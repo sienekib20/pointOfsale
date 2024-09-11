@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="panelRoot" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../../../../resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.IndexController">
+   <children>
+      <AnchorPane id="AnchorPane" fx:id="panelMain" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: -black900;">
+         <children>
+            <AnchorPane fx:id="panelSidemenu" minHeight="-Infinity" minWidth="70.0" prefHeight="600.0" prefWidth="0.0" style="-fx-background-color: -black500;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="iconRoot" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="5.0" layoutY="14.0" onMouseClicked="#actionReduceWindow" prefHeight="50.0" prefWidth="60.0" styleClass="sidebar-logo" text="logo">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../resources/media/favicon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <JFXButton fx:id="btnHome" layoutY="100.0" onMouseClicked="#showHome" styleClass="nav-item">
+                     <graphic>
+                        <MaterialDesignIconView glyphName="TELEVISION_GUIDE" size="24" style="-fx-fill: -purple500;" styleClass="btn-icon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnOrder" layoutY="180.0" onMouseClicked="#showOrders" styleClass="nav-item">
+                     <graphic>
+                        <MaterialDesignIconView glyphName="VECTOR_DIFFERENCE_BA" size="24" style="-fx-fill: -purple500;" styleClass="btn-icon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnReports" layoutY="260.0" onMouseClicked="#showReports" styleClass="nav-item">
+                     <graphic>
+                        <MaterialDesignIconView glyphName="LIBRARY" size="24" style="-fx-fill: -purple500;" styleClass="btn-icon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnClients" layoutY="340.0" onMouseClicked="#showClients" styleClass="nav-item">
+                     <graphic>
+                        <MaterialDesignIconView glyphName="ACCOUNT_MULTIPLE" size="24" style="-fx-fill: -purple500;" styleClass="btn-icon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSettings" layoutY="420.0" onMouseClicked="#showSettings" styleClass="nav-item">
+                     <graphic>
+                        <MaterialDesignIconView glyphName="SETTINGS" size="24" style="-fx-fill: -purple500;" styleClass="btn-icon" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExit" layoutY="517.0" onMouseClicked="#actionExit" styleClass="nav-item" AnchorPane.bottomAnchor="0.0">
+                     <graphic>
+                        <MaterialDesignIconView glyphName="POWER" size="24" style="-fx-fill: -purple500;" styleClass="btn-icon" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="panelExtended" layoutX="70.0" prefHeight="600.0" prefWidth="930.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="226" pageHeight="842" columnWidth="186" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="37098d2d-1dd7-4297-8c43-fadacad7eea7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dbMatricula"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="Parameter" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     ( SELECT valor FROM `configuracao` WHERE idConfiguracao = 2 ),
+     ( SELECT valor FROM `configuracao` WHERE idConfiguracao = 4 ),
+     ( SELECT valor FROM `configuracao` WHERE idConfiguracao = 5 ),
+     ( SELECT valor FROM `configuracao` WHERE idConfiguracao = 6 ),
+     ( SELECT valor FROM `configuracao` WHERE idConfiguracao = 7 ),
+     viewinfovenda.`fIdFactura` AS viewinfovenda_fIdFactura,
+     viewinfovenda.`fIdTipoDoc` AS viewinfovenda_fIdTipoDoc,
+     viewinfovenda.`fIdUsuario` AS viewinfovenda_fIdUsuario,
+     viewinfovenda.`fIdTipoUsuario` AS viewinfovenda_fIdTipoUsuario,
+     viewinfovenda.`fNomeCliente` AS viewinfovenda_fNomeCliente,
+     viewinfovenda.`fNifCliente` AS viewinfovenda_fNifCliente,
+     viewinfovenda.`fMatricula` AS viewinfovenda_fMatricula,
+     viewinfovenda.`fPrecoMatricula` AS viewinfovenda_fPrecoMatricula,
+     viewinfovenda.`fNprocesso` AS viewinfovenda_fNprocesso,
+     viewinfovenda.`fPlacaFrente` AS viewinfovenda_fPlacaFrente,
+     viewinfovenda.`fServico` AS viewinfovenda_fServico,
+     viewinfovenda.`fClasseVeiculo` AS viewinfovenda_fClasseVeiculo,
+     viewinfovenda.`fPlacaTras` AS viewinfovenda_fPlacaTras,
+     viewinfovenda.`fNquadro` AS viewinfovenda_fNquadro,
+     viewinfovenda.`fEstado` AS viewinfovenda_fEstado,
+     viewinfovenda.`idIdoc` AS viewinfovenda_idIdoc,
+     viewinfovenda.`idIdFactura` AS viewinfovenda_idIdFactura,
+     viewinfovenda.`idIdTipoDoc` AS viewinfovenda_idIdTipoDoc,
+     viewinfovenda.`idDescricao` AS viewinfovenda_idDescricao,
+     viewinfovenda.`tdIdTipoDoc` AS viewinfovenda_tdIdTipoDoc,
+     viewinfovenda.`tdCodigo` AS viewinfovenda_tdCodigo,
+     viewinfovenda.`tdNome` AS viewinfovenda_tdNome,
+     viewinfovenda.`uIdUsuario` AS viewinfovenda_uIdUsuario,
+     viewinfovenda.`uIdTipoUsuario` AS viewinfovenda_uIdTipoUsuario,
+     viewinfovenda.`uNome` AS viewinfovenda_uNome,
+     viewinfovenda.`uDataNasc` AS viewinfovenda_uDataNasc,
+     viewinfovenda.`uGenero` AS viewinfovenda_uGenero,
+     viewinfovenda.`uBi` AS viewinfovenda_uBi,
+     viewinfovenda.`uEmail` AS viewinfovenda_uEmail,
+     viewinfovenda.`uTelefone` AS viewinfovenda_uTelefone,
+     viewinfovenda.`uEndereco` AS viewinfovenda_uEndereco,
+     viewinfovenda.`uDataAdesao` AS viewinfovenda_uDataAdesao,
+     viewinfovenda.`uNomeUsuario` AS viewinfovenda_uNomeUsuario,
+     viewinfovenda.`tuIdTipoUsuario` AS viewinfovenda_tuIdTipoUsuario,
+     viewinfovenda.`tuNome` AS viewinfovenda_tuNome,
+     viewinfovenda.`tuNota` AS viewinfovenda_tuNota,
+     viewinfovenda.`vIdVenda` AS viewinfovenda_vIdVenda,
+     viewinfovenda.`vIdFactura` AS viewinfovenda_vIdFactura,
+     viewinfovenda.`vTotalVenda` AS viewinfovenda_vTotalVenda,
+     viewinfovenda.`vEntregue` AS viewinfovenda_vEntregue,
+     viewinfovenda.`vTroco` AS viewinfovenda_vTroco,
+     viewinfovenda.`vDataVenda` AS viewinfovenda_vDataVenda, (SELECT CONCAT(tdCodigo, " ", (SELECT YEAR(viewinfovenda_vdatavenda)), "/",idDescricao))
+, (SELECT COUNT(*))
+FROM
+     `viewinfovenda` viewinfovenda
+WHERE
+     fIdFactura = $P{Parameter}]]>
+	</queryString>
+	<field name="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 2 )" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 2 )"/>
+		<property name="com.jaspersoft.studio.field.label" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 2 )"/>
+	</field>
+	<field name="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 4 )" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 4 )"/>
+		<property name="com.jaspersoft.studio.field.label" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 4 )"/>
+	</field>
+	<field name="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 5 )" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 5 )"/>
+		<property name="com.jaspersoft.studio.field.label" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 5 )"/>
+	</field>
+	<field name="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 6 )" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 6 )"/>
+		<property name="com.jaspersoft.studio.field.label" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 6 )"/>
+	</field>
+	<field name="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 7 )" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 7 )"/>
+		<property name="com.jaspersoft.studio.field.label" value="( SELECT valor FROM `configuracao` WHERE idConfiguracao = 7 )"/>
+	</field>
+	<field name="viewinfovenda_fIdFactura" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="fIdFactura"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fIdFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fIdTipoDoc" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="fIdTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fIdTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fIdUsuario" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="fIdUsuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fIdUsuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fIdTipoUsuario" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="fIdTipoUsuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fIdTipoUsuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fNomeCliente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fNomeCliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fNomeCliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fNifCliente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fNifCliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fNifCliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fMatricula" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fMatricula"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fMatricula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fPrecoMatricula" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.name" value="fPrecoMatricula"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fPrecoMatricula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fNprocesso" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fNprocesso"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fNprocesso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fPlacaFrente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fPlacaFrente"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fPlacaFrente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fServico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fServico"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fServico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fClasseVeiculo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fClasseVeiculo"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fClasseVeiculo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fPlacaTras" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fPlacaTras"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fPlacaTras"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fNquadro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fNquadro"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fNquadro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_fEstado" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="fEstado"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_fEstado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_idIdoc" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idIdoc"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_idIdoc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_idIdFactura" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idIdFactura"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_idIdFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_idIdTipoDoc" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idIdTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_idIdTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_idDescricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="idDescricao"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_idDescricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_tdIdTipoDoc" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="tdIdTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_tdIdTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_tdCodigo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tdCodigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_tdCodigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_tdNome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tdNome"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_tdNome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uIdUsuario" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="uIdUsuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uIdUsuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uIdTipoUsuario" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="uIdTipoUsuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uIdTipoUsuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uNome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uNome"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uNome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uDataNasc" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="uDataNasc"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uDataNasc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uGenero" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uGenero"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uGenero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uBi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uBi"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uBi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uEmail" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uEmail"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uEmail"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uTelefone" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="uTelefone"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uTelefone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uEndereco" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uEndereco"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uEndereco"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uDataAdesao" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="uDataAdesao"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uDataAdesao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_uNomeUsuario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uNomeUsuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_uNomeUsuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_tuIdTipoUsuario" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="tuIdTipoUsuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_tuIdTipoUsuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_tuNome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tuNome"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_tuNome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_tuNota" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tuNota"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_tuNota"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_vIdVenda" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="vIdVenda"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_vIdVenda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_vIdFactura" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="vIdFactura"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_vIdFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_vTotalVenda" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.name" value="vTotalVenda"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_vTotalVenda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_vEntregue" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.name" value="vEntregue"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_vEntregue"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_vTroco" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.name" value="vTroco"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_vTroco"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="viewinfovenda_vDataVenda" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="vDataVenda"/>
+		<property name="com.jaspersoft.studio.field.label" value="viewinfovenda_vDataVenda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewinfovenda"/>
+	</field>
+	<field name="(SELECT CONCAT(tdCodigo, &quot; &quot;, (SELECT YEAR(viewinfovenda_vdatavenda)), &quot;/&quot;,idDescricao))" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name">
+			<![CDATA[(SELECT CONCAT(tdCodigo, " ", (SELECT YEAR(viewinfovenda_vdatavenda)), "/",idDescricao))]]>
+		</property>
+		<property name="com.jaspersoft.studio.field.label">
+			<![CDATA[(SELECT CONCAT(tdCodigo, " ", (SELECT YEAR(viewinfovenda_vdatavenda)), "/",idDescricao))]]>
+		</property>
+	</field>
+	<field name="(SELECT COUNT(*))" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="(SELECT COUNT(*))"/>
+		<property name="com.jaspersoft.studio.field.label" value="(SELECT COUNT(*))"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="400" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="388" width="80" height="12" uuid="eb915190-06e9-4bdf-ab80-703834255374">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo de Pagamento:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="162" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="98" width="186" height="12" uuid="3f7ad179-e640-4951-944c-0f46d356082a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[*Obridado e volte sempre!*]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="186" height="12" uuid="687bb3a7-2caf-4796-8f71-0361c2ba5ab5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Iva: Regime de Não Sujeição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="122" width="140" height="39" uuid="b655f3a3-492a-4464-a820-9c8fca5b9c1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ Os bens/serviços foram colocados a disposição do adquirente na data e local do documento]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="92" width="186" height="1" uuid="93cef2f1-4ecd-4998-a592-fcf32be66a85">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="50" width="186" height="15" uuid="1f4f025a-b56a-4bcd-9e83-895a4b9f6148"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contactos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="65" width="80" height="12" uuid="b19cfef1-13d7-4964-9bbb-3ba42efe81f9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="77" width="80" height="12" uuid="bc732f43-9343-4a5d-a3ef-fb7d355800e9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[E-mail:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="65" width="106" height="12" uuid="792f1864-6f8f-496b-b48f-e62b0f3319f5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{( SELECT valor FROM `configuracao` WHERE idConfiguracao = 5 )}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="77" width="106" height="12" uuid="9718e6ff-f257-49a7-b2f0-c0fd30e03a5f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{( SELECT valor FROM `configuracao` WHERE idConfiguracao = 6 )}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="48" width="186" height="1" uuid="3444c312-a22b-4f83-8254-1935c38a0118">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="34" width="90" height="12" uuid="50642e57-f56b-4b48-9fef-9334a7324914">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NIF:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="34" width="96" height="12" uuid="9007e195-4bd3-4094-913c-6e8faa24418e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{( SELECT valor FROM `configuracao` WHERE idConfiguracao = 7 )}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="186" height="12" uuid="7a8d689a-f02d-4e68-8e6b-0fa1648ac97d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{( SELECT valor FROM `configuracao` WHERE idConfiguracao = 4 )}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="8" width="186" height="12" uuid="772babcc-43e9-4ff2-884a-cb6eb54a79a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{( SELECT valor FROM `configuracao` WHERE idConfiguracao = 2 )}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="186" height="1" uuid="01535326-5bba-4237-8299-6d04e1860a42">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>

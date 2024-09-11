@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="documentoTicket" pageWidth="226" pageHeight="510" columnWidth="186" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9f6ade97-3aac-406e-8bf1-e692201aa425">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="buesimples"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#C21411">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#FFFFFF">
+		<pen lineWidth="0.0"/>
+		<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+			<pen lineWidth="0.5" lineStyle="Double" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="7c24f9e2-38ce-4baf-8af8-f163fc8e9f8f">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="buesimples"/>
+		<parameter name="parametro" class="java.lang.Integer"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM viewdocumento WHERE idDocumento =   $P{parametro}]]>
+		</queryString>
+		<field name="idDocumento" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idDocumento"/>
+			<property name="com.jaspersoft.studio.field.label" value="idDocumento"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="idUsuario" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idUsuario"/>
+			<property name="com.jaspersoft.studio.field.label" value="idUsuario"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="idTipoDoc" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idTipoDoc"/>
+			<property name="com.jaspersoft.studio.field.label" value="idTipoDoc"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="idEntidade" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idEntidade"/>
+			<property name="com.jaspersoft.studio.field.label" value="idEntidade"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="idPrazoPagamento" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idPrazoPagamento"/>
+			<property name="com.jaspersoft.studio.field.label" value="idPrazoPagamento"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="dataDoc" class="java.sql.Timestamp">
+			<property name="com.jaspersoft.studio.field.name" value="dataDoc"/>
+			<property name="com.jaspersoft.studio.field.label" value="dataDoc"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="entregue" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="entregue"/>
+			<property name="com.jaspersoft.studio.field.label" value="entregue"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="total" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="troco" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="troco"/>
+			<property name="com.jaspersoft.studio.field.label" value="troco"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="idDocumentoAd" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idDocumentoAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="idDocumentoAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="idArtigoAd" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idArtigoAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="idArtigoAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="descricaoAd" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="descricaoAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="descricaoAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="qtdAd" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="qtdAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="qtdAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="precoAd" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="precoAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="precoAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="descontoAd" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="descontoAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="descontoAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="impostoAd" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="impostoAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="impostoAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="totalAd" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="totalAd"/>
+			<property name="com.jaspersoft.studio.field.label" value="totalAd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomeU" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeU"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeU"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomeUsuarioU" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeUsuarioU"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeUsuarioU"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="imagemU" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="imagemU"/>
+			<property name="com.jaspersoft.studio.field.label" value="imagemU"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="estadoU" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estadoU"/>
+			<property name="com.jaspersoft.studio.field.label" value="estadoU"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomeTu" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeTu"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeTu"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="codigoTd" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="codigoTd"/>
+			<property name="com.jaspersoft.studio.field.label" value="codigoTd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomeTd" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeTd"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeTd"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomeE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeE"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nifE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nifE"/>
+			<property name="com.jaspersoft.studio.field.label" value="nifE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="imagemE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="imagemE"/>
+			<property name="com.jaspersoft.studio.field.label" value="imagemE"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomeTe" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeTe"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeTe"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomePp" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomePp"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomePp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="nomeA" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeA"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeA"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="imagemA" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="imagemA"/>
+			<property name="com.jaspersoft.studio.field.label" value="imagemA"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="estadoA" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.name" value="estadoA"/>
+			<property name="com.jaspersoft.studio.field.label" value="estadoA"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<field name="descricaoId" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="descricaoId"/>
+			<property name="com.jaspersoft.studio.field.label" value="descricaoId"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewdocumento"/>
+		</field>
+		<group name="idDocumento">
+			<groupExpression><![CDATA[$F{idDocumento}]]></groupExpression>
+		</group>
+		<group name="idUsuario">
+			<groupExpression><![CDATA[$F{idUsuario}]]></groupExpression>
+		</group>
+		<group name="idTipoDoc">
+			<groupExpression><![CDATA[$F{idTipoDoc}]]></groupExpression>
+		</group>
+		<group name="idEntidade">
+			<groupExpression><![CDATA[$F{idEntidade}]]></groupExpression>
+		</group>
+		<group name="idPrazoPagamento">
+			<groupExpression><![CDATA[$F{idPrazoPagamento}]]></groupExpression>
+		</group>
+		<group name="dataDoc">
+			<groupExpression><![CDATA[$F{dataDoc}]]></groupExpression>
+		</group>
+		<group name="entregue">
+			<groupExpression><![CDATA[$F{entregue}]]></groupExpression>
+		</group>
+		<group name="total">
+			<groupExpression><![CDATA[$F{total}]]></groupExpression>
+		</group>
+		<group name="troco">
+			<groupExpression><![CDATA[$F{troco}]]></groupExpression>
+		</group>
+		<group name="idDocumentoAd">
+			<groupExpression><![CDATA[$F{idDocumentoAd}]]></groupExpression>
+		</group>
+		<group name="idArtigoAd">
+			<groupExpression><![CDATA[$F{idArtigoAd}]]></groupExpression>
+		</group>
+		<group name="descricaoAd">
+			<groupExpression><![CDATA[$F{descricaoAd}]]></groupExpression>
+		</group>
+		<group name="qtdAd">
+			<groupExpression><![CDATA[$F{qtdAd}]]></groupExpression>
+		</group>
+		<group name="precoAd">
+			<groupExpression><![CDATA[$F{precoAd}]]></groupExpression>
+		</group>
+		<group name="descontoAd">
+			<groupExpression><![CDATA[$F{descontoAd}]]></groupExpression>
+		</group>
+		<group name="impostoAd">
+			<groupExpression><![CDATA[$F{impostoAd}]]></groupExpression>
+		</group>
+		<group name="totalAd">
+			<groupExpression><![CDATA[$F{totalAd}]]></groupExpression>
+		</group>
+		<group name="nomeU">
+			<groupExpression><![CDATA[$F{nomeU}]]></groupExpression>
+		</group>
+		<group name="nomeUsuarioU">
+			<groupExpression><![CDATA[$F{nomeUsuarioU}]]></groupExpression>
+		</group>
+		<group name="imagemU">
+			<groupExpression><![CDATA[$F{imagemU}]]></groupExpression>
+		</group>
+		<group name="estadoU">
+			<groupExpression><![CDATA[$F{estadoU}]]></groupExpression>
+		</group>
+		<group name="nomeTu">
+			<groupExpression><![CDATA[$F{nomeTu}]]></groupExpression>
+		</group>
+		<group name="codigoTd">
+			<groupExpression><![CDATA[$F{codigoTd}]]></groupExpression>
+		</group>
+		<group name="nomeTd">
+			<groupExpression><![CDATA[$F{nomeTd}]]></groupExpression>
+		</group>
+		<group name="nomeE">
+			<groupExpression><![CDATA[$F{nomeE}]]></groupExpression>
+		</group>
+		<group name="nifE">
+			<groupExpression><![CDATA[$F{nifE}]]></groupExpression>
+		</group>
+		<group name="imagemE">
+			<groupExpression><![CDATA[$F{imagemE}]]></groupExpression>
+		</group>
+		<group name="nomeTe">
+			<groupExpression><![CDATA[$F{nomeTe}]]></groupExpression>
+		</group>
+		<group name="nomePp">
+			<groupExpression><![CDATA[$F{nomePp}]]></groupExpression>
+		</group>
+		<group name="nomeA">
+			<groupExpression><![CDATA[$F{nomeA}]]></groupExpression>
+		</group>
+		<group name="imagemA">
+			<groupExpression><![CDATA[$F{imagemA}]]></groupExpression>
+		</group>
+		<group name="estadoA">
+			<groupExpression><![CDATA[$F{estadoA}]]></groupExpression>
+		</group>
+		<group name="descricaoId">
+			<groupExpression><![CDATA[$F{descricaoId}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="7b8e69e4-9304-4f37-ab0e-60e8e2c923d6">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="buesimples"/>
+		<parameter name="parametro" class="java.lang.Integer"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM viewModoPagamentoDocumento WHERE idDocumento =  $P{parametro}]]>
+		</queryString>
+		<field name="idDocumento" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idDocumento"/>
+			<property name="com.jaspersoft.studio.field.label" value="idDocumento"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewmodopagamentodocumento"/>
+		</field>
+		<field name="idModoPagamento" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="idModoPagamento"/>
+			<property name="com.jaspersoft.studio.field.label" value="idModoPagamento"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewmodopagamentodocumento"/>
+		</field>
+		<field name="valor" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="valor"/>
+			<property name="com.jaspersoft.studio.field.label" value="valor"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewmodopagamentodocumento"/>
+		</field>
+		<field name="nomeMp" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nomeMp"/>
+			<property name="com.jaspersoft.studio.field.label" value="nomeMp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewmodopagamentodocumento"/>
+		</field>
+		<field name="descricaoId" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="descricaoId"/>
+			<property name="com.jaspersoft.studio.field.label" value="descricaoId"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="viewmodopagamentodocumento"/>
+		</field>
+		<group name="idDocumento">
+			<groupExpression><![CDATA[$F{idDocumento}]]></groupExpression>
+		</group>
+		<group name="idModoPagamento">
+			<groupExpression><![CDATA[$F{idModoPagamento}]]></groupExpression>
+		</group>
+		<group name="valor">
+			<groupExpression><![CDATA[$F{valor}]]></groupExpression>
+		</group>
+		<group name="nomeMp">
+			<groupExpression><![CDATA[$F{nomeMp}]]></groupExpression>
+		</group>
+		<group name="descricaoId">
+			<groupExpression><![CDATA[$F{descricaoId}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="parametro" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT *, (SELECT valor FROM configuracao WHERE idConfiguracao = 2) AS nomeEmpresa, (SELECT valor FROM configuracao WHERE idConfiguracao = 4) AS enderecoEmpresa, (SELECT valor FROM configuracao WHERE idConfiguracao = 5) AS telefoneEmpresa, (SELECT valor FROM configuracao WHERE idConfiguracao = 6) AS emailEmpresa, (SELECT valor FROM configuracao WHERE idConfiguracao = 7) AS nifEmpresa FROM viewartigomodopagamentodocumento WHERE idDocumento =   $P{parametro}]]>
+	</queryString>
+	<field name="idDocumento" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idDocumento"/>
+		<property name="com.jaspersoft.studio.field.label" value="idDocumento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="idUsuario" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idUsuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="idUsuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="idTipoDoc" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.label" value="idTipoDoc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="idEntidade" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idEntidade"/>
+		<property name="com.jaspersoft.studio.field.label" value="idEntidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="idPrazoPagamento" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="idPrazoPagamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="idPrazoPagamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="dataDoc" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="dataDoc"/>
+		<property name="com.jaspersoft.studio.field.label" value="dataDoc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="entregue" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="entregue"/>
+		<property name="com.jaspersoft.studio.field.label" value="entregue"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total"/>
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="troco" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="troco"/>
+		<property name="com.jaspersoft.studio.field.label" value="troco"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="nomeU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nomeU"/>
+		<property name="com.jaspersoft.studio.field.label" value="nomeU"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="nomeUsuarioU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nomeUsuarioU"/>
+		<property name="com.jaspersoft.studio.field.label" value="nomeUsuarioU"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="imagemU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="imagemU"/>
+		<property name="com.jaspersoft.studio.field.label" value="imagemU"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="estadoU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estadoU"/>
+		<property name="com.jaspersoft.studio.field.label" value="estadoU"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="codigoTd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="codigoTd"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigoTd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="nomeTd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nomeTd"/>
+		<property name="com.jaspersoft.studio.field.label" value="nomeTd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="nomeE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nomeE"/>
+		<property name="com.jaspersoft.studio.field.label" value="nomeE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="moradaE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="moradaE"/>
+		<property name="com.jaspersoft.studio.field.label" value="moradaE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="nifE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nifE"/>
+		<property name="com.jaspersoft.studio.field.label" value="nifE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="imagemE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="imagemE"/>
+		<property name="com.jaspersoft.studio.field.label" value="imagemE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="nomePp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nomePp"/>
+		<property name="com.jaspersoft.studio.field.label" value="nomePp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="codigoDocumento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="codigoDocumento"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigoDocumento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="serieDocumento" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="serieDocumento"/>
+		<property name="com.jaspersoft.studio.field.label" value="serieDocumento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="descricaoId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descricaoId"/>
+		<property name="com.jaspersoft.studio.field.label" value="descricaoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="viewartigomodopagamentodocumento"/>
+	</field>
+	<field name="nomeEmpresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nomeEmpresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="nomeEmpresa"/>
+	</field>
+	<field name="enderecoEmpresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="enderecoEmpresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="enderecoEmpresa"/>
+	</field>
+	<field name="telefoneEmpresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telefoneEmpresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefoneEmpresa"/>
+	</field>
+	<field name="emailEmpresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="emailEmpresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="emailEmpresa"/>
+	</field>
+	<field name="nifEmpresa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nifEmpresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="nifEmpresa"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="63" width="186" height="10" uuid="c08d5a7c-a16e-49ad-a481-8a05c0211199">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeTd}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="74" y="10" width="39" height="39" forecolor="#E8E8E8" backcolor="#FAFAFA" uuid="f01036a1-c0fd-4e49-968d-1d4e6560b77d"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="53" width="186" height="10" uuid="57dff994-3740-4d0f-a5ce-e0af371baa99">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[UPPER($F{nomeEmpresa})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="73" width="186" height="10" uuid="75e785be-0202-45b2-a35f-cec526ffacb4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} == 1 ? "ORIGINAL" : "DUPLICADO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="90" height="10" uuid="1d646fda-8811-45c2-868d-20615f7273c4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="90" height="10" uuid="398c628d-fcb9-423b-b68e-aaa06d3e9ccc"/>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de emissão:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="5" width="86" height="10" uuid="33ea3e77-dc1f-4d3f-ad4b-fa41aacd056b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="15" width="86" height="10" uuid="395c4a5e-7508-4f63-b670-cfa9bc401799">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataDoc}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="33" width="186" height="1" uuid="f3815c52-d5a7-4f25-9337-89b2a120f0f1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="90" height="10" uuid="b0d81065-ee61-435e-a79d-438f9ca9948a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="90" height="10" uuid="36a47ff3-aaaa-4e0a-8e80-297a2dd53275">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIF:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="5" width="86" height="10" uuid="3f9cdb93-c14c-4e5a-b7a6-1b2a8db041c6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="15" width="86" height="10" uuid="31ed7828-acbb-4d5a-ad6d-60063b9ed835">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nifE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="30" width="186" height="1" uuid="f7b4e39e-7a17-4dc4-8cf5-02477ddb2551"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="4" width="185" height="20" uuid="6f609a82-1f24-4195-85be-e8cb2384a373">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 2_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 2_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="cbb51693-6002-4b56-8b0c-3e71cd645a4c">
+						<datasetParameter name="parametro">
+							<datasetParameterExpression><![CDATA[$P{parametro}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="20" uuid="90f65e03-29cd-41fb-b99d-29a6cac59804">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table 2_CH" height="10" rowSpan="1">
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="20" height="10" uuid="3bfd1598-de36-47e4-a2a2-e01b972384b6"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Top">
+									<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Qtd.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="10">
+							<textField>
+								<reportElement x="0" y="0" width="20" height="10" uuid="dc11ffcd-0955-4719-91a8-f43342d18cd1"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{qtdAd}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="29ef917e-b2a1-4a19-af53-5574274fba73">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table 2_CH" height="10" rowSpan="1">
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="90" height="10" uuid="9126000a-46fb-4bf2-aca1-bd938d3b640f"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Top">
+									<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Producto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="10">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="10" uuid="cc1753fb-7b12-4a05-ba04-1e8d6c5d4f4f"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{descricaoAd}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="38" uuid="c1edaa24-7838-4f21-b1d3-5175a18edd4d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table 2_CH" height="10" rowSpan="1">
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="38" height="10" uuid="ab8ad4be-2d9a-4751-98ae-27dade7c9f70"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[P/Unit.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="10">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="38" height="10" uuid="7d51066b-ea90-4a4f-935f-9394d53b03b5"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{precoAd}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="37" uuid="c4045456-98f7-4f6d-bd39-34e8d2d0782c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table 2_CH" height="10" rowSpan="1">
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="37" height="10" uuid="a12668ac-d366-48da-ae32-c5c707f5b5ee"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="10">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="37" height="10" uuid="3b79e9a7-6f17-41e6-924c-a6d7c002efb9"/>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalAd}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="80">
+			<staticText>
+				<reportElement x="0" y="30" width="90" height="10" uuid="c28e9aa2-f556-44a9-aaa4-0bcee22bc4a9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantia recebida:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="9" width="90" height="10" uuid="1283365a-39ce-4e23-985e-e7025d807f86">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilizador:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="90" height="10" uuid="d882a141-0f63-4d36-9ce2-eabcd5b20158">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantia a pagar:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="90" height="10" uuid="fcc8d15b-3135-4139-9fb8-9944925f24c4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de Itens:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="90" height="10" uuid="8352415e-774a-4da8-9a02-44515f87f113">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Pagamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="90" height="10" uuid="4c194dd2-332f-4e00-8bd1-ba6731a4e033">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Troco:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="90" height="10" uuid="f4a01821-ebad-40d9-8bfd-9f22e574f76b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="4" width="186" height="1" uuid="daf11a43-7623-4b65-ab18-546a7f3304d1"/>
+			</line>
+			<textField>
+				<reportElement x="100" y="9" width="86" height="10" uuid="028cbd0c-0746-4f19-9661-26745ec9d21e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="20" width="86" height="10" uuid="a1bc0839-4a9d-43b9-ad1a-c85173fb1c7b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[SUM( )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="100" y="30" width="86" height="10" uuid="1b62eef1-9a4f-4eec-b8e2-818a2d176906">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entregue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="100" y="40" width="86" height="10" uuid="915303ed-3c83-465b-b7ed-03e0a07c020d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="100" y="50" width="86" height="10" uuid="f7c6d8f6-48ad-4a86-8ad4-52880804dd90">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{troco}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="100" y="60" width="86" height="10" uuid="a2b34e06-942a-4328-9722-9fcf4eb062a0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement style="Table 1_CH" x="90" y="70" width="96" height="10" uuid="c015bd6a-ecdd-40a2-bd08-29528b19b2e0">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset2" uuid="4cb7f62c-11b4-47cd-990e-78800bddf0ef">
+						<datasetParameter name="parametro">
+							<datasetParameterExpression><![CDATA[$P{parametro}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="48" uuid="b777f288-32dc-4ae6-b900-bd58d7c9e278">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table 1_CH" height="10" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="48" height="10" uuid="f7f00223-10fe-4000-ac72-4125185861ff"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Descrição]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="10">
+							<textField>
+								<reportElement x="0" y="0" width="48" height="10" uuid="154be34d-85ca-4d5f-b606-2f2020e3cbe0"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nomeMp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="48" uuid="f923f19c-8807-4769-8a18-29da58ab0cc1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table 1_CH" height="10" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="48" height="10" uuid="50c904ef-b52c-42d7-b82a-0ecfec4d9f31"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="10">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="48" height="10" uuid="0b169bbb-86e7-49d8-b4c5-2d9f36c42bba"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Segoe UI Emoji" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="83" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="3" width="186" height="1" uuid="c5e8c8f6-b8cd-42c1-9f85-e155640b49eb"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="8" width="186" height="10" uuid="b2a05137-ec15-4c72-b74d-fce747f1d3e1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="18" width="186" height="10" uuid="0dae0eaa-9d77-4b0d-b55c-0dd31ff35670">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{enderecoEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="28" width="186" height="10" uuid="7575be61-7324-4c66-b1f6-3288a55cb129">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nifEmpresa}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="41" width="186" height="1" uuid="924b51a0-24e5-46de-add6-395100274aca"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="48" width="186" height="10" uuid="a8c9860d-8d53-45bf-ac8e-2e1e7f129cea">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contactos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="58" width="90" height="10" uuid="ee42d643-8dea-4ae5-a5fe-8b92534ffd07">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="58" width="86" height="10" uuid="a4e444d7-628a-4362-90c3-cc8b1838a3a0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefoneEmpresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="68" width="90" height="10" uuid="175192e3-7618-4641-a5ac-ed1a91179967">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Segoe UI Emoji" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="68" width="86" height="10" uuid="1f5e0ba0-0f36-4610-a34f-3324a42afe14">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{emailEmpresa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="186" height="12" uuid="b75690c4-5dd6-45e8-8e43-43418a90e9a1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8"/>
+				</textElement>
+				<text><![CDATA[*Obridado e volte sempre!*]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="186" height="12" uuid="a306caa3-6594-4aa7-b35d-5e48c5304806">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8"/>
+				</textElement>
+				<text><![CDATA[Iva: Regime de Não Sujeição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="34" width="130" height="39" uuid="19a73142-90e6-4cc9-8bd5-3a372af2f31d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI Emoji" size="8"/>
+				</textElement>
+				<text><![CDATA[ Os bens/serviços foram colocados a disposição do adquirente na data e local do documento]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="4" width="186" height="1" uuid="9c4bb48b-e746-4799-b73b-6a4d316a4591"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

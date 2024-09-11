@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+
+<JFXButton fx:id="btnUsuario" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#actionSelectUsuario" prefHeight="50.0" prefWidth="332.0" ripplerFill="WHITE" style="-fx-background-color: -black900; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@../../../../../resources/dark-themes.css" text="Admin" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.auth.AccountItemController">
+   <graphic>
+      <Label fx:id="labelUsername" prefHeight="50.0" prefWidth="332.0" styleClass="login-user-name" text="Admin" />
+   </graphic>
+</JFXButton>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="310.0" style="-fx-background-color: -black500;" stylesheets="@../../../../../resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.cart.CarrinhoController">
+   <children>
+      <Label fx:id="labelCliente" layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="190.0" style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 15;" text="[0] Consumidor final" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <Label fx:id="labelNPedido" layoutX="14.0" layoutY="35.0" style="-fx-text-fill: afafaf; -fx-font-size: 13; -fx-font-family: Strawford;" text="Pedido #12029" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="32.0" />
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="53.0" prefHeight="40.0" prefWidth="290.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Label maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="120.0" style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 15;" text="Descrição" HBox.hgrow="ALWAYS" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="22.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 15;" text="Qtd." HBox.hgrow="ALWAYS" />
+            <Label alignment="CENTER_RIGHT" layoutX="110.0" layoutY="22.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="120.0" style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 15;" text="Total" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="14.0" />
+               </padding></Label>
+         </children>
+      </HBox>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="14.0" layoutY="100.0" prefHeight="228.0" prefWidth="300.0" style="-fx-background-color: -black500;" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <content>
+            <VBox fx:id="vboxGrid" prefHeight="222.0" prefWidth="298.0" />
+         </content>
+      </ScrollPane>
+      <VBox layoutX="10.0" layoutY="333.0" prefHeight="145.0" prefWidth="290.0" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="290.0" style="-fx-border-color: afafaf; -fx-border-width: 1 0 0 0;" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: afafaf; -fx-font-family: Gendy; -fx-font-size: 14;" text="SubTotal" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="labelValorSubtotal" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="20.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: afafaf; -fx-font-family: Gendy; -fx-font-size: 14;" text="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="290.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: afafaf; -fx-font-family: Gendy; -fx-font-size: 14;" text="Taxa" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="labelValorTaxa" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="20.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: afafaf; -fx-font-family: Gendy; -fx-font-size: 14;" text="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="45.0" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="290.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: afafaf; -fx-font-family: Gendy; -fx-font-size: 14;" text="Desconto" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="labelValorDesconto" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="20.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: afafaf; -fx-font-family: Gendy; -fx-font-size: 14;" text="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="290.0" style="-fx-border-color: afafaf; -fx-border-width: 1 0 1 0; -fx-border-style: dotted;" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 18;" text="Total" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="labelValorTotal" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="20.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="200.0" style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 18;" text="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="487.0" prefHeight="50.0" prefWidth="290.0" spacing="10.0" style="-fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-width: 0 0 0 0;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <JFXButton fx:id="btnDesconto" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onMouseClicked="#applyDiscount" prefHeight="40.0" prefWidth="109.0" ripplerFill="#ffffff37" style="-fx-border-color: -green500; -fx-text-fill: -green500; -fx-font-family: Alkia; -fx-font-size: 13; -fx-border-radius: 2;" text="Desconto" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="btnLimpar" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onMouseClicked="#limparCarrinho" prefHeight="40.0" prefWidth="80.0" ripplerFill="#ffffff37" style="-fx-border-color: -purple500; -fx-text-fill: -purple500; -fx-font-family: Alkia; -fx-font-size: 13; -fx-border-radius: 2;" text="Limpar" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="btnCancelar" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onMouseClicked="#cancelarPedido" prefHeight="40.0" prefWidth="80.0" ripplerFill="#ffffff37" style="-fx-border-color: -danger900; -fx-text-fill: -danger900; -fx-font-family: Alkia; -fx-font-size: 13; -fx-border-radius: 2;" text="Cancelar" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <JFXButton fx:id="btnPagamento" layoutX="129.0" layoutY="547.0" onMouseClicked="#realizarPagamento" prefHeight="45.0" prefWidth="181.0" ripplerFill="#ffffff37" style="-fx-background-color: -purple900; -fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 15; -fx-background-radius: 2; -fx-cursor: hand;" text="Efectuar Pagamento" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <JFXButton layoutX="216.0" layoutY="9.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="35.0" prefWidth="40.0" ripplerFill="#ffffff37" style="-fx-border-color: -purple500; -fx-text-fill: -purple500; -fx-font-family: Alkia; -fx-font-size: 13; -fx-border-radius: 2;" text="-" />
+      <JFXButton layoutX="266.0" layoutY="9.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="35.0" prefWidth="40.0" ripplerFill="#ffffff37" style="-fx-border-color: -purple500; -fx-text-fill: -purple500; -fx-font-family: Alkia; -fx-font-size: 13; -fx-border-radius: 2;" text="+" />
+   </children>
+</AnchorPane>

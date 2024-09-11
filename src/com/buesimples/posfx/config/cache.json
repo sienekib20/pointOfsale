@@ -1,0 +1,19 @@
+{
+  "usuario": [
+    {
+      "idUsuario": 1.0,
+      "idTipoUsuario": 1.0,
+      "idTerminal": 1.0,
+      "nome": "Conta Mayongi",
+      "genero": "Masculino",
+      "bi": "003883683MO038",
+      "email": "mayongi@mayongi-ao.com",
+      "dataAdesao": "2023-02-02T23:00:00+01:00",
+      "imagem": "usuario_664de96417f3b6.13853374.jpg",
+      "nomeUsuario": "admin",
+      "senha": "$2y$10$mrDNGlB/G2U3cScYifmkvepZoo6KphaNm5g7sT3gx8pgY8ab5CLg2",
+      "otp": "",
+      "estado": true
+    }
+  ]
+}

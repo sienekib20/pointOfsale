@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="499.0" style="-fx-background-color: -black900;" stylesheets="@../../../../../resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.alerts.ConnectionErrorController">
+   <children>
+      <Label layoutX="66.0" layoutY="34.0" opacity="0.04" style="-fx-font-size: 200; -fx-font-family: Gendy; -fx-text-fill: afafaf;" text="500" />
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="210.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../resources/media/usb.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="154.0" layoutY="146.0" style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 20;" text="Database Conect Error" />
+      <Label layoutX="109.0" layoutY="169.0" style="-fx-font-size: 16; -fx-text-fill: white; -fx-font-family: Alkia;" text="Erro de Conexão a Base de Dados" />
+      <Label layoutX="33.0" layoutY="208.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="431.0" style="-fx-background-color: afafaf;" />
+      <Label layoutX="172.0" layoutY="237.0" style="-fx-text-fill: afafaf; -fx-font-size: 14;" text="Informe ao Técnico de TI" />
+      <Label fx:id="btnExit" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="415.0" layoutY="14.0" onMouseClicked="#closeAlert" prefHeight="64.0" prefWidth="70.0" style="-fx-cursor: hand;" text="Label">
+         <graphic>
+            <FontAwesomeIconView glyphName="CLOSE" opacity="0.33" size="24" style="-fx-fill: white;" />
+         </graphic>
+      </Label>
+   </children>
+</AnchorPane>

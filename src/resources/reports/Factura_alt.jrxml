@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factura" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cf6e3b23-4763-40a5-9eca-a09a56fff3ab">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="Dataset1" uuid="80aa5804-a6e7-499b-86ac-71d3f14e53d4">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="valorTotal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="389" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="20" width="550" height="80" forecolor="#FFFFFF" backcolor="#776EEB" uuid="0c6ee711-d178-44b8-ad1b-a0124d2eba80"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="&#xD;&#xA;Arial" size="38" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Wizard]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="200" width="100" height="20" uuid="9b665c14-5361-4dbf-8103-0c1c1cb6f485"/>
+				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-64" y="204" width="100" height="30" uuid="e71dbb38-6976-4c8b-9001-eaf04347210a"/>
+				<text><![CDATA[total]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

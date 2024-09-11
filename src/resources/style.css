@@ -1,0 +1,354 @@
+/* 
+    Created on : 15-Aug-2024, 14:32:40
+    Author     : sienekib
+*/
+
+@font-face {
+    src: url('rimouski.ttf');
+}
+
+@font-face {
+    src: url('fonts/Onest-Light.ttf');
+}
+
+@font-face {
+    src: url('fonts/Onest-Regular.ttf');
+}
+
+@font-face {
+    src: url('fonts/Onest-Bold.ttf');
+}
+
+@font-face {
+    src: url('RobotoCondensed-Regular.ttf');
+}
+
+@font-face {
+    src: url('RobotoCondensed-Bold.ttf');
+}
+
+@font-face {
+    src: url('Inter/Inter_28pt-Regular.ttf');
+}
+
+@font-face {
+    src: url('Inter/Inter_28pt-Bold.ttf');
+}
+
+* {
+    -root: #fafafa;
+    -primary: #2ab56f;
+    -secondary: #bebec2;
+    -delete: #f35f56;
+    -hover: #2BA266; 
+    -mongi-color: #55127C;
+    -mongi-secondary: #CFD7E3;
+
+    -main: #252836;
+    -alt: #1F1D2B;
+    -active: #9181F4;
+}
+
+.root {
+    -fx-background-color: -root;
+    -fx-font-smoothing-type: gray; /* ou lcd */
+}
+
+
+.main {
+    -fx-background-color: -main;
+}
+
+/*Sidenav*/
+
+.sidenav {
+    -fx-background-color: -alt;
+}
+
+.sidenav-link-active,
+.sidenav-link {
+    -fx-content-display: graphic-only;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.sidenav-link .icon {
+    -fx-fill: -active;
+}
+
+.sidenav-link-active {
+    -fx-background-color: -main;
+}
+.sidenav-link-active .contain {
+    -fx-background-color: -active;
+    -fx-pref-width: 60;
+    -fx-background-radius: 4;
+    -fx-padding: 18 0 0 0;
+}
+
+.sidenav-link-active .link-text {
+    -fx-pref-height: 0;
+    -fx-text-fill: transparent;
+}
+
+.sidenav-link-active .icon {
+    -fx-fill: white;
+}
+
+/*Typography*/
+
+.h1 {
+    -fx-font-size: 25;
+    /*-fx-font-family: "Roboto Condensed";*/
+    -fx-font-family: "Inter 28pt";
+    -fx-font-weight: 800;
+}
+
+.h2 {
+    -fx-font-size: 20;
+    -fx-font-family: "Inter 28pt";
+    -fx-font-weight: 800;
+}
+
+.h3 {
+    -fx-font-size: 15;
+    -fx-font-family: "Inter 28pt";
+    -fx-font-weight: 800;
+}
+
+.h4 {
+    -fx-font-size: 14;
+    -fx-font-family: "Inter 28pt";
+    -fx-font-weight: 800;
+}
+
+.h5 {
+    -fx-font-size: 12;
+    -fx-font-family: "Inter 28pt";
+    -fx-font-weight: 800;
+}
+
+.left-side-login {
+    -fx-background-color: -mongi-color;
+}
+
+.navbar {
+    -fx-background-color: -mongi-color;
+}
+
+.close-login-screen {
+    -fx-background-color: -delete;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.jfx-input-group {
+    -fx-border-color: -mongi-secondary;
+    -fx-border-radius: 4;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.jfx-text-field-login {
+    -fx-font-size: 15;
+    -fx-accent: -mongi-color;
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+    /*-fx-font-family: "Roboto Condensed";*/
+    -fx-font-family: "Inter 28pt";
+}
+
+.text-field-search {
+    -fx-background-color: white;
+    -fx-font-size: 12;
+    -fx-accent: -mongi-color;
+}
+
+
+/* TableView */
+.table-view {
+    -fx-background-color: white;
+}
+
+.table-cell {
+    -fx-border-color: transparent; 
+}
+
+.table-view .column-header, 
+.table-view .column-header-background .filler {
+    -fx-cell-size : 20;
+    -fx-background-color: white;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 16;
+    -fx-text-fill: -secondary;
+    -fx-alignment: CENTER;
+    /*-fx-font-family: 'Roboto Condensed';*/
+    -fx-font-family: "Inter 28pt";
+    -fx-font-weight: 800;
+}
+
+.table-view .cell {
+    -fx-cell-size: 30;
+    -fx-text-fill: #000000;
+    -fx-font-size: 15;
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -secondary;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: white;
+}
+
+/*Buttons */
+
+.button-close {
+    -fx-background-color: none;
+    -fx-fill: -secondary;
+}
+
+.button-close .jfx-rippler {
+    -jfx-rippler-fill: none;
+}
+
+.button-close:hover .glyph-icon {
+    -fx-fill: black;
+}
+
+.main-view-button {
+    -fx-background-color: #2d3037;
+    -fx-text-fill: white;
+}
+
+.main-view-button .jfx-rippler {
+    -jfx-rippler-fill: none;
+}
+
+.main-view-button:hover .glyph-icon,
+.main-view-button:pressed .glyph-icon {
+    -fx-background-color: #76787c;
+    -fx-fill: white;
+}
+
+.button-administrador {
+    -fx-background-color: -primary;
+    -fx-text-fill: white;
+}
+
+.button-administrador .jfx-rippler {
+    -jfx-rippler-fill: none;
+}
+
+.button-user {
+    -fx-background-color: #4A86FF;
+    -fx-text-fill: white;
+}
+
+.button-user .jfx-rippler {
+    -jfx-rippler-fill: none;
+}
+
+.button-no {
+    -fx-pref-height: 15px;
+    -fx-background-color: -delete;
+    -fx-text-fill: white;
+}
+
+.button-no .jfx-rippler { 
+    -jfx-rippler-fill: none;
+}
+
+.button-yes {
+    -fx-pref-height: 15px;
+    -fx-background-color: -primary;
+    -fx-text-fill: white;
+}
+
+.button-yes .jfx-rippler {
+    -jfx-rippler-fill: none;
+}
+
+.button-general {
+    -fx-background-color: -mongi-color;
+    /*-fx-font-family: "Roboto Condensed";*/
+    -fx-font-family: "Inter 28pt";
+    -fx-font-size: 16;
+    -fx-cursor: hand;
+}
+
+.button-general .jfx-rippler {
+    -jfx-rippler-fill: none;
+}
+
+
+/* ScrollPane */
+
+
+.scroll-pane {
+    /*-fx-background-color: -main;*/
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical>.track-background, .scroll-bar:horizontal>.track-background {
+    -fx-background-color: rgb(230.0, 230.0, 240.0);
+    /*-fx-background-color: -main;*/
+    -fx-background-insets: 0.0;
+}
+
+.scroll-bar:vertical>.thumb, .scroll-bar:horizontal>.thumb {
+    -fx-background-color: rgb(158, 158, 158 );
+    /*-fx-background-color: -alt;*/
+    -fx-background-insets: 2.0;
+    -fx-background-radius: 4.0;
+}
+
+.scroll-bar>.increment-button, .scroll-bar>.decrement-button,
+.scroll-bar:hover>.increment-button, .scroll-bar:hover>.decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar>.increment-button>.increment-arrow, .scroll-bar>.decrement-button>.decrement-arrow {
+    -fx-background-color: rgb(150.0, 150.0, 150.0);
+}
+
+.scroll-bar>.track-background {
+    -fx-background-color: transparent;
+}
+
+.btnStatusBarDefault,
+.btnStatusBarActive {
+    -fx-font-family: Onest;
+    -fx-font-size: 14;
+}
+
+.btnStatusBarDefault {
+    -fx-background-color: white;
+    -fx-text-fill: #000;
+}
+
+.btnStatusBarActive {
+    -fx-background-color: #1E98ED;
+    -fx-text-fill: white;
+    -fx-border-radius: 4;
+}
+
+
+.btnSettingCheck {
+    -fx-border-radius: 6;
+    -fx-border-color: #b1b1b1;
+    -fx-cursor: hand;
+}
+
+
+.checkout-item-selected {
+    -fx-background-color: #9181F4;
+}

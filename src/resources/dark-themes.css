@@ -1,0 +1,439 @@
+/*  Created on : 03-Sep-2024, 13:48:31
+    Author     : sienekib */
+@font-face {
+    src: url('Gendy.otf');
+    /* font-family: Gendy */
+}
+
+@font-face {
+    src: url('Strawford-Regular.otf');
+    /* font-family: Strawford */
+}
+
+@font-face {
+    src: url('Alkia.ttf');
+    /* font-family: Alkia */
+}
+
+
+@font-face {
+    src: url('AristaSans.otf');
+    /* font-family: Arista Sans */
+}
+
+
+* {
+    -dark900: #2B2738;
+    -dark500: #1F232F;
+    -dark100: #1F1C2A;
+    -dark000: #303846;
+    -darkl00: #403A54;
+
+    -black900: #252836;
+    -black500: #1F1D2B;
+
+    -purple500: #9080F4;
+    -purple900: #6055A2;
+    -purple100: #704791;
+
+    -dark000: #3A354B;
+    -danger900: #CE0F57;
+
+    -green500: #13CB88;
+
+    -muted: afafaf;
+}
+
+.root {
+    -fx-background-color: -dark900;
+    -fx-font-smoothing-type: lcd;
+    /* ou gray*/
+}
+
+.overlay-panel {
+    -fx-background-color: rgba(0, 0, 0, 0.85);
+}
+
+.login-input {
+    -fx-background-color: -darkl00;
+    -fx-background-radius: 4;
+}
+
+.login-input-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-family: Gendy;
+    -fx-font-weight: 100;
+    -fx-font-size: 15;
+}
+
+.login-input-jfx-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-family: Gendy;
+    -fx-font-weight: 100;
+    -fx-font-size: 15;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-text-fill: fff;
+    -jfx-unfocus-color: transparent;
+    -jfx-focus-color: transparent;
+}
+
+.login-btn {
+    -fx-background-color: -purple900;
+    -fx-text-fill: white;
+    -fx-font-family: Gendy;
+    -fx-font-size: 15;
+    -fx-cursor: hand;
+}
+
+.login-link-btn {
+    -fx-background-color: #07f;
+    -fx-background-radius: 5;
+}
+
+.login-user-name {
+    -fx-font-size: 15;
+    -fx-text-fill: afafaf;
+    -fx-cursor: hand;
+    -fx-font-family: Gendy;
+}
+
+.login-user-name:hover {
+    -fx-text-fill: white;
+}
+
+
+/* timeline */
+
+.timeline-circle,
+.timeline-circle-active {
+    -fx-font-family: Strawford;
+    -fx-font-size: 15;
+    -fx-background-radius: 50%;
+}
+
+.timeline-circle {
+    -fx-text-fill: -dark100;
+    -fx-background-color: -muted;
+}
+
+.timeline-circle-active {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: -purple500;
+}
+
+
+/* Modal Pagamento  */
+
+.payment-item {
+    -fx-border-color: afafaf;
+    -fx-border-width: 0 0 1 0;
+}
+
+.payment-item:hover {
+    -fx-background-color: rgba(48, 56, 70, 0.98);
+}
+
+.payment-item-btn {
+    -fx-content-display: graphic-only;
+    -fx-focus-traversable: false;
+    -fx-cursor: hand;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.payment-item-btn .icon {
+    -fx-fill: white;
+}
+
+
+/* Sidebar  */
+
+.nav-item {
+    -fx-content-display: graphic-only;
+    -fx-cursor: hand;
+    -fx-focus-traversable: false;
+    -fx-pref-width: 70;
+    -fx-pref-height: 60;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.nav-item .jfx-rippler {
+    -jfx-rippler-fill: rgba(0, 0, 0, 0.1);
+}
+
+.nav-item-content {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+.active-item .nav-item-content {
+    -fx-text-fill: red;
+}
+
+
+
+
+
+/* Topbar */
+
+.topbar-btn-contain,
+.topbar-btn-contain-active {
+    -fx-border-width: 0 0 1 0;
+}
+
+.topbar-btn-contain {
+    -fx-border-color: afafaf;
+}
+
+.topbar-btn-contain-active {
+    -fx-border-color: -purple500;
+}
+
+.topbar-btn-contain-active .topbar-btn,
+.topbar-btn-contain .topbar-btn {
+    -fx-font-size: 13;
+    -fx-font-family: Alkia;
+}
+
+.topbar-btn-contain-active .topbar-btn {
+    -fx-text-fill: -purple500;
+}
+
+.topbar-btn-contain .topbar-btn {
+    -fx-text-fill: afafaf;
+}
+
+
+/* viewport */
+
+.viewport-btn {
+    -fx-background-color: -black500;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-content-display: graphic-only;
+}
+
+
+
+
+/* scroll pane */
+.scroll-pane {
+    /*-fx-background-color: -main;*/
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical>.track-background,
+.scroll-bar:horizontal>.track-background {
+    -fx-background-color: rgb(230.0, 230.0, 240.0);
+    /*-fx-background-color: -main;*/
+    -fx-background-insets: 0.0;
+}
+
+.scroll-bar:vertical>.thumb,
+.scroll-bar:horizontal>.thumb {
+    /*-fx-background-color: rgb(158, 158, 158);*/
+    -fx-background-color: -dark100;
+    -fx-background-insets: 2.0;
+    -fx-background-radius: 4.0;
+}
+
+.scroll-bar>.increment-button,
+.scroll-bar>.decrement-button,
+.scroll-bar:hover>.increment-button,
+.scroll-bar:hover>.decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar>.increment-button>.increment-arrow,
+.scroll-bar>.decrement-button>.decrement-arrow {
+    /* -fx-background-color: rgb(150.0, 150.0, 150.0); */
+    -fx-background-color: -dark500;
+}
+
+.scroll-bar>.track-background {
+    -fx-background-color: red;
+}
+
+
+
+/* Settings */
+
+.setting-btn .jfx-rippler {
+    -jfx-rippler-fill: white;
+}
+
+.setting-btn .setting-btn-title,
+.setting-btn-active .setting-btn-title {
+    -fx-font-family: Gendy;
+    -fx-font-size: 15;
+}
+
+.setting-btn .setting-btn-title {
+    -fx-text-fill: afafaf;
+}
+
+.setting-btn-active .setting-btn-title {
+    -fx-text-fill: -purple500;
+}
+
+.setting-btn .setting-btn-icon {
+    -fx-fill: afafaf;
+}
+
+.setting-btn-active .setting-btn-icon {
+    -fx-fill: -purple500;
+}
+
+.setting-btn .setting-btn-activator {
+    -fx-background-color: transparent;
+}
+
+.setting-btn-active .setting-btn-activator {
+    -fx-background-radius: 1;
+    -fx-background-color: -purple500;
+}
+
+.setting-btn .setting-btn-contain {
+    -fx-background-color: transparent;
+}
+
+.setting-btn-active .setting-btn-contain {
+    -fx-background-color: rgba(112, 71, 145, 0.15);
+}
+
+
+
+/* sidebar new */
+
+.nav-link-active,
+.nav-link {
+    -fx-content-display: graphic-only;
+    -fx-pref-width: 70;
+    -fx-pref-height: 60;
+    -fx-cursor: hand;
+    -fx-focus-traversable: false;
+    -fx-background-radius: 0;
+}
+
+.nav-link .jfx-rippler {
+    -jfx-rippler-fill: rgba(37, 40, 54, 0.1);
+}
+
+.nav-link-active {
+    -fx-background-color: rgba(112, 71, 145, 0.2);
+    -fx-border-color: -purple500;
+    -fx-border-width: 0 3 0 0;
+}
+
+.nav-link:hover {
+    -fx-background-color: rgba(112, 71, 145, 0.2);
+}
+
+/* TABLE */
+
+/* TableView */
+.table-view {
+    -fx-background-color: white;
+}
+
+.table-view .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+
+.table-cell {
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-cell-size: 20;
+    -fx-background-color: -black500;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+    /*-fx-font-family: 'Roboto Condensed';*/
+    -fx-font-family: Gendy;
+    -fx-font-weight: 800;
+}
+
+.table-view .cell {
+    -fx-cell-size: 45;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14;
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell {
+    -fx-text-fill: white;
+    -fx-background-color: -dark500;
+    -fx-border-color: -black900;
+}
+
+.table-row-cell:nth-child(odd) {
+    -fx-text-fill: white;
+    -fx-background-color: -dark100;
+}
+
+.table-row-cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: -purple500;
+}
+
+.table-row-cell .text {
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected .text {
+    -fx-text-fill: white;
+}
+
+
+/* Alerts */
+
+.alert-btn-response {
+    -fx-font-family: Gendy;
+    -fx-background-color: -purple500;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+    -fx-pref-height: 50px;
+    -fx-pref-width: 340px;
+    -fx-font-size: 15;
+    -fx-cursor: hand;
+}
+
+.alert-btn-response .jfx-rippler {
+    -jfx-rippler-fill: white;
+}
+
+.alert-title {
+    -fx-font-family: Gendy;
+    -fx-fill: -purple500;
+    -fx-font-size: 30;
+}
+
+.alert-body {
+    -fx-font-family: Gendy;
+    -fx-fill: -purple500;
+    -fx-font-size: 15;
+}
+
+.jfx-dialog-overlay-pane > StackPane {
+    -fx-background-radius: 10;
+    -fx-background-color: white;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="hboxItem" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="290.0" style="-fx-border-color: rgba(0, 0, 0, 0.1); -fx-border-width: 0 0 1 0; -fx-cursor: pointer;" stylesheets="@../../../../../../../pos/src/resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.cart.CheckoutItemController">
+   <children>
+      <Label fx:id="txtProduto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="130.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: Onest; -fx-text-fill: white;" text="IPhone X" />
+      <Label fx:id="txtQtd" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="40.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: Onest; -fx-text-fill: white;" text="1" />
+      <Label fx:id="txtPreco" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="120.0" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-font-family: Onest; -fx-text-fill: white;" text="10 000 000,00">
+         <padding>
+            <Insets right="14.0" />
+         </padding></Label>
+   </children>
+</HBox>
