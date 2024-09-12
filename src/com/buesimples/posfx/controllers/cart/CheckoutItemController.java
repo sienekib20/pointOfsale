@@ -69,7 +69,7 @@ public class CheckoutItemController implements Initializable {
       return unitPrice;
    }
 
-   public double getArtclePrice() {
+   public double getArticlePrice() {
       return articlePrice_;
    }
 

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.buesimples.posfx.controllers.IndexController;
 import com.buesimples.posfx.controllers.alerts.AlertBuilderController;
+import com.buesimples.posfx.controllers.alerts.ConfirmationController;
+import com.buesimples.posfx.controllers.alerts.PlaceOrderController;
 import com.buesimples.posfx.utils.constants.Constants;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialog.DialogTransition;
@@ -19,11 +21,15 @@ public class AlertBuilder {
 
     private static String title;
 
-    private static JFXDialog dialog;
+    private static JFXDialog dialogGenerator;
 
     private static IndexController instanceIndex = null;
 
     private static AlertBuilder instance;
+    
+    private static StackPane dialogContainer;
+    
+    private static AnchorPane nodeToBlur;
 
     public AlertBuilder() {
         instance = this;
@@ -31,9 +37,14 @@ public class AlertBuilder {
 
     public static AlertBuilder build() {
         new AlertBuilder();
+        
         if (instanceIndex == null) {
             instanceIndex = IndexController.getInstance();
         }
+        
+        dialogContainer = instanceIndex.getRootNode();
+        nodeToBlur = instanceIndex.getExtendedNode();
+        
         return instance;
     }
 
@@ -41,8 +52,7 @@ public class AlertBuilder {
         try {
             setFunction(type);
 
-            StackPane dialogContainer = instanceIndex.getRootNode();
-            AnchorPane nodeToBlur = instanceIndex.getExtendedNode();
+
 
             FXMLLoader fxml = new FXMLLoader();
             fxml.setLocation(getClass().getResource(Constants.view("alerts.AlertBuilder")));
@@ -54,34 +64,98 @@ public class AlertBuilder {
             nodeToDisable.setDisable(true);
             nodeToBlur.setEffect(Constants.BOX_BLUR_EFFECT);
 
-            dialog = new JFXDialog();
-            dialog.setContent(root);
-            dialog.setDialogContainer(dialogContainer);
-            dialog.setBackground(Background.EMPTY);
-            dialog.getStyleClass().add("jfx-dialog-overlay-pane");
-            dialog.setTransitionType(DialogTransition.TOP);
-            
+            JFXDialog dialog = createDialog(dialogContainer, root);
+
             alertBuilder.setAlertData(title, body, dialog);
 
             dialog.show();
-
-            dialog.setOnDialogOpened(e -> {
-                nodeToDisable.setDisable(true);
-                nodeToBlur.setEffect(Constants.BOX_BLUR_EFFECT);
-            });
-
-            dialog.setOnDialogClosed(e -> {
-                nodeToDisable.setDisable(false);
-                nodeToBlur.setEffect(null);
-            });
+            actionDialog(dialog, nodeToDisable, nodeToBlur);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void confirm(AlertType type, Node nodeToDisable, String body) {
+        try {
+            setFunction(type);
+
+            FXMLLoader fxml = new FXMLLoader();
+            fxml.setLocation(getClass().getResource(Constants.view("alerts.Confirmation")));
+
+            AnchorPane root = fxml.load();
+            root.setStyle("-fx-background-color: #2B2738");
+            ConfirmationController alertBuilder = fxml.getController();
+
+            nodeToDisable.setDisable(true);
+            nodeToBlur.setEffect(Constants.BOX_BLUR_EFFECT);
+
+            JFXDialog dialog = createDialog(dialogContainer, root);
+
+            alertBuilder.setAlertData(title, body, dialog);
+
+            dialog.show();
+            actionDialog(dialog, nodeToDisable, nodeToBlur);
+
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void placeOrder(AlertType type, Node nodeToDisable, String body) {
+        try {
+            setFunction(type);
+
+            FXMLLoader fxml = new FXMLLoader();
+            fxml.setLocation(getClass().getResource(Constants.view("alerts.PlaceOrder")));
+
+            AnchorPane root = fxml.load();
+            root.setStyle("-fx-background-color: #2B2738");
+            PlaceOrderController orderController  = fxml.getController();
+
+            nodeToDisable.setDisable(true);
+            nodeToBlur.setEffect(Constants.BOX_BLUR_EFFECT);
+
+            JFXDialog dialog = createDialog(dialogContainer, root);
+
+            orderController.setAlertData(title, body, dialog);
+
+            dialog.show();
+            actionDialog(dialog, nodeToDisable, nodeToBlur);
+
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private JFXDialog createDialog(StackPane dialogContainer, AnchorPane root) {            
+        dialogGenerator = new JFXDialog();
+        dialogGenerator.setContent(root);
+        dialogGenerator.setDialogContainer(dialogContainer);
+        dialogGenerator.setBackground(Background.EMPTY);
+        dialogGenerator.getStyleClass().add("jfx-dialog-overlay-pane");
+        dialogGenerator.setTransitionType(DialogTransition.TOP);
+        
+        return dialogGenerator;
+    }
+    
+    void actionDialog(JFXDialog dialog, Node nodeToDisable, AnchorPane nodeToBlur) {
+        dialog.setOnDialogOpened(e -> {
+            nodeToDisable.setDisable(true);
+            nodeToBlur.setEffect(Constants.BOX_BLUR_EFFECT);
+        });
+
+        dialog.setOnDialogClosed(e -> {
+            nodeToDisable.setDisable(false);
+            nodeToBlur.setEffect(null);
+        });
+    }
+
     public static void close() {
-        if (dialog != null) {
-            dialog.close();
+        if (dialogGenerator != null) {
+            dialogGenerator.close();
         }
     }
 
@@ -92,9 +166,16 @@ public class AlertBuilder {
                 break;
 
             case ERROR:
-                title = "Oops!";
+                title = "Erro!";
+                break;
+            case INFORMATION:
+                title = "Info!";
+                break;
+            case WARNING:
+                title = "Aviso!";
                 break;
         }
     }
+
 
 }

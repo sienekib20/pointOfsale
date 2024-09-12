@@ -417,6 +417,31 @@
     -fx-cursor: hand;
 }
 
+.alert-btn-ok {
+    -fx-font-family: Gendy;
+    -fx-background-color: -purple500;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+    -fx-pref-height: 50px;
+    -fx-pref-width: 160px;
+    -fx-font-size: 15;
+    -fx-cursor: hand;
+}
+
+.alert-btn-no {
+    -fx-font-family: Gendy;
+    -fx-background-color: -danger900;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+    -fx-pref-height: 50px;
+    -fx-pref-width: 160px;
+    -fx-font-size: 15;
+    -fx-cursor: hand;
+}
+
+
+.alert-btn-no .jfx-rippler,
+.alert-btn-ok .jfx-rippler,
 .alert-btn-response .jfx-rippler {
     -jfx-rippler-fill: white;
 }
@@ -436,4 +461,11 @@
 .jfx-dialog-overlay-pane > StackPane {
     -fx-background-radius: 10;
     -fx-background-color: white;
+}
+
+.alert-input {
+    -jfx-unfocus-color: transparent;
+    -jfx-focus-color: transparent;
+    -fx-border-color: afafaf;
+    -fx-border-radius: 0;
 }

@@ -7,11 +7,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="panelNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="390.0" style="-fx-background-color: -black500;" stylesheets="@../../../../../resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.alerts.AlertBuilderController">
+<AnchorPane fx:id="panelNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="390.0" style="-fx-background-color: -black500;" stylesheets="@../../../../../resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.alerts.ConfirmationController">
    <children>
       <HBox alignment="CENTER" layoutY="115.0" prefHeight="115.0" prefWidth="390.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <JFXButton fx:id="btnClose" onMouseClicked="#closeAlertManager" styleClass="alert-btn-response" text="Okey" />
+            <JFXButton fx:id="btnOk" onMouseClicked="#okCloseAlert" styleClass="alert-btn-ok" text="Okey" />
+            <JFXButton fx:id="btnNo" layoutX="125.0" layoutY="43.0" onMouseClicked="#noCloseAlert" styleClass="alert-btn-no" text="Cancelar">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXButton>
          </children>
       </HBox>
       <VBox alignment="CENTER_LEFT" prefHeight="115.0" prefWidth="390.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

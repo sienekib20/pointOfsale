@@ -12,6 +12,7 @@ import com.buesimples.posfx.alerts.AlertBuilder;
 import com.buesimples.posfx.alerts.AlertType;
 import com.buesimples.posfx.animations.Animations;
 import com.buesimples.posfx.controllers.IndexController;
+import com.buesimples.posfx.controllers.alerts.AlertBuilderController;
 import com.buesimples.posfx.controllers.cart.CarrinhoController;
 import com.buesimples.posfx.database.DatabaseHelpers;
 import com.buesimples.posfx.models.Artigos;
