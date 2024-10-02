@@ -91,14 +91,14 @@ public class DatabaseHelpers {
     }
 
     public void insert(String table, String requestMethod, String... data) {
-        Api.getInstance().post(
+        List<Map<String, Object>> map = Api.getInstance().post(
                 url + "insert?tabela=" + table,
                 requestMethod,
                 data);
     }
 
     public int lastInsertId(String tableName) {
-        
+
         List<Map<String, Object>> data = select(tableName, "GET");
         Map<String, Object> lastMap = data.get(data.size() - 1);
         String idCol = "id" + tableName.substring(0, 1).toUpperCase() + tableName.substring(1).toLowerCase();
@@ -106,7 +106,7 @@ public class DatabaseHelpers {
         int lastId = -1;
 
         for (String key : lastMap.keySet()) {
-            
+
             lastId = (int) Double.parseDouble(lastMap.get(idCol).toString());
         }
 
@@ -195,7 +195,7 @@ public class DatabaseHelpers {
         }
         return null;
     }
-    
+
     public int gerarDocumento(
             int idTipoDoc,
             int idUsuario,
@@ -224,10 +224,10 @@ public class DatabaseHelpers {
         data.put("total", total);
         data.put("troco", troco);
         data.put("imposto", imposto);
-        
+
         String jsonString = JsonUtils.mapToJsonString(data);
         DatabaseHelpers.build().insert("documento", "POST", jsonString);
         return DatabaseHelpers.build().lastInsertId("documento");
     }
-    
+
 }

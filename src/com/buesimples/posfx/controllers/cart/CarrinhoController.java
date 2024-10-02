@@ -188,6 +188,22 @@ public class CarrinhoController implements Initializable {
     void realizarPagamento(MouseEvent event) {
         if (vboxGrid.getChildren().size() > 0) {
             AlertBuilder.build().placeOrder(AlertType.INFORMATION, labelCliente, "");
+            int[] qtdItems = { 0 };
+
+            itemMap.forEach((key, val) -> {
+                for (Node node : val.getChildren()) {
+                    if (node instanceof Label) {
+                        Label label = (Label) node;
+                        if ("txtQtd".equals(label.getId())) {
+                            try {
+                                qtdItems[0] += Integer.parseInt(label.getText().trim());
+                            } catch (NumberFormatException e) {
+                            }
+                        }
+                    }
+                }
+            });
+            PlaceOrderController.getInstance().setCheckoutItems(qtdItems[0]);
             PlaceOrderController.getInstance().valorTotalToPay(labelValorTotal.getText());
             return;
         }
@@ -274,15 +290,14 @@ public class CarrinhoController implements Initializable {
                         data.getCheckoutQtdArtigo(),
                         precoItem,
                         data.getIdImposto(),
-                        data.getTaxa()
-                );
+                        data.getTaxa());
 
                 updateTax(precoItem, data.getTaxa(), 1, true);
 
                 if (!valorInicialTaxa.containsKey(id)) {
                     valorInicialTaxa.put(id, data.getTaxa());
                 }
-                
+
                 definirValorSubTotal(1, id);
             });
 
@@ -317,7 +332,7 @@ public class CarrinhoController implements Initializable {
             labelValorDesconto.setText(
                     String.valueOf(
                             Double.parseDouble(labelValorDesconto.getText().trim())
-                            + (indice * this.valorInicialDesconto.get(id))));
+                                    + (indice * this.valorInicialDesconto.get(id))));
         } else {
             System.out.println("Invalid: CheckountController - 480");
         }
@@ -328,8 +343,8 @@ public class CarrinhoController implements Initializable {
         if (labelValorTaxa.getText().contains("-")) {
             labelValorTaxa.setText(
                     labelValorTaxa
-                    .getText()
-                    .replaceAll("-", ""));
+                            .getText()
+                            .replaceAll("-", ""));
         }
 
         if (controllerMap.isEmpty()) {

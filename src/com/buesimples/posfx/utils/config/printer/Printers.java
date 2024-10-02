@@ -1,6 +1,7 @@
 package com.buesimples.posfx.utils.config.printer;
 
 import com.buesimples.posfx.controllers.IndexController;
+import com.buesimples.posfx.controllers.cart.CheckoutItemController;
 import com.buesimples.posfx.database.DatabaseHelpers;
 import com.buesimples.posfx.models.Factura;
 import com.buesimples.posfx.models.Ticket;
@@ -26,6 +27,7 @@ import java.util.Objects;
 import javafx.collections.ObservableSet;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -203,18 +205,25 @@ public class Printers {
         }
     }
 
-    public void gerarPDF() {
+    private static PrintService findPrintService(String printerName) {
+        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
+        for (PrintService printService : printServices) {
+            if (printService.getName().trim().equals(printerName)) {
+                return printService;
+            }
+        }
+        return null;
+    }
+
+    public void gerarPDF(int IdDocumento, int nItem) {
         try {
-            // testing();
-            List<Factura> facturaList = new ArrayList<>();
+
             List<Ticket> ticketList = new ArrayList<>();
-
-            Factura factura = new Factura();
-            factura.setValor(100.0);
-
             Ticket tick = new Ticket();
 
-            List<Map<String, Object>> config = DatabaseHelpers.build().select("configuracao", "GET");
+            List<Map<String, Object>> config = DatabaseHelpers.build().select(
+                    "configuracao",
+                    "GET");
             // String logo, nomeEmpresa, telefoneDoc, emailDoc, nifDoc, websiteDoc;
             for (Map<String, Object> empresa : config) {
                 switch (empresa.get("campo").toString()) {
@@ -230,6 +239,10 @@ public class Printers {
                     case "telefone":
                         tick.setTelefone(empresa.get("valor").toString());
                         break;
+                    case "nif":
+                        tick.setNifEmpresaAtual(empresa.get("valor").toString());
+                        break;
+
                 }
             }
 
@@ -237,11 +250,11 @@ public class Printers {
             String docPages = "ORIGINAL";
             tick.setDocPages(docPages);
 
-            int IdDocumento = 356;
+            List<TicketProduct> tickProducts = new ArrayList<TicketProduct>();
+
             List<Map<String, Object>> viewDocumento = DatabaseHelpers.build().querySelect(
                     "viewDocumento",
-                    "POST",
-                    ""
+                    "POST", ""
                             + "{ "
                             + "\"idDocumento\": " + IdDocumento + " "
                             + "}");
@@ -257,49 +270,60 @@ public class Printers {
                 tick.setValorTotalProduto(
                         Double.parseDouble(Objects.requireNonNull(
                                 vd.get("totalAd").toString(), "0.0")));
-                tick.setnItens((int) Double.parseDouble("2"));
+
+                // Add in TickProductsList
+                tickProducts.add(new TicketProduct(
+                        tick.getQtdProduto(),
+                        tick.getNomeProduto(),
+                        tick.getPrecoUnitProduto(),
+                        tick.getValorTotalProduto()));
+
             }
+            tick.setnItens(nItem);
 
             List<Map<String, Object>> viewModoPagamento = DatabaseHelpers.build().querySelect(
                     "viewartigomodopagamentodocumento",
-                    "POST",
-                    ""
+                    "POST", ""
                             + "{ "
                             + "\"idDocumento\": " + IdDocumento + " "
                             + "}");
+            Double valorTotalEntregue = 0.0;
+            Double valorTotalAPagar = 0.0;
+            Double valorTotalTroco = 0.0;
+
             for (Map<String, Object> vd : viewModoPagamento) {
                 String nomeTd = JsonUtils.nonNullElse(vd, "nomeTd", 0);
-                String nomeE = vd.get("nomeE").toString() != null ? vd.get("nomeE").toString() : "";
-                String nifE = vd.get("nifE").toString() != null ? vd.get("nifE").toString() : "";
-                String dataDocumento = vd.get("dataDocumento").toString() != null ? vd.get("dataDocumento").toString()
-                        : "";
+                String nomeE = JsonUtils.nonNullElse(vd, "nomeE", 0);
+                String nifE = JsonUtils.nonNullElse(vd, "nifE", 0);
+                String dataDocumento = JsonUtils.nonNullElse(vd, "dataDocumento", 0);
                 dataDocumento = dataDocumento.split("T")[0];
-                String codigoDocumento = vd.get("codigoDocumento").toString() != null
-                        ? vd.get("codigoDocumento").toString()
-                        : "";
-                String nomeU = vd.get("nomeU").toString() != null ? vd.get("nomeU").toString() : "";
-                String nomePp = vd.get("nomePp").toString() != null ? vd.get("nomePp").toString() : "";
-                String entregue = vd.get("entregue").toString() != null ? vd.get("entregue").toString() : "0.0";
-                String total = vd.get("total").toString() != null ? vd.get("total").toString() : "0.0";
-                String troco = vd.get("troco").toString() != null ? vd.get("troco").toString() : "0.0";
+                String codigoDocumento = JsonUtils.nonNullElse(vd, "codigoDocumento", 0);
+                String nomeU = JsonUtils.nonNullElse(vd, "nomeU", 0);
+                String nomePp = JsonUtils.nonNullElse(vd, "nomePp", 0);
+                String entregue = JsonUtils.nonNullElse(vd, "entregue", 1);
+                String total = JsonUtils.nonNullElse(vd, "total", 1);
+                String troco = JsonUtils.nonNullElse(vd, "troco", 1);
 
                 tick.setNomeDocumento(nomeTd);
                 tick.setNomeEntidade(nomeE);
                 tick.setNomeEmpresaAtual(nomeE);
                 tick.setNifEntidade(nifE);
-                tick.setNifEmpresaAtual(nifE);
+                // tick.setNifEmpresaAtual(nifE);
                 tick.setDataDoc(dataDocumento);
                 tick.setCodigoDocumento(codigoDocumento);
                 tick.setUtilizador(nomeU);
 
-                tick.setValorRecebido(Double.parseDouble(entregue));
-                tick.setValorPagar(Double.parseDouble(total));
-                tick.setValorTroco(Double.parseDouble(troco));
                 tick.setTipoPagamento(nomePp);
-                tick.setValorTotal(Double.parseDouble(total));
-            }
 
-            facturaList.add(factura);
+                valorTotalEntregue += Double.parseDouble(entregue);
+                valorTotalAPagar += Double.parseDouble(total);
+                valorTotalTroco += Double.parseDouble(troco);
+
+                tick.setValorRecebido(valorTotalEntregue);
+                tick.setValorPagar(valorTotalAPagar);
+                tick.setValorTroco(valorTotalTroco);
+                tick.setValorTotal(valorTotalAPagar);
+            }
             ticketList.add(tick);
 
             Map<String, Object> parameters = new HashMap<>();
@@ -330,18 +354,12 @@ public class Printers {
             parameters.put("nItens", tick.getnItens());
 
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ticketList);
-
-            List<TicketProduct> tickProducts = new ArrayList<TicketProduct>();
-            tickProducts.add(new TicketProduct(2, "Munitor", 4000.0, 4000.0 * 2));
-            tickProducts.add(new TicketProduct(1, "Candieiro", 1500.0, 1500.0 * 1));
-            tickProducts.add(new TicketProduct(1, "Candieiro", 1500.0, 1500.0 * 1));
-            tickProducts.add(new TicketProduct(1, "Candieiro", 1500.0, 1500.0 * 1));
             JRBeanCollectionDataSource itemAdicionados = new JRBeanCollectionDataSource(tickProducts);
 
             parameters.put("TABELA_DOCUMENTO", itemAdicionados);
 
             // Gere o relatório
-            
+
             InputStream resourceStream = getClass().getResourceAsStream("/resources/reports/ModeloTicket.jrxml");
             JasperReport jr = JasperCompileManager.compileReport(resourceStream);
             /*
@@ -381,10 +399,9 @@ public class Printers {
             String reportPath = reportDirPath + "\\" + timestamp + "_create_ticket.pdf";
 
             // Gerar o relatório PDF
-            // Gere o relatório PDF
             JasperExportManager.exportReportToPdfFile(jp, reportPath);
             System.out.println("Relatório salvo em: " + reportPath);
-            // Imprimir o arquivo gerado, se necessário
+
             // printReport(reportPath);
 
             System.out.println("Relatório gerado com sucesso!");
@@ -409,22 +426,4 @@ public class Printers {
             System.out.println("Erro ao tentar imprimir o arquivo: " + ex.getMessage());
         }
     }
-
-    // public void gerarPDF(
-    // String nomeEpresa,
-    // String nomeDocumento,
-    // String codigoDocumento,
-    // String dataDoc,
-    // String docPages,
-    // String nomeEntidade,
-    // String nifEntidade,
-    // String utilizador,
-    // int nItens,
-    // double valorRecebido,
-    // double valorPagar,
-    // double valorTroco,
-    // double valorTotal,
-    // String tipoPagamento,
-    // String telefone,
-    // String email)
 }

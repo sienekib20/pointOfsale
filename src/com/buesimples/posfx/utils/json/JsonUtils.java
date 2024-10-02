@@ -31,8 +31,8 @@ public class JsonUtils {
 
     public static String nonNullElse(Map<String, Object> o, String key, int need) {
         if (need == 0) {
-            return o.get(key).toString() != null ? o.get(key).toString() : "";
+            return o.get(key) != null ? o.get(key).toString() : "";
         }
-        return o.get(key).toString() != null ? o.get(key).toString() : "0.0";
+        return o.get(key) != null ? o.get(key).toString() : "0.0";
     }
 }
