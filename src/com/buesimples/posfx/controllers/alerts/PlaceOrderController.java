@@ -1,12 +1,27 @@
 package com.buesimples.posfx.controllers.alerts;
 
+import com.buesimples.posfx.controllers.IndexController;
+import com.buesimples.posfx.controllers.cart.CarrinhoController;
+import com.buesimples.posfx.database.DatabaseHelpers;
+import com.buesimples.posfx.models.ModoPagamento;
+import com.buesimples.posfx.services.OrderControlService;
+import com.buesimples.posfx.services.map.ItemData;
+import com.buesimples.posfx.session.SessionUtils;
+import com.buesimples.posfx.utils.config.Config;
+import com.buesimples.posfx.utils.config.printer.Printers;
+import com.buesimples.posfx.utils.formatter.InputFormatter;
+import com.buesimples.posfx.utils.hashing.Hash;
+import com.buesimples.posfx.utils.json.JsonUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +29,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -30,7 +47,10 @@ public class PlaceOrderController implements Initializable {
     private JFXDialog dialog;
 
     @FXML
-    private JFXButton btnClose;
+    private AnchorPane panelWating;
+
+    @FXML
+    private JFXButton btnPayment;
 
     @FXML
     private JFXButton btnDesconto;
@@ -54,6 +74,9 @@ public class PlaceOrderController implements Initializable {
     private Label labelValorTotal;
 
     @FXML
+    private Label labelValorEmFalta;
+
+    @FXML
     private Label labelTextTotal;
 
     @FXML
@@ -70,6 +93,10 @@ public class PlaceOrderController implements Initializable {
 
     double valorTotal;
 
+    private int lastInsertedId;
+
+    private Map<Integer, ModoPagamento> modoPagmentoList = new HashMap<>();
+
     public PlaceOrderController() {
         instance = this;
     }
@@ -84,6 +111,8 @@ public class PlaceOrderController implements Initializable {
 
     public void setAlertData(String title, String body, JFXDialog dialog) {
         this.dialog = dialog;
+        btnPayment.setDisable(true);
+        panelWating.toBack();
     }
 
     @FXML
@@ -93,7 +122,101 @@ public class PlaceOrderController implements Initializable {
 
     @FXML
     void efectuarPagamentoAndClose(MouseEvent event) {
+        panelWating.toFront();
+        Printers.getInstance().gerarPDF();
+        // Printers.getInstance().pageSetup(((Stage) panelWating.getScene().getWindow()));
+        // gerarHash();
+        /*int sessionId = (int) Double.parseDouble(Config.getMap("localStorage", "sessionId"));
+        int idSerie = Integer.parseInt(IndexController.getInstance().getDefinitionSingle("serie"));
 
+        lastInsertedId = DatabaseHelpers.build().gerarDocumento(
+                2,
+                sessionId,
+                CarrinhoController.getInstance().getClientId(),
+                1,
+                idSerie,
+                SessionUtils.currentTimestamp(),
+                InputFormatter.valorMonetarioToDouble(labelValorEntregue.getText().trim()),
+                CarrinhoController.getInstance().getTotalIliquido(),
+                0,
+                InputFormatter.valorMonetarioToDouble(labelValorTotal.getText()),
+                InputFormatter.valorMonetarioToDouble(labelValorTroco.getText()),
+                CarrinhoController.getInstance().getTotalImposto());
+
+        // int last = 356;
+        
+        // Gerar o HASH E FAZER UM UPDATE
+        
+        Map<Integer, ItemData> map = OrderControlService.getInstance().getItemMap();
+
+        map.forEach((key, item) -> {
+            gerarArtigoDoc(lastInsertedId, item);
+        });
+
+        // Processa os modos de pagamento
+        criarModoPagamento(lastInsertedId);
+        
+        System.out.println("Sem Makas");*/
+//        List<Map<String, Object>> map = DatabaseHelpers.build().querySelect("viewdocumento", "POST",
+//                "{\n"
+//                + "    \"idDocumento\": " + 356 + "\n"
+//                + "}"
+//        );
+//
+//        List<Map<String, Object>> dadosEmpresa = DatabaseHelpers.build().select("configuracao", "POST");
+//        for (Map<String, Object> data : dadosEmpresa) {
+//            String campo = data.get("campo").toString();
+//            if (campo.equals("titulo")) {
+//                String nomeEmpresa = data.get("valor").toString();
+//            }
+//        }
+
+        /*for (Map<String, Object> item : map) {
+            String nomeE = "Mayongi Lda";
+            String nomeDocumento = item.get("nomeTd").toString();
+            String codigoDocumento = item.get("codigoDocumento").toString();
+            String dataDoc = item.get("dataDoc").toString();
+            String docPages = "";
+            String nomeEntidade = item.get("nomeE").toString();
+            String nifE = item.get("nifE").toString();
+            String utilizador = item.get("nomeU").toString();
+
+            int nItens = 0;
+            double valorRecebido = Double.parseDouble(labelValorEntregue.getText().trim());
+            double valorPagar = Double.parseDouble(labelValorTotal.getText().trim());
+            double valorTroco = Double.parseDouble(labelValorTroco.getText().trim());
+            double valorTotall = valorPagar;
+
+            String tipoPagamento = item.get("nifE").toString();
+            String telefone = "";
+            String email = "";
+            
+        }*/
+//        Printers.getInstance().gerarPDF();
+
+        /*String impressoraSelecionada = Config.getConfig("impressora");
+        Printers.initConfigurations().printDocument(impressoraSelecionada);*/
+    }
+
+    void gerarHash() {
+        // 356
+        List<Map<String, Object>> map = DatabaseHelpers.build().querySelect("viewdocumento", "POST",
+                "{\n"
+                + "    \"idDocumento\": " + 356 + "\n"
+                + "}"
+        );
+        String codigoDocumento = "";
+        String dataDoc = "";
+        double total = 0;
+        String prevHash = null;
+
+        for (Map<String, Object> item : map) {
+            dataDoc = item.get("dataDoc").toString();
+            total = Double.parseDouble(item.get("total").toString());
+            codigoDocumento = item.get("codigoDocumento").toString();
+        }
+
+        Hash.buildHash(dataDoc, codigoDocumento, total, prevHash).generateHashSaft();
     }
 
     public void valorTotalToPay(String valor) {
@@ -115,20 +238,20 @@ public class PlaceOrderController implements Initializable {
 
     @FXML
     void pagamentoFormCheque(KeyEvent event) {
-        actualizarValorPagamento(3, event);
+        actualizarValorPagamento(3, event, "Cheque");
     }
 
     @FXML
     void pagamentoFormDinheiro(KeyEvent event) {
-        actualizarValorPagamento(1, event);
+        actualizarValorPagamento(1, event, "Dinheiro");
     }
 
     @FXML
     void pagamentoFormMulticaixa(KeyEvent event) {
-        actualizarValorPagamento(2, event);
+        actualizarValorPagamento(2, event, "Multicaixa");
     }
 
-    void actualizarValorPagamento(int idFormaPagamento, KeyEvent event) {
+    void actualizarValorPagamento(int idFormaPagamento, KeyEvent event, String modoPagamento) {
 
         if (!event.getCode().isDigitKey() && event.getCode() != KeyCode.BACK_SPACE) {
             event.consume();
@@ -154,16 +277,36 @@ public class PlaceOrderController implements Initializable {
         }
 
         String valorAtual = inputField.getText().replaceAll("[^\\d]", ""); // Remove qualquer não dígito
+        int idModoPagamento = pegarIdModoPagamento(modoPagamento);
+        double valor = 0.0;
 
         // Formata o valor para duas casas decimais com separador de milhares e vírgula para decimal
         if (!valorAtual.isEmpty()) {
-            double valor = Double.parseDouble(valorAtual) / 100; // Divide por 100 para simular centavos
+            valor = Double.parseDouble(valorAtual) / 100; // Divide por 100 para simular centavos
             inputField.setText(formatarValorMonetario(valor)); // Atualiza o campo com o valor formatado
             inputField.positionCaret(inputField.getText().length()); // Coloca o cursor no final
         }
+        modoPagmentoList.put(idModoPagamento, new ModoPagamento(lastInsertedId, idModoPagamento, valor));
 
         // Atualiza a soma total
         actualizarSomaTotal();
+    }
+
+    int pegarIdModoPagamento(String nomeModoPagamento) {
+        int idModoPagamento = -1;
+        List<Map<String, Object>> map = DatabaseHelpers.build().querySelect(
+                "modopagamento",
+                "POST",
+                "{\n"
+                + "    \"nome\": \"" + nomeModoPagamento + "\"\n"
+                + "}"
+        );
+
+        for (Map<String, Object> item : map) {
+            idModoPagamento = (int) Double.parseDouble(item.get("idModoPagamento").toString());
+        }
+
+        return idModoPagamento;
     }
 
     void actualizarSomaTotal() {
@@ -203,12 +346,15 @@ public class PlaceOrderController implements Initializable {
         String entregue = labelValorEntregue.getText();
         double valorEntregue = Double.parseDouble(formatarParaNumerico(entregue));
         if (valorEntregue < this.valorTotal) {
+            labelValorEmFalta.setText(formatarValorMonetario(this.valorTotal - valorEntregue));
             labelTextTotal.setStyle(styleFalta);
             labelValorTotal.setStyle(styleFalta);
             labelValorTroco.setText("0.0"); // Não há troco se o valor é insuficiente
         } else {
+            labelValorEmFalta.setText("0.0");
             labelTextTotal.setStyle(styleMatch);
             labelValorTotal.setStyle(styleMatch);
+            btnPayment.setDisable(false);
 
             if (valorEntregue > this.valorTotal) {
                 String valorTroco = formatarValorMonetario(valorEntregue - this.valorTotal);
@@ -227,6 +373,58 @@ public class PlaceOrderController implements Initializable {
         valorFormatado = valorFormatado.replace(',', '.');
 
         return valorFormatado;
+    }
+
+    void gerarArtigoDoc(int idDocumento, ItemData artigo) {
+        Map<String, Object> data = new HashMap<>();
+
+        double valorTotalSet = artigo.getValorTotal();
+
+        data.put("idDocumento", idDocumento);
+        data.put("idArtigo", artigo.getIdArtigo());
+        data.put("idImposto", artigo.getIdImposto());
+        data.put("descricao", artigo.getDescricao());
+        data.put("dataDocumento", SessionUtils.currentTimestamp());
+        data.put("qtd", artigo.getQuantidade());
+        data.put("preco", artigo.getPrecoInicial());
+        data.put("tipoDesconto", "valor");
+        data.put("desconto", calcularDesconto(0, valorTotalSet, 0.0));
+        data.put("imposto", artigo.getValorImposto());
+        data.put("total", artigo.getValorTotal());
+
+        String jsonString = JsonUtils.mapToJsonString(data);
+        DatabaseHelpers.build().insert("artigodocumento", "POST", jsonString);
+    }
+
+    double calcularDesconto(int tipoDesconto, double valorTotal, double valorDesconto) {
+
+        // Tipo 1 = valor | Tipo 2 = Porcentagem
+        //
+        if (tipoDesconto == 1) {
+            return valorTotal - valorDesconto;
+        }
+
+        if (tipoDesconto == 2) {
+
+            double result = (valorTotal * valorDesconto) / 100;
+
+            return valorTotal - result;
+        }
+
+        return 0.0;
+    }
+
+    void criarModoPagamento(int idDocumento) {
+        Map<String, Object> data = new HashMap<>();
+        modoPagmentoList.forEach((idModoPagamento, modoPagamento) -> {
+            if (modoPagamento.getValor() > 0.0) {
+                data.put("idDocumento", idDocumento);
+                data.put("idModoPagamento", idModoPagamento);
+                data.put("valor", modoPagamento.getValor());
+                String jsonString = JsonUtils.mapToJsonString(data);
+                DatabaseHelpers.build().insert("modopagamentodocumento", "POST", jsonString);
+            }
+        });
     }
 
 }

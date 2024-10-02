@@ -2,75 +2,87 @@ package com.buesimples.posfx.models;
 
 public class Checkout {
 
-   private int id;
+    private int id;
 
-   private String checkoutNomeArtigo;
+    private String checkoutNomeArtigo;
 
-   private int checkoutQtdArtigo;
+    private int checkoutQtdArtigo;
 
-   private String checkoutPrecoArtigo;
+    private String checkoutPrecoArtigo;
 
-   private double taxa;
+    private int idImposto;
 
-   private int qtdDisponivel;
+    private double taxa;
 
-   public int getId() {
-      return id;
-   }
+    private int qtdDisponivel;
 
-   public void setId(int id) {
-      this.id = id;
-   }
+    public Checkout() {
+    }
 
-   public Checkout() {
-   }
+    public Checkout(int id, String checkoutNomeArtigo, int checkoutQtdArtigo, String checkoutPrecoArtigo, int idImposto, double taxa, int qtdDisponivel) {
+        this.id = id;
+        this.checkoutNomeArtigo = checkoutNomeArtigo;
+        this.checkoutQtdArtigo = checkoutQtdArtigo;
+        this.checkoutPrecoArtigo = checkoutPrecoArtigo;
+        this.idImposto = idImposto;
+        this.taxa = taxa;
+        this.qtdDisponivel = qtdDisponivel;
+    }
 
-   public Checkout(int id, String checkoutNomeArtigo, int checkoutQtdArtigo, String checkoutPrecoArtigo, double taxa, int qtdDisponivel) {
-      this.id = id;
-      this.checkoutNomeArtigo = checkoutNomeArtigo;
-      this.checkoutQtdArtigo = checkoutQtdArtigo;
-      this.checkoutPrecoArtigo = checkoutPrecoArtigo;
-      this.taxa = taxa;
-      this.qtdDisponivel = qtdDisponivel;
-   }
+    public int getId() {
+        return id;
+    }
 
-   public String getCheckoutNomeArtigo() {
-      return checkoutNomeArtigo;
-   }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-   public void setCheckoutNomeArtigo(String checkoutNomeArtigo) {
-      this.checkoutNomeArtigo = checkoutNomeArtigo;
-   }
+    public String getCheckoutNomeArtigo() {
+        return checkoutNomeArtigo;
+    }
 
-   public int getCheckoutQtdArtigo() {
-      return checkoutQtdArtigo;
-   }
+    public void setCheckoutNomeArtigo(String checkoutNomeArtigo) {
+        this.checkoutNomeArtigo = checkoutNomeArtigo;
+    }
 
-   public void setCheckoutQtdArtigo(int checkoutQtdArtigo) {
-      this.checkoutQtdArtigo = checkoutQtdArtigo;
-   }
+    public int getCheckoutQtdArtigo() {
+        return checkoutQtdArtigo;
+    }
 
-   public String getCheckoutPrecoArtigo() {
-      return checkoutPrecoArtigo;
-   }
+    public void setCheckoutQtdArtigo(int checkoutQtdArtigo) {
+        this.checkoutQtdArtigo = checkoutQtdArtigo;
+    }
 
-   public void setCheckoutPrecoArtigo(String checkoutPrecoArtigo) {
-      this.checkoutPrecoArtigo = checkoutPrecoArtigo;
-   }
+    public String getCheckoutPrecoArtigo() {
+        return checkoutPrecoArtigo;
+    }
 
-   public double getTaxa() {
-      return taxa;
-   }
+    public void setCheckoutPrecoArtigo(String checkoutPrecoArtigo) {
+        this.checkoutPrecoArtigo = checkoutPrecoArtigo;
+    }
 
-   public void setTaxa(double taxa) {
-      this.taxa = taxa;
-   }
+    public double getTaxa() {
+        return taxa;
+    }
 
-   public int qtdDisponivel() {
-      return qtdDisponivel;
-   }
+    public void setTaxa(double taxa) {
+        this.taxa = taxa;
+    }
 
-   public void setQtdDisponivel(int qtdDisponivel) {
-      this.qtdDisponivel = qtdDisponivel;
-   }
+    public int qtdDisponivel() {
+        return qtdDisponivel;
+    }
+
+    public void setQtdDisponivel(int qtdDisponivel) {
+        this.qtdDisponivel = qtdDisponivel;
+    }
+
+    public int getIdImposto() {
+        return idImposto;
+    }
+
+    public void setIdImposto(int idImposto) {
+        this.idImposto = idImposto;
+    }
+
 }

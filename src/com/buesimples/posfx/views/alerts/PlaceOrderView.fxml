@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
@@ -9,150 +10,170 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="650.0" style="-fx-background-color: -dark900;" stylesheets="@../../../../../resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.alerts.PlaceOrderController">
+<AnchorPane style="-fx-background-color: -dark900;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.alerts.PlaceOrderController">
    <children>
-      <HBox alignment="CENTER_RIGHT" layoutY="470.0" prefHeight="80.0" prefWidth="650.0" spacing="10.0" AnchorPane.bottomAnchor="0.0">
+      <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="745.0" style="-fx-background-color: -dark900;" stylesheets="@../../../../../resources/dark-themes.css">
          <children>
-            <JFXButton fx:id="btnClose" onMouseClicked="#efectuarPagamentoAndClose" prefWidth="407.0" styleClass="alert-btn-ok" text="Efectuar Pagamento" />
-            <JFXButton fx:id="btnDesconto" layoutX="255.0" layoutY="15.0" onMouseClicked="#aplicarDisconto" styleClass="alert-btn-no" text="Desconto" />
-         </children>
-         <padding>
-            <Insets right="40.0" />
-         </padding>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="649.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="540.0" spacing="5.0">
+            <HBox alignment="CENTER_RIGHT" layoutY="470.0" prefHeight="80.0" prefWidth="650.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Label fx:id="txtAlertTitle" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="540.0" style="-fx-text-fill: white;" styleClass="alert-title" text="Efectuar pagamento" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="txtAlertBody" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="540.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Escolher formas de pagamentos" wrapText="true" VBox.vgrow="ALWAYS" />
+                  <JFXButton fx:id="btnPayment" onMouseClicked="#efectuarPagamentoAndClose" prefWidth="407.0" styleClass="alert-btn-ok" text="Efectuar Pagamento" />
+                  <JFXButton fx:id="btnDesconto" layoutX="255.0" layoutY="15.0" onMouseClicked="#aplicarDisconto" styleClass="alert-btn-no" text="Desconto" />
                </children>
                <padding>
-                  <Insets left="30.0" />
+                  <Insets right="40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="645.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="76.0" prefWidth="689.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="txtAlertTitle" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="540.0" style="-fx-text-fill: white;" styleClass="alert-title" text="Efectuar pagamento" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="txtAlertBody" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="540.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Escolher formas de pagamentos" wrapText="true" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox layoutY="300.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="67.0" prefWidth="540.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;">
+                     <children>
+                        <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="197.0" style="-fx-text-fill: white; -fx-font-size: 17;" styleClass="alert-body" text="Entregue" />
+                        <Label fx:id="labelValorEntregue" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="484.0" style="-fx-text-fill: white; -fx-font-size: 17;" styleClass="alert-body" text="0" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets right="11.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="77.0" minWidth="-Infinity" prefHeight="67.0" prefWidth="540.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;">
+                     <children>
+                        <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: white; -fx-font-size: 19;" styleClass="alert-body" text="Troco" />
+                        <Label fx:id="labelValorTroco" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="514.0" style="-fx-text-fill: white; -fx-font-size: 19;" styleClass="alert-body" text="0" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets right="11.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="10.0" minWidth="-Infinity" prefHeight="67.0" prefWidth="540.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;">
+                     <children>
+                        <Label fx:id="labelTextTotal" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="164.0" style="-fx-text-fill: white; -fx-font-size: 24;" styleClass="alert-body" text="Total a Pagar" />
+                        <Label fx:id="labelValorTotal" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="520.0" style="-fx-text-fill: white; -fx-font-size: 24;" styleClass="alert-body" text="0" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets right="11.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="14.0" layoutY="90.0" prefHeight="200.0" prefWidth="590.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Dinheiro">
+                           <padding>
+                              <Insets left="16.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="inputDinheiro" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormDinheiro" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Multicaixa">
+                           <padding>
+                              <Insets left="16.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="inputMulticaixa" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormMulticaixa" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="50.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Cheque">
+                           <padding>
+                              <Insets left="16.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="inputCheque" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormCheque" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="90.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Valor Adiantado">
+                           <padding>
+                              <Insets left="16.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="inputAdiantado" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormAdiantado" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
                </padding>
             </VBox>
-            <JFXButton fx:id="btnExit" contentDisplay="GRAPHIC_ONLY" onMouseClicked="#fecharModal" prefHeight="60.0" prefWidth="71.0" ripplerFill="WHITE" style="-fx-cursor: hand;">
+            <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="450.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="339.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;">
+               <children>
+                  <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" style="-fx-text-fill: white; -fx-font-size: 16;" styleClass="alert-body" text="Valor em Falta">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="labelValorEmFalta" alignment="CENTER_RIGHT" layoutX="40.0" layoutY="42.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="244.0" style="-fx-text-fill: white; -fx-font-size: 16;" styleClass="alert-body" text="0" />
+               </children>
+            </HBox>
+            <JFXButton fx:id="btnExit" contentDisplay="GRAPHIC_ONLY" layoutX="631.0" layoutY="30.0" onMouseClicked="#fecharModal" prefHeight="60.0" prefWidth="80.0" ripplerFill="WHITE" style="-fx-cursor: hand;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <graphic>
                   <FontAwesomeIconView glyphName="CLOSE" opacity="0.5" size="28" style="-fx-fill: white;" />
                </graphic>
             </JFXButton>
+            <AnchorPane fx:id="panelWating" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXSpinner layoutX="269.0" layoutY="197.0" prefHeight="125.0" prefWidth="142.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
+                  <Label alignment="CENTER" layoutX="260.0" layoutY="432.0" style="-fx-text-fill: white; -fx-font-size: 20;" styleClass="alert-body" text="Imprimindo" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
+               </children>
+            </AnchorPane>
          </children>
-      </HBox>
-      <VBox layoutY="300.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <padding>
-            <Insets left="30.0" right="30.0" />
-         </padding>
-         <children>
-            <HBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="67.0" prefWidth="540.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;">
-               <children>
-                  <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="197.0" style="-fx-text-fill: white; -fx-font-size: 17;" styleClass="alert-body" text="Entregue" />
-                  <Label fx:id="labelValorEntregue" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="391.0" style="-fx-text-fill: white; -fx-font-size: 17;" styleClass="alert-body" text="0" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets right="11.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets right="30.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="77.0" minWidth="-Infinity" prefHeight="67.0" prefWidth="540.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;">
-               <children>
-                  <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: white; -fx-font-size: 19;" styleClass="alert-body" text="Troco" />
-                  <Label fx:id="labelValorTroco" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: white; -fx-font-size: 19;" styleClass="alert-body" text="0" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets right="11.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets right="30.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="10.0" minWidth="-Infinity" prefHeight="67.0" prefWidth="540.0" style="-fx-border-color: afafaf; -fx-border-width: 0 0 1 0;">
-               <children>
-                  <Label fx:id="labelTextTotal" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="164.0" style="-fx-text-fill: white; -fx-font-size: 24;" styleClass="alert-body" text="Total a Pagar" />
-                  <Label fx:id="labelValorTotal" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="426.0" style="-fx-text-fill: white; -fx-font-size: 24;" styleClass="alert-body" text="0" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets right="11.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets right="30.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-      <VBox layoutX="14.0" layoutY="90.0" prefHeight="200.0" prefWidth="590.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Dinheiro">
-                     <padding>
-                        <Insets left="16.0" />
-                     </padding>
-                  </Label>
-                  <JFXTextField fx:id="inputDinheiro" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormDinheiro" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </JFXTextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Multicaixa">
-                     <padding>
-                        <Insets left="16.0" />
-                     </padding>
-                  </Label>
-                  <JFXTextField fx:id="inputMulticaixa" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormMulticaixa" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </JFXTextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="50.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Cheque">
-                     <padding>
-                        <Insets left="16.0" />
-                     </padding>
-                  </Label>
-                  <JFXTextField fx:id="inputCheque" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormCheque" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </JFXTextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="90.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="500.0" styleClass="alert-input">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="297.0" style="-fx-text-fill: white;" styleClass="alert-body" text="Valor Adiantado">
-                     <padding>
-                        <Insets left="16.0" />
-                     </padding>
-                  </Label>
-                  <JFXTextField fx:id="inputAdiantado" alignment="CENTER_RIGHT" onKeyReleased="#pagamentoFormAdiantado" prefHeight="48.0" prefWidth="408.0" promptText="0.0" style="-fx-text-fill: white; -fx-prompt-text-fill: white; -fx-font-size: 16; -fx-font-family: Gendy; -fx-border-color: transparent;" styleClass="alert-input" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </JFXTextField>
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets left="30.0" right="30.0" />
-         </padding>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

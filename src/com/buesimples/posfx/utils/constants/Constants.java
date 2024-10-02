@@ -35,7 +35,7 @@ public class Constants {
    }
 
    public static final String getJsonFile(String filename) {
-      return JSON_PATH + filename;
+      return JSON_PATH + filename + ".json";
    }
 
    /**

@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Arrays;
 
 public class MainController {
-
+    
+   private static MainController instance;
+    
    @FXML
    private StackPane panelRoot;
 
@@ -44,6 +46,10 @@ public class MainController {
 
    // Lista de todos os botões de navegação
    private List<JFXButton> navButtons;
+   
+   public MainController() {
+       instance = this;
+   }
 
    @FXML
    private void initialize() {
@@ -53,7 +59,11 @@ public class MainController {
       // Ativar o botão inicial (Home) por padrão
       setActiveButton(btnHome);
    }
-
+   
+   public static MainController getInstance() {
+        return instance;
+   }
+   
    // Ações de navegação
    @FXML
    private void showHome() {
@@ -98,7 +108,7 @@ public class MainController {
    }
 
    // Método para carregar uma nova view no painel central
-   private void loadView(String viewName) {
+   public void loadView(String viewName) {
       NodeLoader.getInstance().load(panelExtented, viewName);
    }
 

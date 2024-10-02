@@ -6,8 +6,11 @@ import java.util.logging.Logger;
 
 import com.buesimples.posfx.animations.Animations;
 import com.buesimples.posfx.utils.constants.Constants;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,75 +20,105 @@ import javafx.stage.StageStyle;
 
 public class NodeLoader {
 
-   private static NodeLoader instance = null;
+    private static NodeLoader instance = null;
 
-   public NodeLoader() {
-      instance = this;
-   }
+    private Map<String, Node> loadedNodes = new HashMap<>();
 
-   public static NodeLoader getInstance() {
-      if (instance == null) {
-         instance = new NodeLoader();
-      }
-      return instance;
-   }
+    public NodeLoader() {
+        instance = this;
+    }
 
-   public <T> T load(AnchorPane container, String rootFxml) {
-      try {
-         // Limpar os filhos do container antes de adicionar um novo nó
-         container.getChildren().clear();
+    public static NodeLoader getInstance() {
+        if (instance == null) {
+            instance = new NodeLoader();
+        }
+        return instance;
+    }
 
-         
-         String fxmlView = rootFxml.contains(".") ? rootFxml.replace('.', '/') : rootFxml;
-         
-         FXMLLoader fxmlLoader = new FXMLLoader();
-         fxmlLoader.setLocation(getClass().getResource(Constants.VIEWS_PACKAGE + fxmlView + "View.fxml"));
-         Parent root = fxmlLoader.load();
-         
-         // Parent root = FXMLLoader.load(getClass().getResource(Constants.VIEWS_PACKAGE
-         // + rootFxml + "View.fxml"));
-         container.getChildren().add(root);
-         AnchorPane.setTopAnchor(root, 0.0);
-         AnchorPane.setLeftAnchor(root, 0.0);
-         AnchorPane.setBottomAnchor(root, 0.0);
-         AnchorPane.setRightAnchor(root, 0.0);
+    public <T> T load(AnchorPane container, String rootFxml) {
+        try {
+            // Limpar os filhos do container antes de adicionar um novo nó
+            container.getChildren().clear();
 
-         Animations.fadeInUp(container, 2.0);
+            String fxmlView = rootFxml.contains(".") ? rootFxml.replace('.', '/') : rootFxml;
 
-         return fxmlLoader.getController();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(Constants.VIEWS_PACKAGE + fxmlView + "View.fxml"));
+            Parent root = fxmlLoader.load();
 
-      } catch (IOException ex) {
-         Logger.getLogger(NodeLoader.class.getName()).log(Level.SEVERE, null, ex);
-         return null;
-      }
-   }
+            // Parent root = FXMLLoader.load(getClass().getResource(Constants.VIEWS_PACKAGE
+            // + rootFxml + "View.fxml"));
+            container.getChildren().add(root);
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setBottomAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
 
-   public Parent getNode(String fxml) throws IOException {
-      return FXMLLoader.load(getClass().getResource(Constants.VIEWS_PACKAGE + fxml + "View.fxml"));
-   }
+            Animations.fadeInUp(container, 2.0);
 
-   public void loadNode(AnchorPane node, String nodeName) {
-      load(node, nodeName);
-   }
+            return fxmlLoader.getController();
 
-   public void loadNodeById(AnchorPane node, String id) {
-      load(node, Constants.VIEW_NODE_MAP.get(id));
-   }
+        } catch (IOException ex) {
+            Logger.getLogger(NodeLoader.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 
-   public void showWindow(Stage stage, String view) {
-      try {
-         Parent root = FXMLLoader.load(getClass().getResource(Constants.view(view)));
+    public Parent getNode(String fxml) throws IOException {
+        return FXMLLoader.load(getClass().getResource(Constants.VIEWS_PACKAGE + fxml + "View.fxml"));
+    }
 
-         stage.getIcons().add(new Image(Constants.STAGE_ICON));
-         stage.initStyle(StageStyle.TRANSPARENT);
-         stage.setTitle(Constants.TITLE);
-         stage.setScene(new Scene(root));
-         stage.show();
+    public void loadNode(AnchorPane node, String nodeName) {
+        load(node, nodeName);
+    }
 
-      } catch (IOException e) {
-         // e.printStackTrace();
-         System.out.println("Error in Main: " + e.getMessage() + " Linha de Erro: 47");
-      }
-   }
+    public void loadNodeById(AnchorPane node, String id) {
+        load(node, Constants.VIEW_NODE_MAP.get(id));
+    }
+
+    public void loadNode1(AnchorPane parent, String nodeName) {
+        if (loadedNodes.containsKey(nodeName)) {
+            parent.getChildren().clear();
+            parent.getChildren().add(loadedNodes.get(nodeName));
+        } else {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(Constants.view(nodeName)));
+                Node node = loader.load();
+                loadedNodes.put(nodeName, node);
+                parent.getChildren().clear();
+                parent.getChildren().add(node);
+                AnchorPane.setTopAnchor(node, 0.0);
+                AnchorPane.setRightAnchor(node, 0.0);
+                AnchorPane.setBottomAnchor(node, 0.0);
+                AnchorPane.setLeftAnchor(node, 0.0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void clearNode(String nodeName) {
+        loadedNodes.remove(nodeName);
+    }
+
+    public void clearAllNodes() {
+        loadedNodes.clear();
+    }
+
+    public void showWindow(Stage stage, String view) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(Constants.view(view)));
+
+            stage.getIcons().add(new Image(Constants.STAGE_ICON));
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setTitle(Constants.TITLE);
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            // e.printStackTrace();
+            System.out.println("Error in Main: " + e.getMessage() + " Linha de Erro: 47");
+        }
+    }
 
 }

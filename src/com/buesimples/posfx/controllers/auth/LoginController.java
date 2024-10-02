@@ -8,12 +8,14 @@ import java.util.ResourceBundle;
 
 import com.buesimples.posfx.animations.Animations;
 import com.buesimples.posfx.database.DatabaseHelpers;
+import com.buesimples.posfx.session.SessionUtils;
 import com.buesimples.posfx.utils.config.Config;
 import com.buesimples.posfx.utils.constants.Constants;
 import com.buesimples.posfx.utils.hashing.Hash;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.util.HashMap;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,185 +35,189 @@ import javafx.stage.StageStyle;
 
 public class LoginController implements Initializable {
 
-   private static LoginController instance;
+    private static LoginController instance;
 
-   @FXML
-   private AnchorPane panelRoot;
+    @FXML
+    private AnchorPane panelRoot;
 
-   @FXML
-   private AnchorPane panelLogin;
+    @FXML
+    private AnchorPane panelLogin;
 
-   @FXML
-   private Label inputSelectedUser;
+    @FXML
+    private Label inputSelectedUser;
 
-   @FXML
-   private JFXPasswordField inputSenha;
+    @FXML
+    private JFXPasswordField inputSenha;
 
-   @FXML
-   private JFXButton btnLogin;
+    @FXML
+    private JFXButton btnLogin;
 
-   @FXML
-   private Label btnExitPanel;
+    @FXML
+    private Label btnExitPanel;
 
-   @FXML
-   private Label btnInformar;
+    @FXML
+    private Label btnInformar;
 
-   @FXML
-   private Label btnExit;
+    @FXML
+    private Label btnExit;
 
-   @FXML
-   private AnchorPane panelUsuarios;
+    @FXML
+    private AnchorPane panelUsuarios;
 
-   @FXML
-   private JFXTextField inputPesquisa;
+    @FXML
+    private JFXTextField inputPesquisa;
 
-   @FXML
-   private VBox vboxLista;
+    @FXML
+    private VBox vboxLista;
 
-   
+    public LoginController() {
+        instance = this;
+    }
 
-   public LoginController() {
-      instance = this;
-   }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.carregarUsuarios();
+    }
 
-   @Override
-   public void initialize(URL location, ResourceBundle resources) {
-      this.carregarUsuarios();
-   }
+    public static LoginController getInstance() {
+        return instance;
+    }
 
-   public static LoginController getInstance() {
-      return instance;
-   }
+    private void carregarUsuarios() {
+        List<Map<String, Object>> map = DatabaseHelpers.build().select(
+                "usuario", "GET");
+        Config.putInCache("usuario", map);
 
-   private void carregarUsuarios() {
-      List<Map<String, Object>> map = DatabaseHelpers.build().select(
-            "usuario", "GET");
-      Config.putInCache("usuario", map);
+        for (Map<String, Object> item : map) {
 
-      for (Map<String, Object> item : map) {
+            String username = (String) item.get("nome");
 
-         String username = (String) item.get("nome");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(Constants.view("auth.AccountItem")));
+            JFXButton button = null;
+            try {
+                button = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            AccountItemController accountItem = loader.getController();
+            accountItem.setUsername(username);
 
-         FXMLLoader loader = new FXMLLoader();
-         loader.setLocation(getClass().getResource(Constants.view("auth.AccountItem")));
-         JFXButton button = null;
-         try {
-            button = loader.load();
-         } catch (IOException e) {
-            e.printStackTrace();
-         }
-         AccountItemController accountItem = loader.getController();
-         accountItem.setUsername(username);
+            vboxLista.getChildren().add(button);
+        }
+    }
 
-         vboxLista.getChildren().add(button);
-      }
-   }
+    @FXML
+    void actionExit(MouseEvent event) {
+        ((Stage) btnExit.getScene().getWindow()).close();
+    }
 
-   @FXML
-   void actionExit(MouseEvent event) {
-      ((Stage) btnExit.getScene().getWindow()).close();
-   }
+    @FXML
+    void actionExitPanel(MouseEvent event) {
+        mudarPaneis(0);
+    }
 
-   @FXML
-   void actionExitPanel(MouseEvent event) {
-      mudarPaneis(0);
-   }
+    public void setUsuarioSelecionado(String username) {
+        inputSelectedUser.setText(username.trim());
+    }
 
-   public void setUsuarioSelecionado(String username) {
-      inputSelectedUser.setText(username.trim());
-   }
+    @FXML
+    void actionFiltrarDados(KeyEvent event) {
 
-   @FXML
-   void actionFiltrarDados(KeyEvent event) {
+    }
 
-   }
+    @FXML
+    void actionInformarGestor(MouseEvent event) {
 
-   @FXML
-   void actionInformarGestor(MouseEvent event) {
+    }
 
-   }
 
-   @FXML
-   void actionLogin(MouseEvent event) {
-      if (inputSenha.getText().isEmpty()) {
+    @FXML
+    void actionLogin() {
+        if (inputSenha.getText().isEmpty()) {
 
-         System.out.println("Alerta de Erro");
+            System.out.println("Alerta de Erro");
 
-      } else {
-         String nomeUsuario = DatabaseHelpers.getColumnValue(
-               Config.getFromCache("usuario"),
-               "nome");
-         String senhaUsuario = DatabaseHelpers.getColumnValue(
-               Config.getFromCache("usuario"), "senha");
+        } else {
+            String nomeUsuario = DatabaseHelpers.getColumnValue(
+                    Config.getFromCache("usuario"),
+                    "nome");
+            String senhaUsuario = DatabaseHelpers.getColumnValue(
+                    Config.getFromCache("usuario"), "senha");
 
-         if (inputSelectedUser.getText().toLowerCase().trim().equals(nomeUsuario.trim().toLowerCase())) {
-            if (Hash.verify(inputSenha.getText(), senhaUsuario)) {
-               Stage primaryStage = ((Stage) btnLogin.getScene().getWindow());
-               try {
-                  FXMLLoader fxml = new FXMLLoader();
-                  //fxml.setLocation(getClass().getResource(Constants.MAIN_VIEW));
-                  fxml.setLocation(getClass().getResource(Constants.view("Main")));
+            if (inputSelectedUser.getText().toLowerCase().trim().equals(nomeUsuario.trim().toLowerCase())) {
+                if (Hash.verify(inputSenha.getText(), senhaUsuario)) {
+                    SessionUtils.createSessionStorage();
+                    Stage primaryStage = ((Stage) btnLogin.getScene().getWindow());
+                    
+                    try {
+                        FXMLLoader fxml = new FXMLLoader();
+                        //fxml.setLocation(getClass().getResource(Constants.MAIN_VIEW));
+                        fxml.setLocation(getClass().getResource(Constants.view("Main")));
 
-                  Parent root = fxml.load();
+                        Parent root = fxml.load();
 
-                  Stage stage = new Stage(StageStyle.UNDECORATED);
-                  stage.getIcons().add(new Image(Constants.STAGE_ICON));
-                  stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-                  stage.setFullScreen(true);
-                  stage.setMinHeight(Constants.MIN_HEIGHT);
-                  stage.setMinWidth(Constants.MIN_WIDTH);
-                  stage.setResizable(false);
-                  stage.setTitle(Constants.TITLE);
-                  stage.setScene(new Scene(root));
-                  stage.show();
+                        Stage stage = new Stage(StageStyle.UNDECORATED);
+                        stage.getIcons().add(new Image(Constants.STAGE_ICON));
+                        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+                        stage.setFullScreen(true);
+                        stage.setMinHeight(Constants.MIN_HEIGHT);
+                        stage.setMinWidth(Constants.MIN_WIDTH);
+                        stage.setResizable(false);
+                        stage.setTitle(Constants.TITLE);
+                        stage.setScene(new Scene(root));
+                        stage.show();
 
-                  primaryStage.close();
+                        primaryStage.close();
 
-                  root.setOnKeyPressed((KeyEvent e) -> {
-                     if (e.getCode().equals(KeyCode.F11)) {
-                        stage.setFullScreen(!stage.isFullScreen());
-                     }
-                  });
+                        root.setOnKeyPressed((KeyEvent e) -> {
+                            if (e.getCode().equals(KeyCode.F11)) {
+                                stage.setFullScreen(!stage.isFullScreen());
+                            }
+                        });
 
-                  stage.setOnCloseRequest(ev -> {
-                     /*
+                        stage.setOnCloseRequest(ev -> {
+                            /*
                       * DatabaseHelper.logout();
                       * ProductsController.closeStage();
-                      */
-                  });
+                             */
+                        });
 
-               } catch (IOException e) {
-                  e.printStackTrace();
-               }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
+                }
             }
-         }
 
-      }
-   }
+        }
+    }
 
-   @FXML
-   void actionLoginWithKey(KeyEvent event) {
+    @FXML
+    void actionLoginWithKey(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
 
-   }
+            actionLogin();
+        }
+    }
 
-   @FXML
-   void actionSelectUsuario(MouseEvent event) {
-      mudarPaneis(1);
-   }
+    @FXML
+    void actionSelectUsuario(MouseEvent event) {
+        mudarPaneis(1);
+    }
 
-   void mudarPaneis(int type) {
-      if (type == 1) {
-         panelLogin.toBack();
-         panelUsuarios.setVisible(true);
-         panelUsuarios.toFront();
-         Animations.fadeIn(panelUsuarios, 5);
-      } else {
-         panelLogin.toFront();
-         panelUsuarios.setVisible(false);
-         panelUsuarios.toBack();
-      }
+    void mudarPaneis(int type) {
+        if (type == 1) {
+            panelLogin.toBack();
+            panelUsuarios.setVisible(true);
+            panelUsuarios.toFront();
+            Animations.fadeIn(panelUsuarios, 5);
+        } else {
+            panelLogin.toFront();
+            panelUsuarios.setVisible(false);
+            panelUsuarios.toBack();
+        }
 
-   }
+    }
 
 }

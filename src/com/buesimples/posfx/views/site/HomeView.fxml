@@ -23,7 +23,7 @@
                </padding></AnchorPane>
             <AnchorPane prefHeight="600.0" prefWidth="620.0" style="-fx-background-color: -black900;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="20.0" layoutY="14.0" prefHeight="28.0" prefWidth="199.0" style="-fx-font-family: Gendy; -fx-text-fill: white; -fx-font-size: 20;" text="Mayongi Lda" AnchorPane.leftAnchor="25.0" />
+                  <Label layoutX="20.0" layoutY="14.0" prefHeight="28.0" prefWidth="199.0" style="-fx-font-family: Gendy; -fx-text-fill: white; -fx-font-size: 20;" text="Mayongi Lda" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="14.0" />
                   <Label layoutX="20.0" layoutY="42.0" style="-fx-text-fill: afafaf; -fx-font-family: Alkia; -fx-font-size: 14;" text="Terça, 10 de Agosto 2024" AnchorPane.leftAnchor="25.0" />
                   <HBox layoutX="35.0" layoutY="69.0" prefHeight="60.0" prefWidth="570.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                      <children>
