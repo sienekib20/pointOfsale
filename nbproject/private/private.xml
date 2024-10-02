@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/views/MainView.fxml</file>
-            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/views/auth/LoginView.fxml</file>
-            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/utils/formatter/InputFormatter.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/controllers/setting/SetGeralController.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/services/CartService.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/controllers/alerts/PlaceOrderController.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/controllers/auth/LoginController.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/resources/reports/ModeloTicket.jrxml</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/controllers/site/HomeController.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/models/Ticket.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/services/map/ItemData.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/utils/config/printer/Printers.java</file>
+            <file>file:/C:/csharp/pointOfSale/src/com/buesimples/posfx/models/TicketProduct.java</file>
         </group>
     </open-files>
 </project-private>

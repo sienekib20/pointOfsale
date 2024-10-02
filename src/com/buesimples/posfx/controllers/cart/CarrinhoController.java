@@ -9,11 +9,17 @@ import java.util.ResourceBundle;
 
 import com.buesimples.posfx.alerts.AlertBuilder;
 import com.buesimples.posfx.alerts.AlertType;
-import com.buesimples.posfx.controllers.alerts.AlertBuilderController;
+import com.buesimples.posfx.controllers.IndexController;
 import com.buesimples.posfx.controllers.alerts.PlaceOrderController;
 import com.buesimples.posfx.models.Checkout;
+import com.buesimples.posfx.services.CartService;
+import com.buesimples.posfx.services.OrderControlService;
 import com.buesimples.posfx.utils.constants.Constants;
+import com.buesimples.posfx.utils.formatter.InputFormatter;
 import com.jfoenix.controls.JFXButton;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +87,27 @@ public class CarrinhoController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
+    void selectionCliente() {
+        labelCliente.setOnMouseClicked((e) -> {
+            IndexController.getInstance().openWindow(e, 5, "site.Client");
+        });
+    }
+
+    public void selectClient(int id, String nome) {
+        labelCliente.setText("[" + id + "] " + nome);
+    }
+
+    public int getClientId() {
+        Pattern pattern = Pattern.compile("\\[(.*?)\\]");
+        Matcher matcher = pattern.matcher(labelCliente.getText().trim());
+        if (matcher.find()) {
+            System.out.println("IDDDDDD: ");
+            return Integer.parseInt(matcher.group(1));
+        } else {
+            return 0;
+        }
+    }
+
     public void updateTax(double price, double taxa, int indice, boolean somarResultado) {
         double valorActualTaxa = 0;
 
@@ -120,10 +147,19 @@ public class CarrinhoController implements Initializable {
         actionCancelar = true;
     }
 
+    public double getTotalIliquido() {
+
+        return Double.parseDouble(labelValorSubtotal.getText());
+    }
+
     @FXML
     void limparCarrinho(MouseEvent event) {
         confirmaAlert();
         actionCancelar = false;
+    }
+
+    public double getTotalImposto() {
+        return InputFormatter.valorMonetarioToDouble(labelValorTaxa.getText());
     }
 
     public void limparDadosCarrinho() {
@@ -158,7 +194,19 @@ public class CarrinhoController implements Initializable {
         AlertBuilder.build().create(AlertType.WARNING, labelCliente, "Carrinho vazio, por favor adicione item!");
     }
 
+    public void adicionarItemNoCarrinhoAlt(List<Checkout> checkoutList, int idArtigoSelecionado) {
+        CartService cartService = CartService.getInstance();
+        for (Checkout item : checkoutList) {
+            cartService.addItem(item);
+        }
+    }
+
+    public void clearCart() {
+        CartService.getInstance().clearCart();
+    }
+
     public void adicionarItemNoCarrinho(ArrayList<Checkout> item, int id) {
+
         try {
             FXMLLoader fxml = new FXMLLoader();
             fxml.setLocation(getClass().getResource(Constants.view("cart.CheckoutItem")));
@@ -220,11 +268,21 @@ public class CarrinhoController implements Initializable {
                     // controllerMap.put(id, itemController);
                 }
 
+                OrderControlService.getInstance().adicionarOuAtualizarItem(
+                        id,
+                        data.getCheckoutNomeArtigo(),
+                        data.getCheckoutQtdArtigo(),
+                        precoItem,
+                        data.getIdImposto(),
+                        data.getTaxa()
+                );
+
                 updateTax(precoItem, data.getTaxa(), 1, true);
 
                 if (!valorInicialTaxa.containsKey(id)) {
                     valorInicialTaxa.put(id, data.getTaxa());
                 }
+                
                 definirValorSubTotal(1, id);
             });
 
@@ -311,6 +369,8 @@ public class CarrinhoController implements Initializable {
     }
 
     public void updateTable(int id) {
+        CartService.getInstance().removeItem(id);
+
         if (itemMap.containsKey(id)) {
             HBox hbox = itemMap.get(id);
 

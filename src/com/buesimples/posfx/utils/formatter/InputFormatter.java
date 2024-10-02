@@ -14,6 +14,11 @@ public class InputFormatter {
 
    private static final DecimalFormat FORMATTER = new DecimalFormat("#,##0.00",
          new DecimalFormatSymbols(Locale.getDefault()));
+   
+   
+   public static double valorMonetarioToDouble(String valor) {
+       return Double.parseDouble(valor.replace(" ", "").replace(',','.'));
+   }
 
    public static void onlyNumbers(JFXTextField textField) {
       textField.setTextFormatter(new TextFormatter<>(change -> {

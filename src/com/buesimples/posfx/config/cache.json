@@ -14,6 +14,12 @@
       "senha": "$2y$10$mrDNGlB/G2U3cScYifmkvepZoo6KphaNm5g7sT3gx8pgY8ab5CLg2",
       "otp": "",
       "estado": true
+    },
+    {
+      "idUsuario": 7.0,
+      "nome": "siene",
+      "dataAdesao": "2024-09-13T11:37:22+01:00",
+      "estado": true
     }
   ]
 }

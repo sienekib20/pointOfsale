@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane stylesheets="@../../../../../resources/onlyBtn.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.setting.SettingsController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: -dark500;" stylesheets="@../../../../../resources/dark-themes.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="30.0" layoutY="24.0" prefHeight="28.0" prefWidth="199.0" style="-fx-font-family: Gendy; -fx-text-fill: white; -fx-font-size: 20;" text="Configuração" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
+            <Label layoutX="30.0" layoutY="52.0" style="-fx-text-fill: afafaf; -fx-font-family: Alkia; -fx-font-size: 14;" text="Deixa o app conforme necessário" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="40.0" />
+            <AnchorPane layoutX="14.0" layoutY="73.0" prefHeight="513.0" prefWidth="290.0" style="-fx-background-color: -black500;" stylesheets="@../../../../../resources/onlyBtn.css" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="73.0">
+               <children>
+                  <JFXButton fx:id="btnGeral" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showGeral" prefHeight="100.0" prefWidth="290.0" ripplerFill="#c7c2c2cc" styleClass="btn-setting" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0" spacing="10.0" styleClass="btn-setting-contain">
+                                 <children>
+                                    <Label styleClass="btn-setting-title" text="Geral" />
+                                    <Label alignment="TOP_LEFT" prefHeight="46.0" prefWidth="251.0" style="-fx-text-fill: afafaf; -fx-font-size: 13;" text="Parametriza os aspectos gerais do teu sistema conforme necessário" wrapText="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                              <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="4.0" styleClass="btn-setting-activator" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnViewport" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showViewport" prefHeight="100.0" prefWidth="290.0" ripplerFill="#c7c2c2cc" styleClass="btn-setting" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="120.0">
+                     <graphic>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0" spacing="10.0" styleClass="btn-setting-contain">
+                                 <children>
+                                    <Label styleClass="btn-setting-title" text="Viewport" />
+                                    <Label alignment="TOP_LEFT" prefHeight="46.0" prefWidth="251.0" style="-fx-text-fill: afafaf; -fx-font-size: 13;" text="Mudança das funcionalidades de botão da viewport" wrapText="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                              <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="4.0" styleClass="btn-setting-activator" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnDatabase" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="110.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showDatabase" prefHeight="100.0" prefWidth="290.0" ripplerFill="#c7c2c2cc" styleClass="btn-setting" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="250.0">
+                     <graphic>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0" spacing="10.0" styleClass="btn-setting-contain">
+                                 <children>
+                                    <Label styleClass="btn-setting-title" text="Base de Dados" />
+                                    <Label alignment="TOP_LEFT" prefHeight="46.0" prefWidth="251.0" style="-fx-text-fill: afafaf; -fx-font-size: 13;" text="Configure os endereços válidos para acesso aos dados" wrapText="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                              <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="4.0" styleClass="btn-setting-activator" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSecurity" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="210.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showSecurity" prefHeight="100.0" prefWidth="290.0" ripplerFill="#c7c2c2cc" styleClass="btn-setting" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="390.0">
+                     <graphic>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="290.0" spacing="10.0" styleClass="btn-setting-contain">
+                                 <children>
+                                    <Label styleClass="btn-setting-title" text="Segurança" />
+                                    <Label alignment="TOP_LEFT" prefHeight="46.0" prefWidth="251.0" style="-fx-text-fill: afafaf; -fx-font-size: 13;" text="Torne seguro a sua conta" wrapText="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                              <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="4.0" styleClass="btn-setting-activator" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="panelExtended" layoutX="312.0" layoutY="73.0" prefHeight="513.0" prefWidth="609.0" style="-fx-background-color: -black500;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="312.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="73.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

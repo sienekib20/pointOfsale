@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="513.0" prefWidth="609.0" style="-fx-background-color: -black500;" stylesheets="@../../../../../../resources/dark-themes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buesimples.posfx.controllers.setting.SetGeralController">
+   <children>
+      <ScrollPane fitToWidth="true" prefHeight="454.0" prefWidth="609.0" style="-fx-background-color: transparent;" stylesheets="@../../../../../../resources/onlyBtn.css" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane prefHeight="1000.0" prefWidth="594.0" stylesheets="@../../../../../../resources/onlyBtn.css">
+               <children>
+                  <Label style="-fx-text-fill: white; -fx-font-family: Gendy; -fx-font-size: 17;" text="Aspectos Gerais" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  <Label layoutX="10.0" layoutY="538.0" style="-fx-text-fill: efefef; -fx-font-family: Gendy; -fx-font-size: 14.5;" text="Impressora" AnchorPane.leftAnchor="10.0" />
+                  <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="558.0" prefHeight="46.0" prefWidth="381.0" style="-fx-text-fill: rgba(255, 255, 255, 0.5); -fx-font-size: 12.5;" text="Seleciona a impressora por definição, para quando realizar as impressoras das tuas facturas e tickets" wrapText="true" AnchorPane.leftAnchor="10.0" />
+                  <JFXComboBox fx:id="txtComboImpressoras" layoutX="10.0" layoutY="614.0" prefHeight="46.0" prefWidth="583.0" promptText="Selecionar uma Impressora" style="-fx-text-fill: white;" styleClass="setting-input" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <padding>
+                        <Insets left="20.0" right="10.0" />
+                     </padding>
+                  </JFXComboBox>
+                  <Label layoutX="13.0" layoutY="44.0" style="-fx-text-fill: efefef; -fx-font-family: Gendy; -fx-font-size: 14.5;" text="Dados da Empresa" AnchorPane.leftAnchor="10.0" />
+                  <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="64.0" prefHeight="46.0" prefWidth="381.0" style="-fx-text-fill: rgba(255, 255, 255, 0.5); -fx-font-size: 12.5;" text="Configure os dados necessários para sua empresa. Obs. Esses dados estarão presentes nos seus documentos gerados" wrapText="true" AnchorPane.leftAnchor="10.0" />
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="145.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <JFXTextField fx:id="txtNomeEmpresa" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="280.0" style="-fx-text-fill: white;" styleClass="setting-input" text="Mayongi Angola" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXComboBox fx:id="txtCategoriaEmpresa" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="280.0" promptText="Selecionar uma Categoria" style="-fx-text-fill: white;" styleClass="setting-input" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" right="10.0" />
+                           </padding>
+                        </JFXComboBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="121.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="276.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="Nome da Empresa" wrapText="true" HBox.hgrow="ALWAYS" />
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="274.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="Categoria da Empresa" wrapText="true" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="11.0" layoutY="212.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="276.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="Endereço" wrapText="true" HBox.hgrow="ALWAYS" />
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="274.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="URL do Website" wrapText="true" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="7.0" layoutY="240.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <JFXTextField fx:id="txtEndereco" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="280.0" style="-fx-text-fill: white;" styleClass="setting-input" text="Mayongi Angola" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtWebsite" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="280.0" style="-fx-text-fill: white;" styleClass="setting-input" text="Mayongi Angola" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="12.0" layoutY="313.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="276.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="Nº de Telefone" wrapText="true" HBox.hgrow="ALWAYS" />
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="274.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="Email" wrapText="true" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="12.0" layoutY="341.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <JFXTextField fx:id="txtTelefone" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="280.0" style="-fx-text-fill: white;" styleClass="setting-input" text="Mayongi Angola" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtEmail" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="280.0" style="-fx-text-fill: white;" styleClass="setting-input" text="Mayongi Angola" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="20.0" layoutY="415.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="276.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="Rodapé" wrapText="true" HBox.hgrow="ALWAYS" />
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="274.0" style="-fx-text-fill: white; -fx-font-size: 12.5;" text="NIF (Número de Identificação Fiscal)" wrapText="true" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="443.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <JFXTextField fx:id="txtRodape" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="280.0" style="-fx-text-fill: white;" styleClass="setting-input" text="Mayongi Angola" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtNIF" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="280.0" style="-fx-text-fill: white;" styleClass="setting-input" text="Mayongi Angola" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="200.0" spacing="10.0" stylesheets="@../../../../../../resources/onlyBtn.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <JFXButton fx:id="btnSave" onMouseClicked="#saveDatabaseSettings" prefHeight="50.0" prefWidth="123.0" styleClass="setting-save-btn" text="Salvar" />
+            <JFXButton fx:id="btnReset" layoutX="476.0" layoutY="15.0" onMouseClicked="#resetDatabaseSettings" prefHeight="50.0" prefWidth="123.0" style="-fx-background-color: #303846;" styleClass="setting-save-btn" text="Redefinir" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

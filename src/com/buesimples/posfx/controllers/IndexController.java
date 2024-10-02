@@ -16,140 +16,165 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class IndexController implements Initializable {
 
-   private static IndexController instance;
+    private static IndexController instance;
 
-   @FXML
-   private StackPane panelRoot;
+    @FXML
+    private StackPane panelRoot;
 
-   @FXML
-   private AnchorPane panelMain;
+    @FXML
+    private AnchorPane panelMain;
 
-   @FXML
-   private AnchorPane panelSidemenu;
+    @FXML
+    private AnchorPane panelSidemenu;
 
-   @FXML
-   private Label iconRoot;
+    @FXML
+    private Label iconRoot;
 
-   @FXML
-   private JFXButton btnHome;
+    @FXML
+    private JFXButton btnHome;
 
-   @FXML
-   private JFXButton btnOrder;
+    @FXML
+    private JFXButton btnOrder;
 
-   @FXML
-   private JFXButton btnReports;
+    @FXML
+    private JFXButton btnReports;
 
-   @FXML
-   private JFXButton btnClients;
+    @FXML
+    private JFXButton btnClients;
 
-   @FXML
-   private JFXButton btnSettings;
+    @FXML
+    private JFXButton btnSettings;
 
-   @FXML
-   private JFXButton btnExit;
+    @FXML
+    private JFXButton btnExit;
 
-   @FXML
-   private AnchorPane panelExtended;
+    @FXML
+    private AnchorPane panelExtended;
 
-   private NodeLoader loader;
+    private NodeLoader loader;
 
-   // private List<Map<String, Object>> idDefinicao;
+    // private List<Map<String, Object>> idDefinicao;
+    private List<Map<String, Object>> configurations;
 
-   private List<Map<String, Object>> configurations;
+    public IndexController() {
+        instance = this;
+    }
 
-   public IndexController() {
-      instance = this;
-   }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loader = NodeLoader.getInstance();
+        showMainWindow();
+    }
+    
+    public Stage getMainStage() {
+        return ((Stage) btnExit.getScene().getWindow());
+    }
 
-   @Override
-   public void initialize(URL location, ResourceBundle resources) {
-      loader = NodeLoader.getInstance();
-      showMainWindow();
-   }
+    public static IndexController getInstance() {
+        return instance;
+    }
 
-   public static IndexController getInstance() {
-      return instance;
-   }
+    public StackPane getRootNode() {
+        return panelRoot;
+    }
 
-   public StackPane getRootNode() {
-      return panelRoot;
-   }
+    public AnchorPane getExtendedNode() {
+        return panelExtended;
+    }
 
-   public AnchorPane getExtendedNode() {
-      return panelExtended;
-   }
+    @FXML
+    void setDisablebtns(MouseEvent event) {
+        setDisablebtns(event, btnHome);
+        setDisablebtns(event, btnOrder);
+        setDisablebtns(event, btnReports);
+        setDisablebtns(event, btnClients);
+        setDisablebtns(event, btnSettings);
+    }
 
-   @FXML
-   void setDisablebtns(MouseEvent event) {
-      setDisablebtns(event, btnHome);
-      setDisablebtns(event, btnOrder);
-      setDisablebtns(event, btnReports);
-      setDisablebtns(event, btnClients);
-      setDisablebtns(event, btnSettings);
-   }
+    void showMainWindow() {
+        btnHome.setDisable(true);
+        loader.loadNode(panelExtended, "site.Home");
+        configurations = DatabaseHelpers.build().select(
+                "definicao",
+                "GET");
+    }
 
-   void showMainWindow() {
-      btnHome.setDisable(true);
-      loader.loadNode(panelExtended, "site.Home");
-      configurations = DatabaseHelpers.build().select(
-            "definicao",
-            "GET");
-      System.out.println("RETRIEVED DATA: " + configurations);
-   }
+    @FXML
+    void actionExit(MouseEvent event) {
+        System.exit(0);
+    }
 
-   @FXML
-   void actionExit(MouseEvent event) {
-      System.exit(0);
-   }
+    @FXML
+    void actionReduceWindow(MouseEvent event) {
 
-   @FXML
-   void actionReduceWindow(MouseEvent event) {
+    }
 
-   }
+    @FXML
+    void showClients(MouseEvent event) {
+        showWindow(event, "site.Client");
+    }
 
-   @FXML
-   void showClients(MouseEvent event) {
-      showWindow(event, "site.Client");
-   }
+    @FXML
+    void showHome(MouseEvent event) {
+        showWindow(event, "site.Home");
+    }
 
-   @FXML
-   void showHome(MouseEvent event) {
-      showWindow(event, "site.Home");
-   }
+    @FXML
+    void showOrders(MouseEvent event) {
+        showWindow(event, "site.Order");
+    }
 
-   @FXML
-   void showOrders(MouseEvent event) {
-      showWindow(event, "site.Order");
-   }
+    @FXML
+    void showReports(MouseEvent event) {
+        showWindow(event, "site.Report");
+    }
 
-   @FXML
-   void showReports(MouseEvent event) {
-      showWindow(event, "site.Report");
-   }
+    @FXML
+    void showSettings(MouseEvent event) {
+        showWindow(event, "site.Setting");
+    }
 
-   @FXML
-   void showSettings(MouseEvent event) {
-      showWindow(event, "site.Setting");
-   }
+    void showWindow(MouseEvent event, String fxml) {
+        setDisablebtns(event);
+        loader.load(panelExtended, fxml);
+    }
 
-   void showWindow(MouseEvent event, String fxml) {
-      setDisablebtns(event);
-      loader.load(panelExtended, fxml);
-   }
+    public void openWindow(MouseEvent event, int id, String fxml) {
+        if (id == 5) {
+            showClients(event);
+        }
+        if (id == 1) {
+            showHome(event);
+        }
+        loader.load(panelExtended, fxml);
+    }
 
-   void setDisablebtns(MouseEvent event, JFXButton button) {
-      if (event.getSource().equals(button)) {
-         button.setDisable(true);
-      } else {
-         button.setDisable(false);
-      }
-   }
+    public void setDisablebtns(MouseEvent event, JFXButton button) {
+        if (event.getSource().equals(button)) {
+            button.setDisable(true);
+        } else {
+            button.setDisable(false);
+        }
+    }
 
-   public List<Map<String, Object>> getDefinition() {
-      return configurations;
-   }
+    public List<Map<String, Object>> getDefinition() {
+        return configurations;
+    }
+
+    public String getDefinitionSingle(String valorDefinicao) {
+
+        for (Map<String, Object> d : configurations) {
+
+            if (valorDefinicao.equals(d.get("descricao").toString())) {
+                return d.get("valor").toString();
+            }
+        }
+
+        return null;
+    }
 
 }

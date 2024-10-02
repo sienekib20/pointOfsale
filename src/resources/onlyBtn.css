@@ -1,0 +1,94 @@
+/* 
+    Created on : 18-Sep-2024, 14:10:17
+    Author     : sienekib
+*/
+
+
+.btn-setting {
+    -fx-cursor: hand;
+    -fx-background-radius: 0;
+}
+
+.btn-setting.active .btn-setting-activator {
+    -fx-background-color: #9080F4;
+}
+
+.btn-setting .jfx-rippler {
+    -jfx-rippler-fill: rgba(0, 0, 0, 0.1);
+}
+
+.btn-setting-contain {
+    -fx-background-color: transparent;
+}
+
+.btn-setting.active .btn-setting-contain {
+    -fx-background-color: rgba(112, 71, 145, 0.1);
+}
+
+.btn-setting-title {
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-font-family: Gendy;
+}
+
+.btn-setting.active .btn-setting-title {
+    -fx-text-fill: #9080F4;
+}
+
+.setting-input {
+    -jfx-unfocus-color: transparent;
+    -jfx-focus-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: rgba(159, 132, 181, 0.2);
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-prompt-text-fill: white;
+}
+
+
+
+.setting-save-btn {
+    -fx-background-color: #9080F4;
+    -fx-text-fill: white;
+    -fx-background-radius: 0;
+    -fx-font-size: 15;
+    -fx-cursor: hand;
+    -fx-pref-width: 123;
+    -fx-pref-height: 50;
+}
+
+/* Estilização do fundo e borda do ComboBox */
+.jfx-combo-box-popup {
+    -fx-background-color: rgba(159, 132, 181, 0.2); /* Fundo transparente do menu */
+    -fx-border-color: rgba(255, 255, 255, 0.1); /* Borda transparente */
+}
+
+/* Estilização do PromptText */
+.setting-combo-box .prompt-text,
+.jfx-combo-box .prompt-text {
+    -fx-prompt-text-fill: white; /* Cor do texto prompt (branco) */
+}
+
+/* Estilização do texto selecionado */
+.setting-combo-box .text,
+.jfx-combo-box .text {
+    -fx-text-fill: white; /* Cor do texto selecionado (branco) */
+}
+
+/* Estilização do fundo do ListView */
+.jfx-combo-box .list-view {
+    -fx-background-color: rgba(159, 132, 181, 0.2); /* Fundo transparente da lista */
+}
+
+/* Estilização do texto das opções na lista */
+.jfx-combo-box .list-view .list-cell {
+    -fx-text-fill: white !important; /* Cor do texto das opções da lista (branco) */
+}
+
+/* Estilização do botão de seta */
+/*.jfx-combo-box .arrow-button .arrow {
+    -fx-background-color: transparent;  Remove fundo do botão 
+    -fx-background-image: url(media/chevron.png);  
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}*/
