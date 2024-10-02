@@ -331,12 +331,14 @@ public class Printers {
 
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ticketList);
 
-            JRBeanCollectionDataSource itemAdicionados = new JRBeanCollectionDataSource(viewDocumento);
             List<TicketProduct> tickProducts = new ArrayList<TicketProduct>();
             tickProducts.add(new TicketProduct(2, "Munitor", 4000.0, 4000.0 * 2));
             tickProducts.add(new TicketProduct(1, "Candieiro", 1500.0, 1500.0 * 1));
+            tickProducts.add(new TicketProduct(1, "Candieiro", 1500.0, 1500.0 * 1));
+            tickProducts.add(new TicketProduct(1, "Candieiro", 1500.0, 1500.0 * 1));
+            JRBeanCollectionDataSource itemAdicionados = new JRBeanCollectionDataSource(tickProducts);
 
-            // parameters.put("TABELA_DOCUMENTO", itemAdicionados);
+            parameters.put("TABELA_DOCUMENTO", itemAdicionados);
 
             // Gere o relatório
             
