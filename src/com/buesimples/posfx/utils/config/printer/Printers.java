@@ -1,9 +1,7 @@
 package com.buesimples.posfx.utils.config.printer;
 
 import com.buesimples.posfx.controllers.IndexController;
-import com.buesimples.posfx.controllers.cart.CheckoutItemController;
 import com.buesimples.posfx.database.DatabaseHelpers;
-import com.buesimples.posfx.models.Factura;
 import com.buesimples.posfx.models.Ticket;
 import com.buesimples.posfx.models.TicketProduct;
 import com.buesimples.posfx.utils.constants.Constants;
@@ -12,7 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.buesimples.posfx.utils.config.Config;
 import com.jfoenix.controls.JFXTextArea;
-import java.awt.Desktop;
 
 import javax.print.*;
 import java.io.*;
@@ -25,16 +22,18 @@ import java.util.Map;
 import java.util.Objects;
 
 import javafx.collections.ObservableSet;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class Printers {
@@ -90,50 +89,6 @@ public class Printers {
         return Config.setConfig("impressora", printerName);
     }
 
-    /*
-     * public void printDocument(String selectedPrinter) {
-     * // Busca as impressoras disponíveis
-     * PrintService printer =
-     * Arrays.stream(PrintServiceLookup.lookupPrintServices(null, null))
-     * .filter(service -> service.getName().equals(selectedPrinter))
-     * .findFirst()
-     * .orElse(null);
-     * 
-     * if (printer == null) {
-     * System.out.println("Impressora não encontrada: " + selectedPrinter);
-     * return;
-     * }
-     * 
-     * // Exibe os DocFlavors suportados
-     * System.out.println("DocFlavors suportados pela impressora " + selectedPrinter
-     * + ":");
-     * for (DocFlavor flavor : printer.getSupportedDocFlavors()) {
-     * System.out.println(flavor);
-     * }
-     * 
-     * // Tenta imprimir
-     * try {
-     * DocPrintJob printJob = printer.createPrintJob();
-     * String textToPrint = "Olá, esta é uma impressão de teste!";
-     * // DocFlavor flavor = DocFlavor.STRING.TEXT_PLAIN; // Use TEXT_PLAIN para
-     * texto simples
-     * DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE; // Use TEXT_PLAIN para
-     * texto simples
-     * 
-     * // Verifica se o flavor é suportado
-     * if (!printer.isDocFlavorSupported(flavor)) {
-     * System.out.println("Flavor " + flavor + " não é suportado pela impressora.");
-     * return;
-     * }
-     * 
-     * Doc doc = new SimpleDoc(textToPrint.getBytes(), flavor, null);
-     * printJob.print(doc, null);
-     * System.out.println("Imprimindo na impressora: " + selectedPrinter);
-     * } catch (PrintException e) {
-     * System.out.println("Erro ao imprimir: " + e.getMessage());
-     * }
-     * }
-     */
     public void printDocument(String selectedPrinter) {
         ObservableSet<Printer> printers = Printer.getAllPrinters();
 
@@ -142,7 +97,7 @@ public class Printers {
             if (selectedPrinter.equals(printer.getName())) {
                 // print();
                 Stage stage = (IndexController.getInstance().getMainStage());
-                pageSetup(stage);
+                //pageSetup(stage);
             }
         }
     }
@@ -158,7 +113,7 @@ public class Printers {
         }
     }
 
-    public void pageSetup(Stage owner) {
+    public void pageSetup(Stage owner, VBox node) {
         PrinterJob job = PrinterJob.createPrinterJob();
         if (job == null) {
             return;
@@ -168,15 +123,13 @@ public class Printers {
         boolean proceder = job.showPrintDialog(owner);
 
         if (proceder) {
-            print(job);
+            print(job, node);
         }
-    }
-
-    public void printPDF(String pdfPath, String printerName) {
 
     }
 
-    private void print(PrinterJob job) {
+    private void print(PrinterJob job, VBox node) {
+        //PrinterJob job = PrinterJob.createPrinterJob();
         // Define the Job Status Message
         System.out.println("Creating a printer job...");
 
@@ -186,10 +139,10 @@ public class Printers {
             // Show the printer job status
             System.out.println(job.jobStatusProperty().asString());
 
-            JFXTextArea a = new JFXTextArea("Testando");
+            // JFXTextArea a = new JFXTextArea("Testando");
 
             // Print the node
-            boolean printed = job.printPage(a);
+            boolean printed = job.printPage(node);
 
             if (printed) {
                 // End the printer job
@@ -203,16 +156,6 @@ public class Printers {
             // Write Error Message
             System.out.println("Could not create a printer job.");
         }
-    }
-
-    private static PrintService findPrintService(String printerName) {
-        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
-        for (PrintService printService : printServices) {
-            if (printService.getName().trim().equals(printerName)) {
-                return printService;
-            }
-        }
-        return null;
     }
 
     public void gerarPDF(int IdDocumento, int nItem) {
@@ -375,6 +318,10 @@ public class Printers {
 
             JasperPrint jp = JasperFillManager.fillReport(jr, parameters, dataSource);
             // JasperViewer.viewReport(jp);
+            // print(node);
+
+            pageSetup(IndexController.getInstance().getMainStage(), this.generateReportLayout(tickProducts, tick));
+
 
             String userHome = System.getenv("USERPROFILE");
             String reportDirPath = userHome + "\\documents\\buesimples\\reports";
@@ -397,33 +344,347 @@ public class Printers {
 
             // Gerar o nome do arquivo com o timestamp
             String reportPath = reportDirPath + "\\" + timestamp + "_create_ticket.pdf";
+            JasperExportManager.exportReportToPdfFile(jp, reportPath);
 
             // Gerar o relatório PDF
-            JasperExportManager.exportReportToPdfFile(jp, reportPath);
-            System.out.println("Relatório salvo em: " + reportPath);
-
-            // printReport(reportPath);
-
-            System.out.println("Relatório gerado com sucesso!");
+            // printReportPdf(reportPath);
         } catch (JRException ex) {
             System.out.println("ERRO: " + ex);
         }
     }
 
-    private void printReport(String filePath) {
-        try {
-            File file = new File(filePath);
+    private VBox generateReportLayout(List<TicketProduct> ticketList, Ticket ticket) {
 
-            // Verificar se a impressão é suportada
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.PRINT)) {
-                Desktop.getDesktop().print(file);
-                System.out.println("Arquivo enviado para impressão: " + filePath);
-            } else {
-                System.out.println("Impressão não é suportada neste sistema.");
-            }
+        VBox reportLayout = new VBox();
+        reportLayout.setPrefSize(226.0, 510.0);
+        reportLayout.setMinSize(226.0, 510.0);
+        reportLayout.setStyle("-fx-background-color: white");
 
-        } catch (IOException ex) {
-            System.out.println("Erro ao tentar imprimir o arquivo: " + ex.getMessage());
-        }
+        
+        reportLayout.getChildren().add(this.reportHeaderSection(ticket));
+        reportLayout.getChildren().add(this.getHr());
+        reportLayout.getChildren().add(this.typeDocSection(ticket));
+        reportLayout.getChildren().add(this.getHr());
+        reportLayout.getChildren().add(this.productSection(ticketList));
+        reportLayout.getChildren().add(this.getHr());
+        reportLayout.getChildren().add(this.detailsProductSection(ticket));
+        reportLayout.getChildren().add(this.getHr());
+        Label txt = new Label("*Obrigado e volte sempre!*");
+        txt.setPrefSize(226.0, 12.0);
+        txt.setStyle("-fx-font-size: 8");
+        txt.setAlignment(Pos.CENTER);
+        reportLayout.getChildren().add(txt);
+        
+        return reportLayout;
     }
+
+    private Label getHr() {
+        Label hr = new Label();
+        hr.setPrefSize(220.0, 1.0);
+        hr.setMinSize(220.0, 1.0);
+        hr.setStyle("-fx-background-color: #000");
+        return hr;
+    }
+
+    private VBox generateVbox() {
+        VBox vbx = new VBox();
+        vbx.setPrefWidth(226.0);
+        vbx.setAlignment(Pos.CENTER);
+        vbx.setPadding(new Insets(0, 5, 0, 5));
+        return vbx;
+    }
+
+    private VBox reportHeaderSection(Ticket ticket) {
+        // Section Header
+        VBox reportHeader = this.generateVbox();
+
+        // ImageView logoEmpresa = new ImageView(new Image(""));
+        // logoEmpresa.setFitWidth(20.0);
+        // logoEmpresa.setFitHeight(20.0);
+
+        // reportHeader.getChildren().add(logoEmpresa);
+
+        Label nomeEmpresa = new Label(ticket.getNomeEmpresa());
+        nomeEmpresa.setPrefSize(216.0, 10.0);
+        nomeEmpresa.setMinSize(216.0, 10.0);
+        nomeEmpresa.setStyle("-fx-font-size: 8; -fx-font-weight: bold");
+        nomeEmpresa.setAlignment(Pos.CENTER);
+
+        Label tipoDocumento = new Label(ticket.getTipoPagamento());
+        tipoDocumento.setPrefSize(216.0, 10.0);
+        tipoDocumento.setMinSize(216.0, 10.0);
+        tipoDocumento.setStyle("-fx-font-size: 7;");
+        tipoDocumento.setAlignment(Pos.CENTER);
+
+        Label docPages = new Label("ORIGINAL");
+        docPages.setPrefSize(216.0, 10.0);
+        docPages.setMinSize(216.0, 10.0);
+        docPages.setStyle("-fx-font-size: 7;");
+        docPages.setAlignment(Pos.CENTER);
+
+        // reportHeader.getChildren().add(logoEmpresa);
+        reportHeader.getChildren().add(nomeEmpresa);
+        reportHeader.getChildren().add(tipoDocumento);
+        reportHeader.getChildren().add(docPages);
+
+        return reportHeader;
+    }
+
+    private VBox typeDocSection(Ticket ticket) {
+
+        VBox vbox = this.generateVbox();
+
+        HBox layoutHbox = new HBox();
+        layoutHbox.setPrefSize(216.0, 15.0);
+
+        Label title = new Label("Documento:");
+        title.setPrefSize(108.0, 12.0);
+        title.setMinSize(108.0, 12.0);
+        title.setStyle("-fx-font-size: 7; ");
+
+        Label documento = new Label(ticket.getCodigoDocumento());
+        documento.setPrefSize(108.0, 12.0);
+        documento.setMinSize(108.0, 12.0);
+        documento.setStyle("-fx-font-size: 7; ");
+        documento.setAlignment(Pos.CENTER_RIGHT);
+
+        layoutHbox.getChildren().add(title);
+        layoutHbox.getChildren().add(documento);
+
+        HBox layoutHbox1 = new HBox();
+        layoutHbox1.setPrefSize(216.0, 15.0);
+
+        Label title1 = new Label("Data de Emissão:");
+        title1.setPrefSize(108.0, 12.0);
+        title1.setMinSize(108.0, 12.0);
+        title1.setStyle("-fx-font-size: 7; ");
+
+        Label documento1 = new Label(ticket.getDataDoc());
+        documento1.setPrefSize(108.0, 12.0);
+        documento1.setMinSize(108.0, 12.0);
+        documento1.setStyle("-fx-font-size: 7; ");
+        documento1.setAlignment(Pos.CENTER_RIGHT);
+
+        layoutHbox1.getChildren().add(title1);
+        layoutHbox1.getChildren().add(documento1);
+
+        vbox.getChildren().add(layoutHbox);
+        vbox.getChildren().add(layoutHbox1);
+
+        return vbox;
+    }
+
+    private VBox productSection(List<TicketProduct> ticketList) {
+        VBox vbx = this.generateVbox();
+
+        HBox hbx = new HBox();
+        hbx.setPrefSize(216.0, 12);
+        hbx.setAlignment(Pos.CENTER_LEFT);
+
+        Label qtd = new Label("Qtd.");
+        qtd.setPrefSize(25.0, 12.0);
+        qtd.setMinSize(25.0, 12.0);
+        qtd.setStyle("-fx-font-size: 8;");
+
+        Label produto = new Label("Produto");
+        produto.setPrefSize(90.0, 12.0);
+        produto.setMinSize(90.0, 12.0);
+        produto.setStyle("-fx-font-size: 8;");
+
+        Label punit = new Label("P/Unit.");
+        punit.setPrefSize(49.0, 12.0);
+        punit.setMinSize(49.0, 12.0);
+        punit.setStyle("-fx-font-size: 8;");
+
+        Label total = new Label("Total");
+        total.setPrefSize(52.0, 12.0);
+        total.setMinSize(52.0, 12.0);
+        total.setStyle("-fx-font-size: 8;");
+
+        hbx.getChildren().add(qtd);
+        hbx.getChildren().add(produto);
+        hbx.getChildren().add(punit);
+        hbx.getChildren().add(total);
+
+        vbx.getChildren().add(hbx);
+
+        for (TicketProduct tp : ticketList) {
+            HBox box = new HBox();
+            hbx.setPrefSize(216.0, 12);
+            hbx.setAlignment(Pos.CENTER_LEFT);
+
+            Label qtd1 = new Label(String.valueOf(tp.getQtdProduto()));
+            qtd1.setPrefSize(25.0, 12.0);
+            qtd1.setMinSize(25.0, 12.0);
+            qtd1.setStyle("-fx-font-size: 7;");
+
+            Label produto1 = new Label(tp.getNomeProduto());
+            produto1.setPrefSize(90.0, 12.0);
+            produto1.setMinSize(90.0, 12.0);
+            produto1.setStyle("-fx-font-size: 7;");
+
+            Label punit1 = new Label(String.valueOf(tp.getPrecoUnitProduto()));
+            punit1.setPrefSize(49.0, 12.0);
+            punit1.setMinSize(49.0, 12.0);
+            punit1.setStyle("-fx-font-size: 7;");
+
+            Label total1 = new Label(String.valueOf(tp.getValorTotalProduto()));
+            total1.setPrefSize(52.0, 12.0);
+            total1.setMinSize(52.0, 12.0);
+            total1.setStyle("-fx-font-size: 7;");
+            box.getChildren().add(qtd1);
+            box.getChildren().add(produto1);
+            box.getChildren().add(punit1);
+            box.getChildren().add(total1);
+            vbx.getChildren().add(box);
+        }
+
+        return vbx;
+    }
+
+    private VBox detailsProductSection(Ticket ticket) {
+        VBox vbx = this.generateVbox();
+        
+        HBox hbx = new HBox();
+        hbx.setPrefSize(216.0, 12);
+        hbx.setAlignment(Pos.CENTER_LEFT);
+
+        Label utilizador = new Label("Utilizador:");
+        utilizador.setPrefSize(80.0, 12.0);
+        utilizador.setMinSize(80.0, 12.0);
+        utilizador.setStyle("-fx-font-size: 7;");
+        
+        Label utilizadorVal = new Label(ticket.getUtilizador());
+        utilizadorVal.setPrefSize(136.0, 12.0);
+        utilizadorVal.setMinSize(136.0, 12.0);
+        utilizadorVal.setStyle("-fx-font-size: 7;");
+        utilizadorVal.setAlignment(Pos.CENTER_RIGHT);
+
+        hbx.getChildren().add(utilizador);
+        hbx.getChildren().add(utilizadorVal);
+        vbx.getChildren().add(hbx);
+
+        HBox hbx0 = new HBox();
+        hbx0.setPrefSize(216.0, 12);
+        hbx0.setAlignment(Pos.CENTER_LEFT);
+
+        Label nIten = new Label("Nº de Itens:");
+        nIten.setPrefSize(80.0, 12.0);
+        nIten.setMinSize(80.0, 12.0);
+        nIten.setStyle("-fx-font-size: 7;");
+        
+        Label nItenVal = new Label(String.valueOf(ticket.getnItens()));
+        nItenVal.setPrefSize(136.0, 12.0);
+        nItenVal.setMinSize(136.0, 12.0);
+        nItenVal.setStyle("-fx-font-size: 7;");
+        nItenVal.setAlignment(Pos.CENTER_RIGHT);
+        
+        hbx0.getChildren().add(nIten);
+        hbx0.getChildren().add(nItenVal); 
+        vbx.getChildren().add(hbx0);        
+        
+
+        HBox hbx2 = new HBox();
+        hbx2.setPrefSize(216.0, 12);
+        hbx2.setAlignment(Pos.CENTER_LEFT);
+
+        Label valorRecebido = new Label("Quantia Recebida:");
+        valorRecebido.setPrefSize(80.0, 12.0);
+        valorRecebido.setMinSize(80.0, 12.0);
+        valorRecebido.setStyle("-fx-font-size: 7;");
+        
+        Label valorRecebidoVal = new Label(String.valueOf(ticket.getValorRecebido()));
+        valorRecebidoVal.setPrefSize(136.0, 12.0);
+        valorRecebidoVal.setMinSize(136.0, 12.0);
+        valorRecebidoVal.setStyle("-fx-font-size: 7;");
+        valorRecebidoVal.setAlignment(Pos.CENTER_RIGHT);
+        
+        hbx2.getChildren().add(valorRecebido);
+        hbx2.getChildren().add(valorRecebidoVal);
+        vbx.getChildren().add(hbx2);
+
+        HBox hbx3 = new HBox();
+        hbx3.setPrefSize(216.0, 12);
+        hbx3.setAlignment(Pos.CENTER_LEFT);
+
+        Label valorPagar = new Label("Quantia a Pagar:");
+        valorPagar.setPrefSize(80.0, 12.0);
+        valorPagar.setMinSize(80.0, 12.0);
+        valorPagar.setStyle("-fx-font-size: 7;");
+        
+        Label valorPagarVal = new Label(String.valueOf(ticket.getValorPagar()));
+        valorPagarVal.setPrefSize(136.0, 12.0);
+        valorPagarVal.setMinSize(136.0, 12.0);
+        valorPagarVal.setStyle("-fx-font-size: 7;");
+        valorPagarVal.setAlignment(Pos.CENTER_RIGHT);
+        
+        hbx3.getChildren().add(valorPagar);
+        hbx3.getChildren().add(valorPagarVal);
+        vbx.getChildren().add(hbx3);
+
+
+        HBox hbx4 = new HBox();
+        hbx4.setPrefSize(216.0, 12);
+        hbx4.setAlignment(Pos.CENTER_LEFT);
+
+        Label troco = new Label("Troco:");
+        troco.setPrefSize(80.0, 12.0);
+        troco.setMinSize(80.0, 12.0);
+        troco.setStyle("-fx-font-size: 7;");
+        
+        Label trocoVal = new Label(String.valueOf(ticket.getValorTroco()));
+        trocoVal.setPrefSize(136.0, 12.0);
+        trocoVal.setMinSize(136.0, 12.0);
+        trocoVal.setStyle("-fx-font-size: 7;");
+        trocoVal.setAlignment(Pos.CENTER_RIGHT);
+        
+        hbx4.getChildren().add(troco);
+        hbx4.getChildren().add(trocoVal);
+        vbx.getChildren().add(hbx4);
+
+        HBox hbx5 = new HBox();
+        hbx5.setPrefSize(216.0, 12);
+        hbx5.setAlignment(Pos.CENTER_LEFT);
+
+        Label total = new Label("Total:");
+        total.setPrefSize(80.0, 12.0);
+        total.setMinSize(80.0, 12.0);
+        total.setStyle("-fx-font-size: 7;");
+        
+        Label totalVal = new Label(String.valueOf(ticket.getValorTotal()));
+        totalVal.setPrefSize(136.0, 12.0);
+        totalVal.setMinSize(136.0, 12.0);
+        totalVal.setStyle("-fx-font-size: 7;");
+        totalVal.setAlignment(Pos.CENTER_RIGHT);
+        
+        hbx5.getChildren().add(total);
+        hbx5.getChildren().add(totalVal);
+        vbx.getChildren().add(hbx5);
+        
+        
+        HBox hbx6 = new HBox();
+        hbx6.setPrefSize(216.0, 12);
+        hbx6.setAlignment(Pos.CENTER_LEFT);
+
+        Label tipoDoc = new Label("Tipo de Pagamento:");
+        tipoDoc.setPrefSize(80.0, 12.0);
+        tipoDoc.setMinSize(80.0, 12.0);
+        tipoDoc.setStyle("-fx-font-size: 7;");
+        
+        Label tipoDocVal = new Label(ticket.getTipoPagamento());
+        tipoDocVal.setPrefSize(136.0, 12.0);
+        tipoDocVal.setMinSize(136.0, 12.0);
+        tipoDocVal.setStyle("-fx-font-size: 7;");
+        
+        hbx6.getChildren().add(tipoDoc);
+        hbx6.getChildren().add(tipoDocVal);
+
+        vbx.getChildren().add(hbx6);
+
+
+        return vbx;
+    }
+
+
+
 }

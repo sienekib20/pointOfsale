@@ -1,0 +1,14 @@
+.main_report {
+   -fx-background-color: white;  
+   -fx-pref-width: 226;
+   -fx-pref-height: 510;
+}
+
+.header_report {}
+
+
+.title {
+   -fx-font-size: 9;
+   -fx-font-weight: bold;
+   -fx-font-family: 'Arial';
+}

@@ -64,7 +64,7 @@ public class SetGeralController implements Initializable {
             txtComboImpressoras.getItems().add(service.getName());
         }
         txtComboImpressoras.getSelectionModel().selectFirst();
-        txtComboImpressoras.setStyle("");
+        // txtComboImpressoras.setStyle("");
     }
 
     @FXML
