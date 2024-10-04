@@ -12,6 +12,13 @@ import com.buesimples.posfx.utils.config.Config;
 import com.jfoenix.controls.JFXTextArea;
 
 import javax.print.*;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.printing.PDFPageable;
+import org.jfree.util.UnitType;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,14 +31,21 @@ import java.util.Objects;
 import javafx.collections.ObservableSet;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -97,7 +111,7 @@ public class Printers {
             if (selectedPrinter.equals(printer.getName())) {
                 // print();
                 Stage stage = (IndexController.getInstance().getMainStage());
-                //pageSetup(stage);
+                // pageSetup(stage);
             }
         }
     }
@@ -129,7 +143,7 @@ public class Printers {
     }
 
     private void print(PrinterJob job, VBox node) {
-        //PrinterJob job = PrinterJob.createPrinterJob();
+        // PrinterJob job = PrinterJob.createPrinterJob();
         // Define the Job Status Message
         System.out.println("Creating a printer job...");
 
@@ -138,11 +152,23 @@ public class Printers {
         if (job != null) {
             // Show the printer job status
             System.out.println(job.jobStatusProperty().asString());
+            double widthMm = 80; // 80mm de largura
+            double heightMm = 200; // 200mm de altura
 
+            // Conversão de milímetros para pontos
+            double widthPoints = (widthMm / 25.4) * 72;
+            double HeightPoints = (heightMm / 25.4) * 72;
             // JFXTextArea a = new JFXTextArea("Testando");
+            // Criar um layout de página customizado (80mm de largura por 200mm de altura)
+            // PageLayout pageLayout = job.getPrinter().createPageLayout(new Paper("Ticket",
+            // widthPoints, HeightPoints, UnitType.RELATIVE),
+            // PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
+
+            PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.LEGAL,
+            PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
 
             // Print the node
-            boolean printed = job.printPage(node);
+            boolean printed = job.printPage(pageLayout, node);
 
             if (printed) {
                 // End the printer job
@@ -322,7 +348,6 @@ public class Printers {
 
             pageSetup(IndexController.getInstance().getMainStage(), this.generateReportLayout(tickProducts, tick));
 
-
             String userHome = System.getenv("USERPROFILE");
             String reportDirPath = userHome + "\\documents\\buesimples\\reports";
 
@@ -347,11 +372,40 @@ public class Printers {
             JasperExportManager.exportReportToPdfFile(jp, reportPath);
 
             // Gerar o relatório PDF
-            // printReportPdf(reportPath);
+            printPDF(reportPath);
         } catch (JRException ex) {
             System.out.println("ERRO: " + ex);
         }
     }
+
+    public void printPDF(String filePath) {
+      try {
+         PDDocument document = PDDocument.load(new File(filePath));
+         PrintService printService = PrintServiceLookup.lookupDefaultPrintService();
+
+         if (printService == null) {
+            System.out.println("No printer found.");
+            return;
+         }
+
+         PDFPageable pageable = new PDFPageable(document);
+         DocPrintJob printJob = printService.createPrintJob();
+
+         // Create the PrintRequestAttributeSet as required
+         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+
+         // Adjusting the DocFlavor according to PDFPageable
+         DocFlavor flavor = DocFlavor.SERVICE_FORMATTED.PAGEABLE; // Adjust this if needed
+
+         // Make sure to use the correct SimpleDoc type
+         SimpleDoc doc = new SimpleDoc(pageable, flavor, null);
+         printJob.print(doc, attr);
+
+         document.close();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
 
     private VBox generateReportLayout(List<TicketProduct> ticketList, Ticket ticket) {
 
@@ -360,7 +414,6 @@ public class Printers {
         reportLayout.setMinSize(226.0, 510.0);
         reportLayout.setStyle("-fx-background-color: white");
 
-        
         reportLayout.getChildren().add(this.reportHeaderSection(ticket));
         reportLayout.getChildren().add(this.getHr());
         reportLayout.getChildren().add(this.typeDocSection(ticket));
@@ -374,7 +427,7 @@ public class Printers {
         txt.setStyle("-fx-font-size: 8");
         txt.setAlignment(Pos.CENTER);
         reportLayout.getChildren().add(txt);
-        
+
         return reportLayout;
     }
 
@@ -544,7 +597,7 @@ public class Printers {
 
     private VBox detailsProductSection(Ticket ticket) {
         VBox vbx = this.generateVbox();
-        
+
         HBox hbx = new HBox();
         hbx.setPrefSize(216.0, 12);
         hbx.setAlignment(Pos.CENTER_LEFT);
@@ -553,7 +606,7 @@ public class Printers {
         utilizador.setPrefSize(80.0, 12.0);
         utilizador.setMinSize(80.0, 12.0);
         utilizador.setStyle("-fx-font-size: 7;");
-        
+
         Label utilizadorVal = new Label(ticket.getUtilizador());
         utilizadorVal.setPrefSize(136.0, 12.0);
         utilizadorVal.setMinSize(136.0, 12.0);
@@ -572,17 +625,16 @@ public class Printers {
         nIten.setPrefSize(80.0, 12.0);
         nIten.setMinSize(80.0, 12.0);
         nIten.setStyle("-fx-font-size: 7;");
-        
+
         Label nItenVal = new Label(String.valueOf(ticket.getnItens()));
         nItenVal.setPrefSize(136.0, 12.0);
         nItenVal.setMinSize(136.0, 12.0);
         nItenVal.setStyle("-fx-font-size: 7;");
         nItenVal.setAlignment(Pos.CENTER_RIGHT);
-        
+
         hbx0.getChildren().add(nIten);
-        hbx0.getChildren().add(nItenVal); 
-        vbx.getChildren().add(hbx0);        
-        
+        hbx0.getChildren().add(nItenVal);
+        vbx.getChildren().add(hbx0);
 
         HBox hbx2 = new HBox();
         hbx2.setPrefSize(216.0, 12);
@@ -592,13 +644,13 @@ public class Printers {
         valorRecebido.setPrefSize(80.0, 12.0);
         valorRecebido.setMinSize(80.0, 12.0);
         valorRecebido.setStyle("-fx-font-size: 7;");
-        
+
         Label valorRecebidoVal = new Label(String.valueOf(ticket.getValorRecebido()));
         valorRecebidoVal.setPrefSize(136.0, 12.0);
         valorRecebidoVal.setMinSize(136.0, 12.0);
         valorRecebidoVal.setStyle("-fx-font-size: 7;");
         valorRecebidoVal.setAlignment(Pos.CENTER_RIGHT);
-        
+
         hbx2.getChildren().add(valorRecebido);
         hbx2.getChildren().add(valorRecebidoVal);
         vbx.getChildren().add(hbx2);
@@ -611,17 +663,16 @@ public class Printers {
         valorPagar.setPrefSize(80.0, 12.0);
         valorPagar.setMinSize(80.0, 12.0);
         valorPagar.setStyle("-fx-font-size: 7;");
-        
+
         Label valorPagarVal = new Label(String.valueOf(ticket.getValorPagar()));
         valorPagarVal.setPrefSize(136.0, 12.0);
         valorPagarVal.setMinSize(136.0, 12.0);
         valorPagarVal.setStyle("-fx-font-size: 7;");
         valorPagarVal.setAlignment(Pos.CENTER_RIGHT);
-        
+
         hbx3.getChildren().add(valorPagar);
         hbx3.getChildren().add(valorPagarVal);
         vbx.getChildren().add(hbx3);
-
 
         HBox hbx4 = new HBox();
         hbx4.setPrefSize(216.0, 12);
@@ -631,13 +682,13 @@ public class Printers {
         troco.setPrefSize(80.0, 12.0);
         troco.setMinSize(80.0, 12.0);
         troco.setStyle("-fx-font-size: 7;");
-        
+
         Label trocoVal = new Label(String.valueOf(ticket.getValorTroco()));
         trocoVal.setPrefSize(136.0, 12.0);
         trocoVal.setMinSize(136.0, 12.0);
         trocoVal.setStyle("-fx-font-size: 7;");
         trocoVal.setAlignment(Pos.CENTER_RIGHT);
-        
+
         hbx4.getChildren().add(troco);
         hbx4.getChildren().add(trocoVal);
         vbx.getChildren().add(hbx4);
@@ -650,18 +701,17 @@ public class Printers {
         total.setPrefSize(80.0, 12.0);
         total.setMinSize(80.0, 12.0);
         total.setStyle("-fx-font-size: 7;");
-        
+
         Label totalVal = new Label(String.valueOf(ticket.getValorTotal()));
         totalVal.setPrefSize(136.0, 12.0);
         totalVal.setMinSize(136.0, 12.0);
         totalVal.setStyle("-fx-font-size: 7;");
         totalVal.setAlignment(Pos.CENTER_RIGHT);
-        
+
         hbx5.getChildren().add(total);
         hbx5.getChildren().add(totalVal);
         vbx.getChildren().add(hbx5);
-        
-        
+
         HBox hbx6 = new HBox();
         hbx6.setPrefSize(216.0, 12);
         hbx6.setAlignment(Pos.CENTER_LEFT);
@@ -670,21 +720,169 @@ public class Printers {
         tipoDoc.setPrefSize(80.0, 12.0);
         tipoDoc.setMinSize(80.0, 12.0);
         tipoDoc.setStyle("-fx-font-size: 7;");
-        
+
         Label tipoDocVal = new Label(ticket.getTipoPagamento());
         tipoDocVal.setPrefSize(136.0, 12.0);
         tipoDocVal.setMinSize(136.0, 12.0);
         tipoDocVal.setStyle("-fx-font-size: 7;");
-        
+
         hbx6.getChildren().add(tipoDoc);
         hbx6.getChildren().add(tipoDocVal);
 
         vbx.getChildren().add(hbx6);
 
-
         return vbx;
     }
 
+    private StackPane gggggg() {
+        // // Definir fonte menor para o recibo
+        // Font smallFont = Font.font("Courier New", 10);
 
+        // // Criar VBox para organizar os textos de forma vertical
+        // VBox vbox = new VBox(5); // Espaçamento de 5px entre os elementos
+        // vbox.setPadding(new Insets(10, 10, 10, 10)); // Definir margens
+        // vbox.setAlignment(Pos.TOP_CENTER); // Alinhar no topo e centralizar o conteúdo
+
+        // // Cabeçalho centralizado
+        // Text header1 = new Text("The Lone Pine");
+        // header1.setFont(Font.font("Courier New", 14));
+        // vbox.getChildren().add(header1);
+
+        // Text header2 = new Text("43 Manchester Road\n12480 Brisbane\nAustralia\n617-3236-6207\n");
+        // header2.setFont(smallFont);
+        // vbox.getChildren().add(header2);
+
+        // // Informações da fatura
+        // Text invoiceInfo = new Text("Invoice: 08000008          09/04/08\nTable: 25                 12:45\n");
+        // invoiceInfo.setFont(smallFont);
+        // vbox.getChildren().add(invoiceInfo);
+
+        // // Linha separadora
+        // Text separator = new Text("----------------------------------------");
+        // separator.setFont(smallFont);
+        // vbox.getChildren().add(separator);
+
+        // // Itens do recibo
+        // vbox.getChildren().add(createItemLine("2 Carlsberg Bottle", "16.00", smallFont));
+        // vbox.getChildren().add(createItemLine("3 Heineken Draft Standard", "24.60", smallFont));
+        // vbox.getChildren().add(createItemLine("1 Heineken Draft Half Liter", "15.20", smallFont));
+        // vbox.getChildren().add(createItemLine("2 Carlsberg Bucket (5 bottles)", "80.00", smallFont));
+        // vbox.getChildren().add(createItemLine("4 Grilled Chicken Breast", "74.00", smallFont));
+        // vbox.getChildren().add(createItemLine("3 Sirloin Steak", "96.00", smallFont));
+        // vbox.getChildren().add(createItemLine("1 Coke", "3.50", smallFont));
+        // vbox.getChildren().add(createItemLine("5 Ice Cream", "18.00", smallFont));
+
+        // // Subtotal, imposto e taxa de serviço
+        // vbox.getChildren().add(createItemLine("Subtotal", "327.30", smallFont));
+        // vbox.getChildren().add(createItemLine("Sales/Gov Tax - 5%", "16.36", smallFont));
+        // vbox.getChildren().add(createItemLine("Service Charge - 10%", "32.73", smallFont));
+
+        // // Linha separadora
+        // Text separator2 = new Text("----------------------------------------");
+        // separator2.setFont(smallFont);
+        // vbox.getChildren().add(separator2);
+
+        // // Total geral
+        // Text grandTotal = new Text("GRAND TOTAL: 376.40");
+        // grandTotal.setFont(smallFont);
+        // vbox.getChildren().add(grandTotal);
+
+        // // Mensagem final
+        // Text footer = new Text("Thank you and see you again!\nCash: 400.00  Change: 23.60\n");
+        // footer.setFont(smallFont);
+        // vbox.getChildren().add(footer);
+
+        // // Configurar layout da cena
+        // StackPane pane = new StackPane(vbox);
+        // pane.setAlignment(Pos.TOP_LEFT);
+        // Font menor para o recibo
+        Font smallFont = Font.font("Courier New", 8);
+
+        // Criar um GridPane para organizar o layout
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 10, 10, 10)); // Ajustar margens
+        grid.setVgap(5); // Espaçamento vertical entre linhas
+        grid.setHgap(10); // Espaçamento horizontal entre colunas
+
+        // Adicionar cabeçalho ao GridPane
+        Text header1 = new Text("The Lone Pine");
+        header1.setFont(Font.font("Courier New", 8));
+        GridPane.setColumnSpan(header1, 2); // Mesclar colunas para centralizar
+        grid.add(header1, 0, 0, 2, 1); // Adicionar na coluna 0, linha 0, ocupando 2 colunas
+
+        Text header2 = new Text("43 Manchester Road\n12480 Brisbane\nAustralia\n617-3236-6207\n");
+        header2.setFont(smallFont);
+        grid.add(header2, 0, 1, 2, 1); // Adicionar em duas colunas
+
+        // Informações da fatura
+        Text invoiceInfo = new Text("Invoice: 08000008          09/04/08\nTable: 25                 12:45\n");
+        invoiceInfo.setFont(smallFont);
+        grid.add(invoiceInfo, 0, 2, 2, 1);
+
+        // Adicionar linha separadora
+        Text separator = new Text("----------------------------------------");
+        separator.setFont(smallFont);
+        grid.add(separator, 0, 3, 2, 1);
+
+        // Adicionar itens ao recibo
+        grid.add(createItemLine("2 Carlsberg Bottle", "16.00", smallFont), 0, 4, 2, 1);
+        grid.add(createItemLine("3 Heineken Draft Standard", "24.60", smallFont), 0, 5, 2, 1);
+        grid.add(createItemLine("1 Heineken Draft Half Liter", "15.20", smallFont), 0, 6, 2, 1);
+        grid.add(createItemLine("2 Carlsberg Bucket (5 bottles)", "80.00", smallFont), 0, 7, 2, 1);
+        grid.add(createItemLine("4 Grilled Chicken Breast", "74.00", smallFont), 0, 8, 2, 1);
+        grid.add(createItemLine("3 Sirloin Steak", "96.00", smallFont), 0, 9, 2, 1);
+        grid.add(createItemLine("1 Coke", "3.50", smallFont), 0, 10, 2, 1);
+        grid.add(createItemLine("5 Ice Cream", "18.00", smallFont), 0, 11, 2, 1);
+
+        // Adicionar subtotal, impostos e taxas
+        grid.add(createItemLine("Subtotal", "327.30", smallFont), 0, 12, 2, 1);
+        grid.add(createItemLine("Sales/Gov Tax - 5%", "16.36", smallFont), 0, 13, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
+
+        // Adicionar linha separadora
+        grid.add(new Text("----------------------------------------"), 0, 15, 2, 1);
+
+        // Total geral
+        Text grandTotal = new Text("GRAND TOTAL: 376.40");
+        grandTotal.setFont(smallFont);
+        grid.add(grandTotal, 0, 16, 2, 1);
+
+        // Adicionar mensagem final
+        Text footer = new Text("Thank you and see you again!\nCash: 400.00  Change: 23.60\n");
+        footer.setFont(smallFont);
+        grid.add(footer, 0, 17, 2, 1);
+
+        // Configurar layout da cena
+        StackPane pane = new StackPane(grid);
+        pane.setAlignment(Pos.TOP_LEFT);
+        return pane;
+    }
+
+    private GridPane createItemLine(String item, String price, Font font) {
+         GridPane line = new GridPane();
+        line.setHgap(10);
+        Text itemName = new Text(item);
+        itemName.setFont(font);
+        Text itemPrice = new Text(price);
+        itemPrice.setFont(font);
+        GridPane.setColumnSpan(itemName, 1);
+        GridPane.setColumnSpan(itemPrice, 1);
+        line.add(itemName, 0, 0);
+        line.add(itemPrice, 1, 0);
+        return line;
+    }
 
 }

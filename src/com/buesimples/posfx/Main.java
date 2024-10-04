@@ -1,5 +1,8 @@
 package com.buesimples.posfx;
 
+import java.util.List;
+import java.util.Map;
+
 import com.buesimples.posfx.database.DatabaseHelpers;
 import com.buesimples.posfx.utils.loader.NodeLoader;
 
@@ -18,7 +21,7 @@ public class Main extends Application {
       }
       this.pretifyFont();
       loader.showWindow(primaryStage, "auth.Login");
-
+      generatehash();
    }
 
    public static void main(String[] args) {
@@ -30,6 +33,20 @@ public class Main extends Application {
       System.setProperty("prism.text", "t2k");
       System.setProperty("prism.subpixeltext", "true");
       System.setProperty("prism.allowhidpi", "true");
+   }
+
+   private void generatehash() {
+      List<Map<String, Object>> mapDoc = DatabaseHelpers.build().querySelect(
+            "documento",
+            "POST", "{\r\n" + //
+                  "    \"idDocumento\": 356\r\n" + //
+                  "}");
+      for (Map<String, Object> map : mapDoc) {
+         String dataDoc = map.get("dataDoc") != null ? map.get("dataDoc").toString() : "";
+         String[] dataParts = dataDoc.contains("T") ? dataDoc.split("T") : dataDoc.split(" ");
+         System.out.println("Data: " + dataDoc);
+         System.out.println("Data Parts: " + dataParts[0]);
+      }
    }
 
    // private void testLayoutTicket(Stage primaryStage) {

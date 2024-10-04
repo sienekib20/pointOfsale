@@ -3,7 +3,7 @@
       "src"
    ],
    "java.project.referencedLibraries": [
-      "c:\\Users\\sienekib\\Downloads\\bluecove-2.0.1-SNAPSHOT.jar",
+      "c:\\Users\\sienekib\\Downloads\\fontbox-2.0.0.jar",
       "c:\\Users\\sienekib\\Downloads\\ironpdf-engine-windows-x86-2024.9.1.jar",
       "c:\\csharp\\pos\\lib\\org.apache.karaf.specs.locator-4.4.6.jar",
       "c:\\csharp\\pos\\lib\\jackson-dataformat-xml-2.15.3.jar",
@@ -32,6 +32,7 @@
       "c:\\csharp\\pos\\lib\\jackson-core-2.15.3.jar",
       "c:\\Users\\sienekib\\Downloads\\spire.pdf.free-5.1.0.jar",
       "c:\\csharp\\pos\\lib\\xml-apis-1.0.b2.jar",
+      "c:\\Users\\sienekib\\Downloads\\bluecove-2.0.1-SNAPSHOT.jar",
       "c:\\csharp\\pos\\lib\\jasperreports-6.21.3.jar",
       "c:\\csharp\\pos\\lib\\fontawesomefx-8.9.jar",
       "c:\\csharp\\pos\\lib\\commons-collections-3.2.2.jar",
