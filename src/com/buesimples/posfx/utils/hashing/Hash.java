@@ -3,16 +3,20 @@ package com.buesimples.posfx.utils.hashing;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import org.mindrot.jbcrypt.BCrypt;
+
+import com.buesimples.posfx.database.DatabaseHelpers;
+
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.Signature;
-import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateKeySpec;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Formatter;
+import java.util.List;
+import java.util.Map;
 
 public class Hash {
 
@@ -35,7 +39,7 @@ public class Hash {
      * Verifica se uma senha em texto plano corresponde a uma senha com hash
      * BCrypt.
      *
-     * @param plainPassword Senha em texto plano.
+     * @param plainPassword  Senha em texto plano.
      * @param hashedPassword Senha com hash BCrypt.
      * @return Verdadeiro se a senha corresponder, falso caso contrário.
      */
@@ -63,16 +67,18 @@ public class Hash {
      * @return O token gerado.
      */
     public static String generateToken() {
-        // Gerar um token aleatório. Aqui, estamos usando uma combinação de tempo atual e um número aleatório.
+        // Gerar um token aleatório. Aqui, estamos usando uma combinação de tempo atual
+        // e um número aleatório.
         // Você pode usar uma abordagem mais robusta se necessário.
-        String token = Long.toHexString(System.currentTimeMillis()) + Long.toHexString(Double.doubleToLongBits(Math.random()));
+        String token = Long.toHexString(System.currentTimeMillis())
+                + Long.toHexString(Double.doubleToLongBits(Math.random()));
         return generateHash(token); // Gera o hash para o token
     }
 
     /**
      * Verifica se um token corresponde ao hash BCrypt.
      *
-     * @param token O token em texto simples.
+     * @param token       O token em texto simples.
      * @param hashedToken O hash BCrypt do token.
      * @return Verdadeiro se o token corresponder, falso caso contrário.
      */
@@ -80,15 +86,49 @@ public class Hash {
         return verify(token, hashedToken);
     }
 
-    public void generateHashSaft() {
+    private String buildContent() {
+        List<Map<String, Object>> __map__ = DatabaseHelpers.build().querySelect(
+                "viewartigomodopagamentodocumento",
+                "POST", "{\r\n" + //
+                        "    \"idDocumento\": 355\r\n" + //
+                        "}");
+        String hashSaft = null;
+        for (Map<String, Object> mm : __map__) {
+            hashSaft = mm.get("hashSaft") != null ? mm.get("hashSaft").toString() : null;
+        }
+
+        List<Map<String, Object>> mapDoc = DatabaseHelpers.build().querySelect(
+                "viewartigomodopagamentodocumento",
+                "POST", "{\r\n" + //
+                        "    \"idDocumento\": 356\r\n" + //
+                        "}");
+        String content = null;
+        hashSaft = hashSaft != null ? ";" + hashSaft : ";";
+        for (Map<String, Object> map : mapDoc) {
+            String dataDoc = map.get("dataDoc") != null ? map.get("dataDoc").toString() : "";
+            String codigoDocumento = map.get("codigoDocumento") != null ? map.get("codigoDocumento").toString() : "";
+            String totalT = map.get("total") != null ? map.get("total").toString() : "0.0";
+            int total = (int) Double.parseDouble(totalT);
+
+            String[] dataParts = dataDoc.contains("T") ? dataDoc.split("T") : dataDoc.split(" ");
+            String horas = dataParts[1];
+            String[] horaParts = dataParts[1].contains("+") ? horas.split("\\+") : horas.split(" ");
+            content = dataParts[0] + ";" + dataParts[0] + "T" + horaParts[0] + ";" + codigoDocumento + ";"
+                    + String.valueOf(total) + hashSaft;
+
+        }
+        return content;
+    }
+
+    public String generateHashSaft() {
         try {
             // Passo PHP: $content = "Y-m-d;Y-m-dTH:m:s;codigoDoc;total;hash";
 
             // Passo PHP: $key = file_get_contents("../../saft/ChavePrivada.pem");
-            PrivateKey privateKey = loadPrivateKey("/resources/hash/key/ChavePrivada.pem");
+            PrivateKey privateKey = loadPrivateKeyPKCS1("/resources/hash/key/ChavePrivada.pem");
 
             // Passo PHP: openssl_sign($content, $assinatura, $key, OPENSSL_ALGO_SHA1);
-            byte[] assinatura = sign(content, privateKey);
+            byte[] assinatura = sign(buildContent(), privateKey);
 
             // Passo PHP: $sha1 = bin2hex($assinatura);
             String sha1 = toHex(assinatura);
@@ -99,10 +139,12 @@ public class Hash {
             // Imprimir resultados
             System.out.println("SHA1 Hash: " + sha1);
             System.out.println("Base64 Signature: " + base64);
+            return sha1;
 
         } catch (Exception e) {
             // e.printStackTrace();
             System.out.println("ERROR: " + e.getMessage());
+            return null;
         }
     }
 
@@ -135,7 +177,7 @@ public class Hash {
     }
 
     // Passo PHP: Carregar chave privada do arquivo PEM
-    private static PrivateKey loadPrivateKey(String resourcePath) throws Exception {
+    private static PrivateKey loadPrivateKeyPKCS1(String resourcePath) throws Exception {
         try (InputStream keyStream = Hash.class.getResourceAsStream(resourcePath)) {
             if (keyStream == null) {
                 throw new IOException("Chave privada não encontrada: " + resourcePath);
@@ -148,9 +190,12 @@ public class Hash {
                     .replaceAll("\\s+", ""); // Remove todos os espaços em branco
 
             byte[] decodedKey = Base64.getDecoder().decode(keyString);
-            System.out.println("Chave privada decodificada: " + Arrays.toString(decodedKey));
 
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodedKey);
+            // Parse the decodedKey assuming it is PKCS#1 format
+            BigInteger modulus = new BigInteger(1, Arrays.copyOfRange(decodedKey, 29, 157));
+            BigInteger privateExponent = new BigInteger(1, Arrays.copyOfRange(decodedKey, 158, decodedKey.length));
+
+            RSAPrivateKeySpec keySpec = new RSAPrivateKeySpec(modulus, privateExponent);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             return keyFactory.generatePrivate(keySpec);
         }

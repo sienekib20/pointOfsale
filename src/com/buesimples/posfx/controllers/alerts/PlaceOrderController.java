@@ -163,9 +163,15 @@ public class PlaceOrderController implements Initializable {
 
         // Processa os modos de pagamento
         criarModoPagamento(lastInsertedId);
+        String hashSaft = Hash.getInstance().generateHashSaft();
+        String agtCode = hashSaft != null ? hashSaft.substring(0, 4) : "0000";
+        
+        // update Hash
+        
 
         // Imprimir
-        Printers.getInstance().gerarPDF(lastInsertedId, nItems);
+        Printers.getInstance().gerarPDF(lastInsertedId, nItems, agtCode);
+        // Printers.getInstance().gerar2PDF(lastInsertedId, nItems, agtCode);
     }
 
     void gerarHash() {

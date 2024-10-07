@@ -2,8 +2,12 @@ package com.buesimples.posfx.utils.config.printer;
 
 import com.buesimples.posfx.controllers.IndexController;
 import com.buesimples.posfx.database.DatabaseHelpers;
+import com.buesimples.posfx.models.ModoPagamento;
 import com.buesimples.posfx.models.Ticket;
+import com.buesimples.posfx.models.TicketModel;
+import com.buesimples.posfx.models.TicketPayment;
 import com.buesimples.posfx.models.TicketProduct;
+import com.buesimples.posfx.models.TicketProductModel;
 import com.buesimples.posfx.utils.constants.Constants;
 import com.buesimples.posfx.utils.json.JsonUtils;
 import com.google.gson.Gson;
@@ -165,7 +169,7 @@ public class Printers {
             // PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
 
             PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.LEGAL,
-            PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
+                    PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
 
             // Print the node
             boolean printed = job.printPage(pageLayout, node);
@@ -184,7 +188,244 @@ public class Printers {
         }
     }
 
-    public void gerarPDF(int IdDocumento, int nItem) {
+    public void gerar2PDF(int IdDocumento, int nItem, String agtCode) {
+        List<TicketModel> ticketList = new ArrayList<>();
+        TicketModel tick = new TicketModel();
+
+        List<Map<String, Object>> config = DatabaseHelpers.build().select(
+                "configuracao",
+                "GET");
+
+        for (Map<String, Object> empresa : config) {
+            switch (empresa.get("campo").toString()) {
+                case "titulo":
+                    tick.setNomeEmpresa(empresa.get("valor").toString());
+                    break;
+                case "endereco":
+                    tick.setEnderecoEmpresa(empresa.get("valor").toString());
+                    break;
+                case "telefone":
+                    tick.setTelefoneEmpresa(empresa.get("valor").toString());
+                    break;
+                case "nif":
+                    tick.setNifEmpresa(empresa.get("valor").toString());
+                    break;
+            }
+        }
+
+
+        System.out.println("TICKET: " + tick.getNomeEmpresa());
+        System.out.println("TICKET: " + tick.getEnderecoEmpresa());
+        System.out.println("TICKET: " + tick.getTelefoneEmpresa());
+        System.out.println("TICKET: " + tick.getNifEmpresa());
+
+        
+
+        List<TicketProductModel> tickProducts = new ArrayList<TicketProductModel>();
+        TicketProductModel tickModel = new TicketProductModel();
+
+        List<Map<String, Object>> viewDocumento = DatabaseHelpers.build().querySelect(
+                "viewDocumento",
+                "POST", ""
+                        + "{ "
+                        + "\"idDocumento\": " + IdDocumento + " "
+                        + "}");
+        for (Map<String, Object> vd : viewDocumento) {
+            tickModel.setNomeProduto(
+                    Objects.requireNonNull(vd.get("descricaoAd").toString(), ""));
+
+            tickModel.setQtdProduto(
+                    (int) Double.parseDouble(Objects.requireNonNull(
+                            vd.get("qtdAd").toString(), "0")));
+            tickModel.setValorTotalProduto(
+                    Double.parseDouble(Objects.requireNonNull(
+                            vd.get("totalAd").toString(), "0.0")));
+
+            // Add in TickProductsList
+            tickProducts.add(new TicketProductModel(
+                    tickModel.getQtdProduto(),
+                    tickModel.getNomeProduto(),
+                    tickModel.getValorTotalProduto()));
+
+        }
+        tick.setnItems(nItem);
+
+        List<Map<String, Object>> viewModoPagamento = DatabaseHelpers.build().querySelect(
+                "viewartigomodopagamentodocumento",
+                "POST", ""
+                        + "{ "
+                        + "\"idDocumento\": " + IdDocumento + " "
+                        + "}");
+        Double valorTotalEntregue = 0.0;
+        Double valorTotalAPagar = 0.0;
+        Double valorTotalTroco = 0.0;
+
+        for (Map<String, Object> vd : viewModoPagamento) {
+            // String nomeTd = JsonUtils.nonNullElse(vd, "nomeTd", 0);
+            String nomeE = JsonUtils.nonNullElse(vd, "nomeE", 0);
+            String moradaE = JsonUtils.nonNullElse(vd, "moradaE", 0);
+
+            String nifE = JsonUtils.nonNullElse(vd, "nifE", 0);
+            String dataDocumento = JsonUtils.nonNullElse(vd, "dataDocumento", 0);
+            String horaDocumento = "";
+            if (dataDocumento.contains("T")) {
+                String[] partes = dataDocumento.split("T");
+                dataDocumento = partes[0];
+                if (partes.length > 1) {
+                    horaDocumento = partes[1];
+                    if (horaDocumento.contains("+")) {
+                        horaDocumento = horaDocumento.split("\\+")[0];
+                    } else if (horaDocumento.contains(" ")) {
+                        horaDocumento = horaDocumento.split(" ")[0];
+                    }
+                }
+            }
+
+            String codigoDocumento = JsonUtils.nonNullElse(vd, "codigoDocumento", 0);
+            String nomeU = JsonUtils.nonNullElse(vd, "nomeU", 0);
+            // String nomePp = JsonUtils.nonNullElse(vd, "nomePp", 0);
+            String entregue = JsonUtils.nonNullElse(vd, "entregue", 1);
+            String total = JsonUtils.nonNullElse(vd, "total", 1);
+            String troco = JsonUtils.nonNullElse(vd, "troco", 1);
+
+            // tick.setCodigoDocumento(nomeTd);
+            tick.setCodigoDocumento(codigoDocumento);
+            tick.setNomeCliente(nomeE);
+            tick.setMoradaCliente(moradaE);
+            tick.setTelefoneCliente("");
+            tick.setnContribuinte(nifE);
+            // tick.setNifEmpresaAtual(nifE);
+            tick.setDataDoc(dataDocumento);
+            tick.setHoraDoc(horaDocumento);
+            tick.setUtilizador(nomeU);
+
+            valorTotalEntregue += Double.parseDouble(entregue);
+            valorTotalAPagar += Double.parseDouble(total);
+            valorTotalTroco += Double.parseDouble(troco);
+
+            tick.setValorTroco(valorTotalTroco);
+            tick.setValorTotal(valorTotalAPagar);
+        }
+
+        ticketList.add(tick);
+        tick.setNumeroProcesso(agtCode);
+
+        Map<String, Object> parameters = new HashMap<>();
+        // parameters.put("valorTotal", factura.getValor());
+        parameters.put("nomeEmpresa", tick.getNomeEmpresa());
+        parameters.put("enderecoEmpresa", tick.getEnderecoEmpresa());
+        parameters.put("nifEmpresa", tick.getNifEmpresa());
+        parameters.put("telefoneEmpresa", tick.getTelefoneEmpresa());
+
+        parameters.put("codigoDocumento", tick.getCodigoDocumento());
+        parameters.put("dataDoc", tick.getDataDoc());
+        parameters.put("horaDoc", tick.getHoraDoc());
+
+        parameters.put("nItems", tick.getnItems());
+        parameters.put("valorTotal", tick.getValorTotal());
+        parameters.put("valorTroco", tick.getValorTroco());
+
+        parameters.put("nomeCliente", tick.getNomeCliente());
+        parameters.put("moradaCliente", tick.getMoradaCliente());
+        parameters.put("nContribuinte", tick.getnContribuinte());
+        parameters.put("telefoneCliente", tick.getTelefoneCliente());
+
+        parameters.put("numeroProcesso", tick.getNumeroProcesso());
+        parameters.put("utilizador", tick.getUtilizador());
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ticketList);
+        JRBeanCollectionDataSource itemAdicionados = new JRBeanCollectionDataSource(tickProducts);
+
+        parameters.put("TABELA_DOCUMENTO", itemAdicionados);
+
+        List<Map<String, Object>> modoPagamento = DatabaseHelpers.build().querySelectData(
+                "POST",
+                "{\r\n" + //
+                        "    \"tabela\": \"modopagamentodocumento\",\r\n" + //
+                        "    \"join\": [\r\n" + //
+                        "        {\r\n" + //
+                        "            \"tipo\": \"inner\",\r\n" + //
+                        "            \"tabela\": \"modopagamento\",\r\n" + //
+                        "            \"juncao\": \"modopagamento.idModoPagamento = modopagamentodocumento.idModoPagamento\"\r\n"
+                        + //
+                        "        }\r\n" + //
+                        "    ],\r\n" + //
+                        "    \"coluna\": [\r\n" + //
+                        "        {\r\n" + //
+                        "            \"modoPagamento\": \"modopagamento.nome\",\r\n" + //
+                        "            \"valor\": \"modopagamentodocumento.valor\"\r\n" + //
+                        "        }\r\n" + //
+                        "    ],\r\n" + //
+                        "    \"where\": [\r\n" + //
+                        "        {\r\n" + //
+                        "            \"tipo\": \"AND\",\r\n" + //
+                        "            \"parametro\": " + IdDocumento + ",\r\n" + //
+                        "            \"valor\": \"356\"\r\n" + //
+                        "        }\r\n" + //
+                        "    ]\r\n" + //
+                        "}");
+
+        List<TicketPayment> tickPayment = new ArrayList<TicketPayment>();
+        TicketPayment tickP = new TicketPayment();
+
+        for (Map<String, Object> modo : modoPagamento) {
+            String modoPayment = modo.get("modoPagamento") != null ? modo.get("modoPagamento").toString() : "";
+            String valor = modo.get("valor") != null ? modo.get("valor").toString() : "0.0";
+            Double valorPayment = Double.parseDouble(valor);
+
+            tickP.setModoPagamento(modoPayment);
+            tickP.setValorPago(valorPayment);
+
+            tickPayment.add(tickP);
+        }
+        JRBeanCollectionDataSource tickModoPayment = new JRBeanCollectionDataSource(tickPayment);
+
+        parameters.put("TABELA_MODO_PAGAMENTO", tickModoPayment);
+
+        //
+
+        // Gere o relatório
+
+        InputStream resourceStream = getClass().getResourceAsStream("/resources/reports/Modelo_Ticket_Descontao.jrxml");
+        try {
+            JasperReport jr = JasperCompileManager.compileReport(resourceStream);
+
+            JasperPrint jp = JasperFillManager.fillReport(jr, parameters, dataSource);
+
+            String userHome = System.getenv("USERPROFILE");
+            String reportDirPath = userHome + "\\documents\\buesimples\\reports";
+
+            // Verificar se o diretório existe, caso contrário, criar
+            File reportDir = new File(reportDirPath);
+            if (!reportDir.exists()) {
+                if (reportDir.mkdirs()) {
+                    System.out.println("Diretório criado: " + reportDirPath);
+                } else {
+                    System.out.println("Erro ao criar diretório: " + reportDirPath);
+                    // return;
+                }
+            }
+
+            // Obter data e hora atual formatada
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+            String timestamp = now.format(formatter);
+
+            // Gerar o nome do arquivo com o timestamp
+            String reportPath = reportDirPath + "\\" + timestamp + "_create_ticket.pdf";
+            JasperExportManager.exportReportToPdfFile(jp, reportPath);
+
+            // Gerar o relatório PDF
+            printPDF(reportPath);
+
+        } catch (JRException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+    public void gerarPDF(int IdDocumento, int nItem, String agtCode) {
         try {
 
             List<Ticket> ticketList = new ArrayList<>();
@@ -331,6 +572,7 @@ public class Printers {
 
             InputStream resourceStream = getClass().getResourceAsStream("/resources/reports/ModeloTicket.jrxml");
             JasperReport jr = JasperCompileManager.compileReport(resourceStream);
+
             /*
              * int largura = jr.getPageWidth();
              * int altura = jr.getPageHeight();
@@ -379,33 +621,51 @@ public class Printers {
     }
 
     public void printPDF(String filePath) {
-      try {
-         PDDocument document = PDDocument.load(new File(filePath));
-         PrintService printService = PrintServiceLookup.lookupDefaultPrintService();
+        try {
+            PDDocument document = PDDocument.load(new File(filePath));
 
-         if (printService == null) {
-            System.out.println("No printer found.");
-            return;
-         }
+            // Obtém a lista de impressoras e deixa o usuário escolher uma
+            PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
 
-         PDFPageable pageable = new PDFPageable(document);
-         DocPrintJob printJob = printService.createPrintJob();
+            if (printServices.length == 0) {
+                System.out.println("Nenhuma impressora encontrada.");
+                return;
+            }
 
-         // Create the PrintRequestAttributeSet as required
-         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+            PrintService printService = null;
 
-         // Adjusting the DocFlavor according to PDFPageable
-         DocFlavor flavor = DocFlavor.SERVICE_FORMATTED.PAGEABLE; // Adjust this if needed
+            String defaultPrinterName = Config.getConfig("impressora");
 
-         // Make sure to use the correct SimpleDoc type
-         SimpleDoc doc = new SimpleDoc(pageable, flavor, null);
-         printJob.print(doc, attr);
+            for (int i = 0; i < printServices.length; i++) {
+                if (printServices[i].getName().equals(defaultPrinterName)) {
+                    printService = printServices[i];
+                }
+            }
 
-         document.close();
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-   }
+            if (printService != null) {
+                PDFPageable pageable = new PDFPageable(document);
+                DocPrintJob printJob = printService.createPrintJob();
+
+                // Cria o conjunto de atributos de solicitação de impressão conforme necessário
+                PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+
+                // Ajusta o DocFlavor de acordo com o PDFPageable
+                DocFlavor flavor = DocFlavor.SERVICE_FORMATTED.PAGEABLE;
+
+                // Usa o tipo correto de SimpleDoc
+                SimpleDoc doc = new SimpleDoc(pageable, flavor, null);
+                printJob.print(doc, attr);
+
+                document.close();
+
+            } else {
+                System.out.println("Erro de Impressora. Conecte Uma");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private VBox generateReportLayout(List<TicketProduct> ticketList, Ticket ticket) {
 
@@ -733,156 +993,18 @@ public class Printers {
 
         return vbx;
     }
-
-    private StackPane gggggg() {
-        // // Definir fonte menor para o recibo
-        // Font smallFont = Font.font("Courier New", 10);
-
-        // // Criar VBox para organizar os textos de forma vertical
-        // VBox vbox = new VBox(5); // Espaçamento de 5px entre os elementos
-        // vbox.setPadding(new Insets(10, 10, 10, 10)); // Definir margens
-        // vbox.setAlignment(Pos.TOP_CENTER); // Alinhar no topo e centralizar o conteúdo
-
-        // // Cabeçalho centralizado
-        // Text header1 = new Text("The Lone Pine");
-        // header1.setFont(Font.font("Courier New", 14));
-        // vbox.getChildren().add(header1);
-
-        // Text header2 = new Text("43 Manchester Road\n12480 Brisbane\nAustralia\n617-3236-6207\n");
-        // header2.setFont(smallFont);
-        // vbox.getChildren().add(header2);
-
-        // // Informações da fatura
-        // Text invoiceInfo = new Text("Invoice: 08000008          09/04/08\nTable: 25                 12:45\n");
-        // invoiceInfo.setFont(smallFont);
-        // vbox.getChildren().add(invoiceInfo);
-
-        // // Linha separadora
-        // Text separator = new Text("----------------------------------------");
-        // separator.setFont(smallFont);
-        // vbox.getChildren().add(separator);
-
-        // // Itens do recibo
-        // vbox.getChildren().add(createItemLine("2 Carlsberg Bottle", "16.00", smallFont));
-        // vbox.getChildren().add(createItemLine("3 Heineken Draft Standard", "24.60", smallFont));
-        // vbox.getChildren().add(createItemLine("1 Heineken Draft Half Liter", "15.20", smallFont));
-        // vbox.getChildren().add(createItemLine("2 Carlsberg Bucket (5 bottles)", "80.00", smallFont));
-        // vbox.getChildren().add(createItemLine("4 Grilled Chicken Breast", "74.00", smallFont));
-        // vbox.getChildren().add(createItemLine("3 Sirloin Steak", "96.00", smallFont));
-        // vbox.getChildren().add(createItemLine("1 Coke", "3.50", smallFont));
-        // vbox.getChildren().add(createItemLine("5 Ice Cream", "18.00", smallFont));
-
-        // // Subtotal, imposto e taxa de serviço
-        // vbox.getChildren().add(createItemLine("Subtotal", "327.30", smallFont));
-        // vbox.getChildren().add(createItemLine("Sales/Gov Tax - 5%", "16.36", smallFont));
-        // vbox.getChildren().add(createItemLine("Service Charge - 10%", "32.73", smallFont));
-
-        // // Linha separadora
-        // Text separator2 = new Text("----------------------------------------");
-        // separator2.setFont(smallFont);
-        // vbox.getChildren().add(separator2);
-
-        // // Total geral
-        // Text grandTotal = new Text("GRAND TOTAL: 376.40");
-        // grandTotal.setFont(smallFont);
-        // vbox.getChildren().add(grandTotal);
-
-        // // Mensagem final
-        // Text footer = new Text("Thank you and see you again!\nCash: 400.00  Change: 23.60\n");
-        // footer.setFont(smallFont);
-        // vbox.getChildren().add(footer);
-
-        // // Configurar layout da cena
-        // StackPane pane = new StackPane(vbox);
-        // pane.setAlignment(Pos.TOP_LEFT);
-        // Font menor para o recibo
-        Font smallFont = Font.font("Courier New", 8);
-
-        // Criar um GridPane para organizar o layout
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10)); // Ajustar margens
-        grid.setVgap(5); // Espaçamento vertical entre linhas
-        grid.setHgap(10); // Espaçamento horizontal entre colunas
-
-        // Adicionar cabeçalho ao GridPane
-        Text header1 = new Text("The Lone Pine");
-        header1.setFont(Font.font("Courier New", 8));
-        GridPane.setColumnSpan(header1, 2); // Mesclar colunas para centralizar
-        grid.add(header1, 0, 0, 2, 1); // Adicionar na coluna 0, linha 0, ocupando 2 colunas
-
-        Text header2 = new Text("43 Manchester Road\n12480 Brisbane\nAustralia\n617-3236-6207\n");
-        header2.setFont(smallFont);
-        grid.add(header2, 0, 1, 2, 1); // Adicionar em duas colunas
-
-        // Informações da fatura
-        Text invoiceInfo = new Text("Invoice: 08000008          09/04/08\nTable: 25                 12:45\n");
-        invoiceInfo.setFont(smallFont);
-        grid.add(invoiceInfo, 0, 2, 2, 1);
-
-        // Adicionar linha separadora
-        Text separator = new Text("----------------------------------------");
-        separator.setFont(smallFont);
-        grid.add(separator, 0, 3, 2, 1);
-
-        // Adicionar itens ao recibo
-        grid.add(createItemLine("2 Carlsberg Bottle", "16.00", smallFont), 0, 4, 2, 1);
-        grid.add(createItemLine("3 Heineken Draft Standard", "24.60", smallFont), 0, 5, 2, 1);
-        grid.add(createItemLine("1 Heineken Draft Half Liter", "15.20", smallFont), 0, 6, 2, 1);
-        grid.add(createItemLine("2 Carlsberg Bucket (5 bottles)", "80.00", smallFont), 0, 7, 2, 1);
-        grid.add(createItemLine("4 Grilled Chicken Breast", "74.00", smallFont), 0, 8, 2, 1);
-        grid.add(createItemLine("3 Sirloin Steak", "96.00", smallFont), 0, 9, 2, 1);
-        grid.add(createItemLine("1 Coke", "3.50", smallFont), 0, 10, 2, 1);
-        grid.add(createItemLine("5 Ice Cream", "18.00", smallFont), 0, 11, 2, 1);
-
-        // Adicionar subtotal, impostos e taxas
-        grid.add(createItemLine("Subtotal", "327.30", smallFont), 0, 12, 2, 1);
-        grid.add(createItemLine("Sales/Gov Tax - 5%", "16.36", smallFont), 0, 13, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-        grid.add(createItemLine("Service Charge - 10%", "32.73", smallFont), 0, 14, 2, 1);
-
-        // Adicionar linha separadora
-        grid.add(new Text("----------------------------------------"), 0, 15, 2, 1);
-
-        // Total geral
-        Text grandTotal = new Text("GRAND TOTAL: 376.40");
-        grandTotal.setFont(smallFont);
-        grid.add(grandTotal, 0, 16, 2, 1);
-
-        // Adicionar mensagem final
-        Text footer = new Text("Thank you and see you again!\nCash: 400.00  Change: 23.60\n");
-        footer.setFont(smallFont);
-        grid.add(footer, 0, 17, 2, 1);
-
-        // Configurar layout da cena
-        StackPane pane = new StackPane(grid);
-        pane.setAlignment(Pos.TOP_LEFT);
-        return pane;
-    }
-
-    private GridPane createItemLine(String item, String price, Font font) {
-         GridPane line = new GridPane();
-        line.setHgap(10);
-        Text itemName = new Text(item);
-        itemName.setFont(font);
-        Text itemPrice = new Text(price);
-        itemPrice.setFont(font);
-        GridPane.setColumnSpan(itemName, 1);
-        GridPane.setColumnSpan(itemPrice, 1);
-        line.add(itemName, 0, 0);
-        line.add(itemPrice, 1, 0);
-        return line;
-    }
+    // private GridPane createItemLine(String item, String price, Font font) {
+    // GridPane line = new GridPane();
+    // line.setHgap(10);
+    // Text itemName = new Text(item);
+    // itemName.setFont(font);
+    // Text itemPrice = new Text(price);
+    // itemPrice.setFont(font);
+    // GridPane.setColumnSpan(itemName, 1);
+    // GridPane.setColumnSpan(itemPrice, 1);
+    // line.add(itemName, 0, 0);
+    // line.add(itemPrice, 1, 0);
+    // return line;
+    // }
 
 }
